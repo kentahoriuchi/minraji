@@ -14,6 +14,16 @@ h1,
 }
 
 /* アコーディオン ここから */
+
+header {
+  width: 100%;
+  padding: 15px 0;
+  margin: 0 auto;
+  text-align: center;
+}
+header .headline{
+  font-size: 32px;
+}
 dl {
     width: 350px;
     margin: 0 auto 10px auto;
