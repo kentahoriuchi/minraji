@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>みんラジ</title>
+    <title>みんラジ!</title>
     <link rel="stylesheet" href="../css/main.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="../javascript/main.js"></script>
@@ -12,25 +12,41 @@
     <header>
         <!-- ヘッダーはここに記述 -->
         <h1 class="headline">
-            <a>みんラジ</a>
+            <a>みんラジ!</a>
         </h1>
     </header>
-    <div id="wrapper">
-                <dl>
-                    <dt class="accordion">MENU01</dt>
-                    <dd>MENU02</dd>
-                </dl>
-                <dl>
-                    <dt class="accordion">MENU01</dt>
-                    <dd>MENU02</dd>
-                </dl>
-                <dl>
-                    <dt class="accordion">MENU01</dt>
-                    <dd>MENU02</dd>
-    <!-- /#wrapper --></div>
-    <!--<button onclick="location.href='./main0.html'">移動</button>-->
-    <!--<a href="https://www.apple.com/jp/">sample2へ</a>-->
-    <input id ="input1" type="button" onclick="location.href='./main0.html'" value="移動">
+    
+  
+    <input id ="input1" type="button" onclick="location.href='./main0.html'" value="新規無料会員登録">
+    <h1>ログイン</h1>
+        <hr>
+        <div align="center">
+            <table border="0">
+                <form action="list.html" method="get">
+                    <tr>
+                        <th>
+                            ユーザID
+                        </th>
+                        <td>
+                            <input type="text" name="user_id" value="" size="24">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            パスワード
+                        </th>
+                        <td>
+                            <input type="password" name="password" value="" size="24">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="ログイン">
+                        </td>
+                    </tr>
+                </form>
+            </table>
+        </div>
     <footer>
         <!-- ヘッダーはここに記述 -->
     </footer>
