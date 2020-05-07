@@ -1,0 +1,20 @@
+{
+    "test": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-minraji-test-220447-authRole",
+            "UnauthRoleArn": "arn:aws:iam::072958730182:role/amplify-minraji-test-220447-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::072958730182:role/amplify-minraji-test-220447-authRole",
+            "Region": "ap-northeast-1",
+            "DeploymentBucketName": "amplify-minraji-test-220447-deployment",
+            "UnauthRoleName": "amplify-minraji-test-220447-unauthRole",
+            "StackName": "amplify-minraji-test-220447",
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:072958730182:stack/amplify-minraji-test-220447/2bb020c0-8f9a-11ea-8727-06680f8688ee",
+            "AmplifyAppId": "d16v7i6ipvaa05"
+        },
+        "categories": {
+            "auth": {
+                "minraji1df54186": {}
+            }
+        }
+    }
+}

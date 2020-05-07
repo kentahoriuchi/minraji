@@ -1,0 +1,10 @@
+{
+	"auth": {
+		"minraji1df54186": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}
