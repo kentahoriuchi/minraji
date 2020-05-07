@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Login from '@/components/Login'
+//import Login from '@/components/Login'
 import Home from '@/components/Home'
-
+import SampleAuth from "../views/SampleAuth";
 
 // Amplify読み込み
 import {  AmplifyEventBus } from 'aws-amplify-vue'
@@ -50,7 +50,8 @@ const router = new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      //component: Login
+      component: SampleAuth
     },
     {
       path: '/',
