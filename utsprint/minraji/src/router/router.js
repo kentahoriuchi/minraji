@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 //import Login from '@/components/Login'
 import Home from '@/components/Home'
-import Chat from '@/components/chat'
+// import Chat from '@/components/chat'
 import SampleAuth from "../views/SampleAuth";
 
 // Amplify読み込み
@@ -60,11 +60,11 @@ const router = new Router({
       component: Home,
       meta:{ requireAuth:true}
     },
-    {
-        path: '/chat',
-        name: 'chat',
-        component: Chat
-    }
+    // {
+    //     path: '/chat',
+    //     name: 'chat',
+    //     component: Chat
+    // }
   ]
 })
 
