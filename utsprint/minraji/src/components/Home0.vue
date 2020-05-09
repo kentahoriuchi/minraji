@@ -6,6 +6,10 @@
         </h1>
 </header>
   
+    <p id ="message_id" v-html="message"><p>
+    <p>
+      ここはホーム画面です。aaaaaaa
+    </p>
     <amplify-sign-out></amplify-sign-out>
     <footer>
      
@@ -14,7 +18,13 @@
 </template>
 
 <script>
-
+export default {
+  data: function() {
+    return {
+      message: '吾輩は猫である。<br>名前はまだない。'
+    }
+  }
+}
 </script>
 
 <style>
