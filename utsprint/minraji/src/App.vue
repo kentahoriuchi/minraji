@@ -6,7 +6,6 @@
     </p>
     <youtube :video-id="videoId" ref="youtube" @playing="playing"></youtube> 
     <button @click="playVideo">play</button>
-    <!-- おっぱい　-->
   </div>
 </template>
 
