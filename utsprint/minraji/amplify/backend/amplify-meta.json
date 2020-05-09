@@ -34,5 +34,13 @@
 			},
 			"lastPushDirHash": "CJwNziiJILkTe47gK9TpbjUbt8I="
 		}
-	}
+	},
+	"function": {
+		"S3Trigger6e906810": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true
+		}
+	},
+	"storage": {}
 }
