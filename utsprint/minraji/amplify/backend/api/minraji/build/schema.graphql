@@ -1,0 +1,151 @@
+type Massage {
+  id: ID!
+  username: String!
+  content: String!
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelMassageConnection {
+  items: [Massage]
+  nextToken: String
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelMassageFilterInput {
+  id: ModelIDInput
+  username: ModelStringInput
+  content: ModelStringInput
+  and: [ModelMassageFilterInput]
+  or: [ModelMassageFilterInput]
+  not: ModelMassageFilterInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+type Query {
+  getMassage(id: ID!): Massage
+  listMassages(filter: ModelMassageFilterInput, limit: Int, nextToken: String): ModelMassageConnection
+}
+
+input CreateMassageInput {
+  id: ID
+  username: String!
+  content: String!
+}
+
+input UpdateMassageInput {
+  id: ID!
+  username: String
+  content: String
+}
+
+input DeleteMassageInput {
+  id: ID
+}
+
+type Mutation {
+  createMassage(input: CreateMassageInput!, condition: ModelMassageConditionInput): Massage
+  updateMassage(input: UpdateMassageInput!, condition: ModelMassageConditionInput): Massage
+  deleteMassage(input: DeleteMassageInput!, condition: ModelMassageConditionInput): Massage
+}
+
+input ModelMassageConditionInput {
+  username: ModelStringInput
+  content: ModelStringInput
+  and: [ModelMassageConditionInput]
+  or: [ModelMassageConditionInput]
+  not: ModelMassageConditionInput
+}
+
+type Subscription {
+  onCreateMassage: Massage @aws_subscribe(mutations: ["createMassage"])
+  onUpdateMassage: Massage @aws_subscribe(mutations: ["updateMassage"])
+  onDeleteMassage: Massage @aws_subscribe(mutations: ["deleteMassage"])
+}

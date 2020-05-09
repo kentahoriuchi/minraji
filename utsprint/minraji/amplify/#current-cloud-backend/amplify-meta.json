@@ -22,7 +22,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-220447-deployment/amplify-cfn-templates/auth/minraji1df54186-cloudformation-template.yml",
 				"logicalId": "authminraji1df54186"
 			},
-			"lastPushTimeStamp": "2020-05-06T13:11:46.714Z",
+			"lastPushTimeStamp": "2020-05-09T03:55:20.854Z",
 			"output": {
 				"AppClientSecret": "2kklhqj6q5s8affpbe8gk0nllf4air21kugg2vhdt50ctaj0l99",
 				"UserPoolId": "ap-northeast-1_xnGhRPOvs",
@@ -33,6 +33,31 @@
 				"UserPoolName": "minraji1df54186_userpool_1df54186"
 			},
 			"lastPushDirHash": "CJwNziiJILkTe47gK9TpbjUbt8I="
+		}
+	},
+	"api": {
+		"minraji": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authminraji1df54186"
+						}
+					}
+				},
+				"GraphQLAPIIdOutput": "nah5k72fwvbbnhscpy3tksbhca",
+				"GraphQLAPIEndpointOutput": "https://bxo3pegg3bf2bkar4kjhgz7bcq.appsync-api.ap-northeast-1.amazonaws.com/graphql"
+			},
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-220447-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"logicalId": "apiminraji"
+			},
+			"lastPushTimeStamp": "2020-05-09T03:55:22.189Z",
+			"lastPushDirHash": "QyxNurdTSJCjejpdBNK4tYbVoFI="
 		}
 	}
 }

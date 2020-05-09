@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "minraji",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authminraji1df54186",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

@@ -7,12 +7,21 @@
 			"customAuth": false
 		}
 	},
-	"function": {
-		"S3Trigger6e906810": {
-			"service": "Lambda",
+	"api": {
+		"minraji": {
+			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
-			"build": true
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authminraji1df54186"
+						}
+					}
+				}
+			}
 		}
-	},
-	"storage": {}
+	}
 }
