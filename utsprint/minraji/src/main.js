@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router/router'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import locale from 'element-ui/lib/locale/lang/ja';
 
 //import awsconfig from './aws-exports';
 import Amplify, * as AmplifyModules from 'aws-amplify';
@@ -15,6 +18,7 @@ Amplify.configure(aws_exports);
 Vue.use(AmplifyPlugin, AmplifyModules);
 
 Vue.config.productionTip = false
+Vue.use(ElementUI, { locale });
 
 let languageDict = {
   ja:{

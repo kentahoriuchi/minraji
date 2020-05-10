@@ -4,8 +4,17 @@
       <!-- <myheader></myheader> -->
       <router-view/>
     </p>
+    <p>
+      <input type="text" v-model="videoId">
+    </p>
     <youtube :video-id="videoId" ref="youtube" @playing="playing"></youtube> 
+    <p>
+      {{videoId}}
+    </p>
     <button @click="playVideo">play</button>
+    <p>
+      <el-input placeholder="飛ばしたい時間を入力(Enterで送信)" v-model="seconds" @keydown.enter.native="sendSeek"></el-input>
+    </p>
   </div>
 </template>
 
@@ -18,7 +27,8 @@ Vue.use(VueYoutube)
 export default {
   data() {
     return {
-      videoId: '4VEE01EFHFs'
+      videoId: '4VEE01EFHFs',
+      seconds: ""
     }
   },
   methods: {
@@ -27,6 +37,9 @@ export default {
     },
     playing() {
       console.log('we are watching!!!')
+    },
+    sendSeek() {
+      this.player.seekTo(this.seconds)
     }
   },
   computed: {
