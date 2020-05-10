@@ -25,7 +25,7 @@ export const updateMassage = /* GraphQL */ `
     }
   }
 `;
-export const deleteMassage = /* GraphQL */ `
+export const deleteMeSssage = /* GraphQL */ `
   mutation DeleteMassage(
     $input: DeleteMassageInput!
     $condition: ModelMassageConditionInput

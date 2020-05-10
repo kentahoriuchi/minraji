@@ -1,0 +1,91 @@
+<template>
+<div>
+  <div class="title">
+    <h2>Amplifyで作るチャットアプリ</h2>
+  </div>
+  <div class="main-contents">
+    <div class="message_base">
+        <div v-for="message in messages" :key="message.id">
+          <div v-bind:class="[message.username === userName ? 'message' : 'message_opponent']">{{message.content}}</div>
+          <div v-bind:class="[message.username === userName ? 'username' : 'username_opponent']">{{message.username}}</div>
+        </div>
+    </div>
+    <el-input placeholder="メッセージを入力(Enterで送信)" v-model="content" @keydown.enter.native="sendMassage"></el-input>
+    <!-- <button v-on:click="sendMassage">送信</button> -->
+    <div class="error">{{ this.error }}</div>
+  </div>
+</div>
+</template>
+
+<script>
+import API, {  graphqlOperation } from '@aws-amplify/api';
+import { Auth } from 'aws-amplify'
+import { createMassage } from "../graphql/mutations";
+import { listMassages } from '../graphql/queries';
+import { onCreateMassage } from '../graphql/subscriptions';
+window.LOG_LEVEL = 'VERBOSE';
+export default {
+
+  name: 'chat',
+  data(){
+    return {
+      messages: [],
+      content: "",
+      userName: "",
+      subscription: {},
+      error: ""
+    }
+  },
+  methods :{
+    sendMassage(){
+      // TODO(1) GraphQLエンドポイントにmutationを発行し、メッセージを登録する
+      if (event.keyCode !== 13) return // Enterキーの場合のみ送信処理を行う
+      const message = { 
+          id: new Date().getTime() + this.userName,
+          username: this.userName,
+          content: this.content
+      }
+      // Mutationの実行
+      API.graphql(graphqlOperation(createMassage, { input: message }))
+        .catch(error => this.error = JSON.stringify(error))
+      this.content = ""
+  },
+    fetch(){
+    // TODO(2) GraphQLエンドポイントにqueryを発行し、メッセージ一覧を取得する
+    API.graphql(graphqlOperation(listMassages, { limit: 100 }))
+      .then(messages => this.messages = messages.data.listMassages.items.sort((a,b) => a.id > b.id ? 1 : -1))
+      .catch(error => this.error = JSON.stringify(error))
+  },
+    subscribe(){
+      // TODO(3-1) GraphQLエンドポイントにsubscriptionを発行し、mutationを監視する
+      this.subscription = API.graphql(graphqlOperation(onCreateMassage)).subscribe({
+        next: (eventData) => {
+          const message = eventData.value.data.onCreateMassage;
+          this.messages.push(message);
+        }
+      })
+    },
+    beforeDestroy() {
+      // TODO(3-2) チャット画面から離れる際に、UnSubscribeする
+      this.subscription.unsubscribe();
+    },
+    scrollBottom() {
+      const container = this.$el.querySelector(".message_base");
+      container.scrollTop = container.scrollHeight;
+    }
+  },
+  async created(){
+    this.userName = (await Auth.currentAuthenticatedUser()).username;
+    this.fetch()
+    this.subscribe()
+  },
+  beforeDestroy() {
+    // TODO(3-2) チャット画面から離れる際に、UnSubscribeする
+  },
+  updated: function () {
+    this.scrollBottom()
+  }
+}
+</script>
+
+<style src="./chat.css" />

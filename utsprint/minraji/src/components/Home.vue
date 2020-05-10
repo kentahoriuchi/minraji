@@ -5,7 +5,7 @@
             <a>みんラジ!</a>
         </h1>
 </header>
-  
+    <router-link to="/chat"> chat page </router-link>
     <amplify-sign-out></amplify-sign-out>
     <footer>
      
