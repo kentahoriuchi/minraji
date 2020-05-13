@@ -23,6 +23,11 @@ header {
 }
 header .headline{
   font-size: 100px;
+  padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+  color: #494949;/*文字色*/
+  background: #f4f4f4;/*背景色*/
+  border-left: solid 5px #7db4e6;/*左線*/
+  border-bottom: solid 3px #d7d7d7;/*下線*/
 }
 /*
 dl {
@@ -68,7 +73,7 @@ dd {
 
 #register {
   position : absolute;
-  top:140px;
+  top:300px;
   left:500px;
   font-size: 1.4em;
   font-weight: bold;
@@ -81,7 +86,7 @@ dd {
 
 #login {
   position : absolute;
-  top:170px;
+  top:330px;
   left:750px;
   font-size: 1.4em;
   font-weight: bold;

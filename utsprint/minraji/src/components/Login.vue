@@ -1,6 +1,9 @@
 <template>
+aaaaaa
   <div>
-      <a id="login"><amplify-authenticator v-bind:authConfig="authConfig"/></a>
+      <div class="login" ><amplify-authenticator></amplify-authenticator></div>
+
+      aaaaaa aaaaaaaaaaaaaaaaaa
   </div>
 </template>
 
@@ -15,10 +18,15 @@ export default {
         }
       }
     }
-  }
+  
 }
+
 </script>
 
 <style>
+div.login {
+    margin-top: 50px;
+    text-align: center;
+}
 
 </style>
