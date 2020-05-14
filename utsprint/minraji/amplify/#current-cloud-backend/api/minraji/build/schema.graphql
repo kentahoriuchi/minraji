@@ -1,7 +1,19 @@
-type Massage {
+type Message {
   id: ID!
   username: String!
   content: String!
+}
+
+type User {
+  id: ID!
+  username: String!
+  roomid: Room
+}
+
+type Room {
+  id: ID!
+  movie: String
+  users(filter: ModelUserFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelUserConnection
 }
 
 enum ModelSortDirection {
@@ -9,8 +21,8 @@ enum ModelSortDirection {
   DESC
 }
 
-type ModelMassageConnection {
-  items: [Massage]
+type ModelMessageConnection {
+  items: [Message]
   nextToken: String
 }
 
@@ -87,13 +99,13 @@ input ModelSizeInput {
   between: [Int]
 }
 
-input ModelMassageFilterInput {
+input ModelMessageFilterInput {
   id: ModelIDInput
   username: ModelStringInput
   content: ModelStringInput
-  and: [ModelMassageFilterInput]
-  or: [ModelMassageFilterInput]
-  not: ModelMassageFilterInput
+  and: [ModelMessageFilterInput]
+  or: [ModelMessageFilterInput]
+  not: ModelMessageFilterInput
 }
 
 enum ModelAttributeTypes {
@@ -110,42 +122,128 @@ enum ModelAttributeTypes {
 }
 
 type Query {
-  getMassage(id: ID!): Massage
-  listMassages(filter: ModelMassageFilterInput, limit: Int, nextToken: String): ModelMassageConnection
+  getMessage(id: ID!): Message
+  listMessages(filter: ModelMessageFilterInput, limit: Int, nextToken: String): ModelMessageConnection
+  getUser(id: ID!): User
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+  getRoom(id: ID!): Room
+  listRooms(filter: ModelRoomFilterInput, limit: Int, nextToken: String): ModelRoomConnection
 }
 
-input CreateMassageInput {
+input CreateMessageInput {
   id: ID
   username: String!
   content: String!
 }
 
-input UpdateMassageInput {
+input UpdateMessageInput {
   id: ID!
   username: String
   content: String
 }
 
-input DeleteMassageInput {
+input DeleteMessageInput {
   id: ID
 }
 
 type Mutation {
-  createMassage(input: CreateMassageInput!, condition: ModelMassageConditionInput): Massage
-  updateMassage(input: UpdateMassageInput!, condition: ModelMassageConditionInput): Massage
-  deleteMassage(input: DeleteMassageInput!, condition: ModelMassageConditionInput): Massage
+  createMessage(input: CreateMessageInput!, condition: ModelMessageConditionInput): Message
+  updateMessage(input: UpdateMessageInput!, condition: ModelMessageConditionInput): Message
+  deleteMessage(input: DeleteMessageInput!, condition: ModelMessageConditionInput): Message
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User
+  createRoom(input: CreateRoomInput!, condition: ModelRoomConditionInput): Room
+  updateRoom(input: UpdateRoomInput!, condition: ModelRoomConditionInput): Room
+  deleteRoom(input: DeleteRoomInput!, condition: ModelRoomConditionInput): Room
 }
 
-input ModelMassageConditionInput {
+input ModelMessageConditionInput {
   username: ModelStringInput
   content: ModelStringInput
-  and: [ModelMassageConditionInput]
-  or: [ModelMassageConditionInput]
-  not: ModelMassageConditionInput
+  and: [ModelMessageConditionInput]
+  or: [ModelMessageConditionInput]
+  not: ModelMessageConditionInput
 }
 
 type Subscription {
-  onCreateMassage: Massage @aws_subscribe(mutations: ["createMassage"])
-  onUpdateMassage: Massage @aws_subscribe(mutations: ["updateMassage"])
-  onDeleteMassage: Massage @aws_subscribe(mutations: ["deleteMassage"])
+  onCreateMessage: Message @aws_subscribe(mutations: ["createMessage"])
+  onUpdateMessage: Message @aws_subscribe(mutations: ["updateMessage"])
+  onDeleteMessage: Message @aws_subscribe(mutations: ["deleteMessage"])
+  onCreateUser: User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
+  onCreateRoom: Room @aws_subscribe(mutations: ["createRoom"])
+  onUpdateRoom: Room @aws_subscribe(mutations: ["updateRoom"])
+  onDeleteRoom: Room @aws_subscribe(mutations: ["deleteRoom"])
+}
+
+type ModelUserConnection {
+  items: [User]
+  nextToken: String
+}
+
+input ModelUserFilterInput {
+  id: ModelIDInput
+  username: ModelStringInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+}
+
+input CreateUserInput {
+  id: ID
+  username: String!
+  userRoomidId: ID
+}
+
+input UpdateUserInput {
+  id: ID!
+  username: String
+  userRoomidId: ID
+}
+
+input DeleteUserInput {
+  id: ID
+}
+
+input ModelUserConditionInput {
+  username: ModelStringInput
+  and: [ModelUserConditionInput]
+  or: [ModelUserConditionInput]
+  not: ModelUserConditionInput
+}
+
+type ModelRoomConnection {
+  items: [Room]
+  nextToken: String
+}
+
+input ModelRoomFilterInput {
+  id: ModelIDInput
+  movie: ModelStringInput
+  and: [ModelRoomFilterInput]
+  or: [ModelRoomFilterInput]
+  not: ModelRoomFilterInput
+}
+
+input CreateRoomInput {
+  id: ID
+  movie: String
+}
+
+input UpdateRoomInput {
+  id: ID!
+  movie: String
+}
+
+input DeleteRoomInput {
+  id: ID
+}
+
+input ModelRoomConditionInput {
+  movie: ModelStringInput
+  and: [ModelRoomConditionInput]
+  or: [ModelRoomConditionInput]
+  not: ModelRoomConditionInput
 }

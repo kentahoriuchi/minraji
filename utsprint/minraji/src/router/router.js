@@ -4,7 +4,10 @@ import Router from 'vue-router'
 //import Login from '@/components/Login'
 import Home from '@/components/Home'
 import Chat from '@/components/chat'
+import Room from '@/components/room'
+import Room_create from '@/components/room_create'
 import SampleAuth from "../views/SampleAuth";
+import In_the_room from '@/components/in_the_room'
 
 // Amplify読み込み
 import {  AmplifyEventBus } from 'aws-amplify-vue'
@@ -64,7 +67,22 @@ const router = new Router({
         path: '/chat',
         name: 'chat',
         component: Chat
-    }
+    },
+    {
+        path: '/room',
+        name: 'room',
+        component: Room
+    },
+    {
+        path: '/room_create',
+        name: 'room_create',
+        component: Room_create
+    },
+    {
+        path: '/room/in',
+        name: 'in_the_room',
+        component: In_the_room
+    },
   ]
 })
 

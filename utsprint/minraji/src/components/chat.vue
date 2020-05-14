@@ -10,8 +10,8 @@
           <div v-bind:class="[message.username === userName ? 'username' : 'username_opponent']">{{message.username}}</div>
         </div>
     </div>
-    <el-input placeholder="メッセージを入力(Enterで送信)" v-model="content" @keydown.enter.native="sendMassage"></el-input>
-    <!-- <button v-on:click="sendMassage">送信</button> -->
+    <el-input placeholder="メッセージを入力(Enterで送信)" v-model="content" @keydown.enter.native="sendMessage"></el-input>
+    <!-- <button v-on:click="sendMessage">送信</button> -->
     <div class="error">{{ this.error }}</div>
   </div>
 </div>
@@ -20,9 +20,9 @@
 <script>
 import API, {  graphqlOperation } from '@aws-amplify/api';
 import { Auth } from 'aws-amplify'
-import { createMassage } from "../graphql/mutations";
-import { listMassages } from '../graphql/queries';
-import { onCreateMassage } from '../graphql/subscriptions';
+import { createMessage } from "../graphql/mutations";
+import { listMessages } from '../graphql/queries';
+import { onCreateMessage } from '../graphql/subscriptions';
 window.LOG_LEVEL = 'VERBOSE';
 export default {
 
@@ -37,7 +37,7 @@ export default {
     }
   },
   methods :{
-    sendMassage(){
+    sendMessage(){
       // TODO(1) GraphQLエンドポイントにmutationを発行し、メッセージを登録する
       if (event.keyCode !== 13) return // Enterキーの場合のみ送信処理を行う
       const message = { 
@@ -46,21 +46,21 @@ export default {
           content: this.content
       }
       // Mutationの実行
-      API.graphql(graphqlOperation(createMassage, { input: message }))
+      API.graphql(graphqlOperation(createMessage, { input: message }))
         .catch(error => this.error = JSON.stringify(error))
       this.content = ""
   },
     fetch(){
     // TODO(2) GraphQLエンドポイントにqueryを発行し、メッセージ一覧を取得する
-    API.graphql(graphqlOperation(listMassages, { limit: 100 }))
-      .then(messages => this.messages = messages.data.listMassages.items.sort((a,b) => a.id > b.id ? 1 : -1))
+    API.graphql(graphqlOperation(listMessages, { limit: 100 }))
+      .then(messages => this.messages = messages.data.listMessages.items.sort((a,b) => a.id > b.id ? 1 : -1))
       .catch(error => this.error = JSON.stringify(error))
   },
     subscribe(){
       // TODO(3-1) GraphQLエンドポイントにsubscriptionを発行し、mutationを監視する
-      this.subscription = API.graphql(graphqlOperation(onCreateMassage)).subscribe({
+      this.subscription = API.graphql(graphqlOperation(onCreateMessage)).subscribe({
         next: (eventData) => {
-          const message = eventData.value.data.onCreateMassage;
+          const message = eventData.value.data.onCreateMessage;
           this.messages.push(message);
         }
       })

@@ -6,6 +6,8 @@
         </h1>
 </header>
     <router-link to="/chat"> chat page </router-link>
+    <br>
+    <router-link to="/room"> room page </router-link>
     <amplify-sign-out></amplify-sign-out>
     <footer>
      
