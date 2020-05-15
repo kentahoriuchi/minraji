@@ -1,10 +1,14 @@
 <template>
+<!-- 待機部屋の画面、部屋が作られると一覧が表示される -->
 <div>
   <div class="title">
     <h2>ルーム画面</h2>
   </div>
   <div class="main-contents">
+    <!-- 部屋を作成する画面に移動 -->
     <router-link to="/room_create"> create room </router-link>
+
+    <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
     <div id='room' v-for="room in rooms" :key="room.id">
           <button v-on:click="gotoroom">{{room.id}}</button>
     </div>
@@ -24,7 +28,6 @@ import { listUsers } from '../graphql/queries';
 import router from '../router/router'
 window.LOG_LEVEL = 'VERBOSE';
 export default {
-
   name: 'chat',
   data(){
     return {
