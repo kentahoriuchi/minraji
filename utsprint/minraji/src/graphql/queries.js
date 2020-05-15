@@ -1,26 +1,93 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getMassage = /* GraphQL */ `
-  query GetMassage($id: ID!) {
-    getMassage(id: $id) {
+export const getMessage = /* GraphQL */ `
+  query GetMessage($id: ID!) {
+    getMessage(id: $id) {
       id
       username
       content
     }
   }
 `;
-export const listMassages = /* GraphQL */ `
-  query ListMassages(
-    $filter: ModelMassageFilterInput
+export const listMessages = /* GraphQL */ `
+  query ListMessages(
+    $filter: ModelMessageFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listMassages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         username
         content
+      }
+      nextToken
+    }
+  }
+`;
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      username
+      roomid {
+        id
+        movie
+        users {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        roomid {
+          id
+          movie
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getRoom = /* GraphQL */ `
+  query GetRoom($id: ID!) {
+    getRoom(id: $id) {
+      id
+      movie
+      users {
+        items {
+          id
+          username
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listRooms = /* GraphQL */ `
+  query ListRooms(
+    $filter: ModelRoomFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listRooms(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        movie
+        users {
+          nextToken
+        }
       }
       nextToken
     }

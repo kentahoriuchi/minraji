@@ -1,6 +1,6 @@
 {
 	"auth": {
-		"minraji1df54186": {
+		"minraji134fba57": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [],
@@ -17,7 +17,7 @@
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authminraji1df54186"
+							"userPoolId": "authminraji134fba57"
 						}
 					}
 				}

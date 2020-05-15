@@ -1,38 +1,38 @@
 {
 	"providers": {
 		"awscloudformation": {
-			"AuthRoleName": "amplify-minraji-test-220447-authRole",
-			"UnauthRoleArn": "arn:aws:iam::072958730182:role/amplify-minraji-test-220447-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::072958730182:role/amplify-minraji-test-220447-authRole",
+			"AuthRoleName": "amplify-minraji-test-162217-authRole",
+			"UnauthRoleArn": "arn:aws:iam::072958730182:role/amplify-minraji-test-162217-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::072958730182:role/amplify-minraji-test-162217-authRole",
 			"Region": "ap-northeast-1",
-			"DeploymentBucketName": "amplify-minraji-test-220447-deployment",
-			"UnauthRoleName": "amplify-minraji-test-220447-unauthRole",
-			"StackName": "amplify-minraji-test-220447",
-			"StackId": "arn:aws:cloudformation:ap-northeast-1:072958730182:stack/amplify-minraji-test-220447/2bb020c0-8f9a-11ea-8727-06680f8688ee",
-			"AmplifyAppId": "d16v7i6ipvaa05"
+			"DeploymentBucketName": "amplify-minraji-test-162217-deployment",
+			"UnauthRoleName": "amplify-minraji-test-162217-unauthRole",
+			"StackName": "amplify-minraji-test-162217",
+			"StackId": "arn:aws:cloudformation:ap-northeast-1:072958730182:stack/amplify-minraji-test-162217/a595bd40-95b3-11ea-a4e0-0aec1eafc950",
+			"AmplifyAppId": "d2evz6dalfayw3"
 		}
 	},
 	"auth": {
-		"minraji1df54186": {
+		"minraji134fba57": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [],
 			"customAuth": false,
 			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-220447-deployment/amplify-cfn-templates/auth/minraji1df54186-cloudformation-template.yml",
-				"logicalId": "authminraji1df54186"
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-162217-deployment/amplify-cfn-templates/auth/minraji134fba57-cloudformation-template.yml",
+				"logicalId": "authminraji134fba57"
 			},
-			"lastPushTimeStamp": "2020-05-09T03:55:20.854Z",
+			"lastPushTimeStamp": "2020-05-14T08:00:53.648Z",
 			"output": {
-				"AppClientSecret": "2kklhqj6q5s8affpbe8gk0nllf4air21kugg2vhdt50ctaj0l99",
-				"UserPoolId": "ap-northeast-1_xnGhRPOvs",
-				"AppClientIDWeb": "7thph84u6clivrrk788tb391d3",
-				"AppClientID": "5vcd1tsf10dl64i6qoibc9bvpi",
-				"IdentityPoolId": "ap-northeast-1:0eb318c1-2de0-43ec-a7ac-c54878c13202",
-				"IdentityPoolName": "minraji1df54186_identitypool_1df54186__test",
-				"UserPoolName": "minraji1df54186_userpool_1df54186"
+				"AppClientSecret": "13oqkl36es5akv7jkm2qg6hpnf8os9nticnqnl2baj1ion17il9j",
+				"UserPoolId": "ap-northeast-1_o3GPvnFbu",
+				"AppClientIDWeb": "5i8p9108dfed3u3uqufntdkdcd",
+				"AppClientID": "2jqisf7r9kqphkb9i950keui57",
+				"IdentityPoolId": "ap-northeast-1:253c0ceb-140e-489d-9ddb-204c5004cab4",
+				"IdentityPoolName": "minraji134fba57_identitypool_134fba57__test",
+				"UserPoolName": "minraji134fba57_userpool_134fba57"
 			},
-			"lastPushDirHash": "CJwNziiJILkTe47gK9TpbjUbt8I="
+			"lastPushDirHash": "6wA7NusijLzrIOUXIgPt8P2S0oM="
 		}
 	},
 	"api": {
@@ -45,19 +45,19 @@
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authminraji1df54186"
+							"userPoolId": "authminraji134fba57"
 						}
 					}
 				},
-				"GraphQLAPIIdOutput": "nah5k72fwvbbnhscpy3tksbhca",
-				"GraphQLAPIEndpointOutput": "https://bxo3pegg3bf2bkar4kjhgz7bcq.appsync-api.ap-northeast-1.amazonaws.com/graphql"
+				"GraphQLAPIIdOutput": "4vgaddb365eyvlju33vmrg2zce",
+				"GraphQLAPIEndpointOutput": "https://z4caipoo7bflflr6vubphqheu4.appsync-api.ap-northeast-1.amazonaws.com/graphql"
 			},
 			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-220447-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-162217-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apiminraji"
 			},
-			"lastPushTimeStamp": "2020-05-09T03:55:22.189Z",
-			"lastPushDirHash": "QyxNurdTSJCjejpdBNK4tYbVoFI="
+			"lastPushTimeStamp": "2020-05-14T08:00:53.648Z",
+			"lastPushDirHash": "1KPhMuS1nrypXXQBGhu0wb7oens="
 		}
 	}
 }

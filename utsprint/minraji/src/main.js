@@ -5,6 +5,12 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import locale from 'element-ui/lib/locale/lang/ja';
 
+//Element UI 
+import ElementUI from 'element-ui'
+import locale from 'element-ui/lib/locale/lang/ja'
+import 'element-ui/lib/theme-chalk/index.css'
+import 'element-ui/lib/theme-chalk/display.css'
+
 //import awsconfig from './aws-exports';
 import Amplify, * as AmplifyModules from 'aws-amplify';
 import { AmplifyPlugin } from 'aws-amplify-vue';
@@ -12,10 +18,12 @@ import { AmplifyPlugin } from 'aws-amplify-vue';
 import { I18n } from '@aws-amplify/core';
 import aws_exports from "./aws-exports";
 
-
 Amplify.configure(aws_exports);
 //Amplify.configure(awsconfig);
 Vue.use(AmplifyPlugin, AmplifyModules);
+
+//Element UI
+Vue.use(ElementUI, { locale });
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale });
