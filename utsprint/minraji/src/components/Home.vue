@@ -9,8 +9,6 @@
     <br>
     <router-link to="/room"> room page </router-link>
     <amplify-sign-out></amplify-sign-out>
-    <br>
-    <router-link to="/movie"> 動画ページ色々 </router-link>
     <footer>
      
     </footer>

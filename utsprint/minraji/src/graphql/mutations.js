@@ -51,6 +51,7 @@ export const createUser = /* GraphQL */ `
         users {
           nextToken
         }
+        time
       }
     }
   }
@@ -69,6 +70,7 @@ export const updateUser = /* GraphQL */ `
         users {
           nextToken
         }
+        time
       }
     }
   }
@@ -87,6 +89,7 @@ export const deleteUser = /* GraphQL */ `
         users {
           nextToken
         }
+        time
       }
     }
   }
@@ -106,6 +109,7 @@ export const createRoom = /* GraphQL */ `
         }
         nextToken
       }
+      time
     }
   }
 `;
@@ -124,6 +128,7 @@ export const updateRoom = /* GraphQL */ `
         }
         nextToken
       }
+      time
     }
   }
 `;
@@ -142,6 +147,7 @@ export const deleteRoom = /* GraphQL */ `
         }
         nextToken
       }
+      time
     }
   }
 `;

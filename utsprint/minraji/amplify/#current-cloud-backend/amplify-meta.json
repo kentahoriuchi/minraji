@@ -22,7 +22,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-162217-deployment/amplify-cfn-templates/auth/minraji134fba57-cloudformation-template.yml",
 				"logicalId": "authminraji134fba57"
 			},
-			"lastPushTimeStamp": "2020-05-14T08:00:53.648Z",
+			"lastPushTimeStamp": "2020-05-15T13:55:19.305Z",
 			"output": {
 				"AppClientSecret": "13oqkl36es5akv7jkm2qg6hpnf8os9nticnqnl2baj1ion17il9j",
 				"UserPoolId": "ap-northeast-1_o3GPvnFbu",
@@ -56,8 +56,8 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-162217-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apiminraji"
 			},
-			"lastPushTimeStamp": "2020-05-14T08:00:53.648Z",
-			"lastPushDirHash": "1KPhMuS1nrypXXQBGhu0wb7oens="
+			"lastPushTimeStamp": "2020-05-15T13:55:21.004Z",
+			"lastPushDirHash": "HBN2SyHQ59b4ysZSGtKMTnDHy0E="
 		}
 	}
 }

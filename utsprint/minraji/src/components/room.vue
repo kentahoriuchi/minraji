@@ -9,8 +9,8 @@
     <router-link to="/room_create"> create room </router-link>
 
     <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
-    <div id='room' v-for="room in rooms" :key="room.id">
-          <button v-on:click="gotoroom">{{room.id}}</button>
+    <div v-for="room in rooms" :key="room.id">
+          <button id="room" v-on:click="gotoroom(room.id)">{{room.id}}</button>
     </div>
     <div class="error">{{ this.error }}</div>
   </div>
@@ -45,27 +45,27 @@ export default {
         .catch(error => this.error = JSON.stringify(error))
       console.log(this.rooms)
     },
-    async gotoroom(){
+    async gotoroom(temp){
       //ユーザーの認証とかをやる
       const roomid = await API.graphql(graphqlOperation(listUsers, { filter: {'username':{eq: this.userName}}}))
       const userroom = roomid.data.listUsers.items[0]
-      console.log(userroom.roomid)
-      if (!userroom.roomid){
-        console.log(document.getElementById("room").textContent)
-        const room_a = await API.graphql(graphqlOperation(listRooms, { filter: {'id':{eq: document.getElementById("room").textContent}}}))
-        const room = room_a.data.listRooms.items[0]
-        const userroomid = {
-          id: userroom.id,
-          username: this.userName,
-          userRoomidId: room.id
-        }
-        console.log(userroomid)
-        API.graphql(graphqlOperation(updateUser, { input: userroomid }))
-          .catch(error => this.error = JSON.stringify(error))
+      // console.log(userroom.roomid)
+      // if (!userroom.roomid){
+      console.log(document.getElementById("room").textContent)
+      var room_a = await API.graphql(graphqlOperation(listRooms, { filter: {'id':{eq: temp}}}))
+      var room = room_a.data.listRooms.items[0]
+      const userroomid = {
+        id: userroom.id,
+        username: this.userName,
+        userRoomidId: room.id
       }
-      else{
-        console.log('already room in')
-      }
+      console.log(userroomid)
+      API.graphql(graphqlOperation(updateUser, { input: userroomid }))
+        .catch(error => this.error = JSON.stringify(error))
+      // }
+      // else{
+      //   console.log('already room in')
+      // }
       router.push('/room/in')
     }
   },
