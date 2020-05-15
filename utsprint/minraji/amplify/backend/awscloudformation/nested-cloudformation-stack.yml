@@ -131,7 +131,7 @@
 						]
 					},
 					"S3DeploymentBucket": "amplify-minraji-test-162217-deployment",
-					"S3DeploymentRootKey": "amplify-appsync-files/cb4a2338c34b0abd3c4bc5fa99f85fdcee2d4008",
+					"S3DeploymentRootKey": "amplify-appsync-files/2c4471ad6560dfd33d1df674b766492ba54998e2",
 					"env": "test"
 				}
 			}

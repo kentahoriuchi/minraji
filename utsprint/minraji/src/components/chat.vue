@@ -10,7 +10,7 @@
           <div v-bind:class="[message.username === userName ? 'username' : 'username_opponent']">{{message.username}}</div>
         </div>
     </div>
-    <el-input placeholder="メッセージを入力(Enterで送信)" v-model="content" @keydown.enter.native="sendMessage"></el-input>
+    <!-- <el-input placeholder="メッセージを入力(Enterで送信)" v-model="content" @keydown.enter.native="sendMessage"></el-input> -->
     <div class="error">{{ this.error }}</div>
   </div>
 </div>

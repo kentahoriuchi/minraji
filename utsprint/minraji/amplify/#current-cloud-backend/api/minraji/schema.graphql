@@ -29,6 +29,7 @@ type Room
   id: ID!
   movie: String
   users: [User] @connection(name: "MemberLinks")
+  time: Int
   # user: User! @connection(name: "UserRoom")
 	# createdAt: String
 	# updatedAt: String
