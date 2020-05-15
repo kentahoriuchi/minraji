@@ -7,7 +7,7 @@ int main(){
     int n, m;
     cin >> n >> m;
     
-    int graph[12][12] = {0};//初期化
+    int graph[12][12] = {0};////初期化
     int x, y;
 
     for(int i = 0; i < m; i++){
