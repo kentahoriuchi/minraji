@@ -39,7 +39,7 @@ export default {
     sendMessage(){
       // TODO(1) GraphQLエンドポイントにmutationを発行し、メッセージを登録する
       if (event.keyCode !== 13) return // Enterキーの場合のみ送信処理を行う
-      const message = { 
+      const message = {
           id: new Date().getTime() + this.userName,
           username: this.userName,
           content: this.content

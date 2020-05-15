@@ -1,16 +1,20 @@
 <template>
+<!-- 部屋作成の画面 -->
 <div>
   <div class="title">
     <h2>ルーム作成画面</h2>
   </div>
   <div class="main-contents">
+    <!-- 動画のidを入力させる、入力欄と送信ボタン -->
     <form id="movie1">
       <input id="movie" placeholder="Youtube リンク入力(Enterで送信)" type='text' value=""/>
       <input type="button" v-on:click="roomCreate" value="room create">
     </form>
     <br>
+    <!-- テスト用 -->
     <button v-on:click="fetch">room_test</button>
     <br>
+    <!-- テスト用そのに -->
     <button v-on:click="userRead">room_test2</button>
     <div class="error">{{ this.error }}</div>
   </div>
