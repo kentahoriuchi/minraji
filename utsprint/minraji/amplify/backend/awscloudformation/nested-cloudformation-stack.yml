@@ -68,15 +68,15 @@
 				}
 			}
 		},
-		"authminraji1df54186": {
+		"authminraji134fba57": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-220447-deployment/amplify-cfn-templates/auth/minraji1df54186-cloudformation-template.yml",
+				"TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-162217-deployment/amplify-cfn-templates/auth/minraji134fba57-cloudformation-template.yml",
 				"Parameters": {
-					"identityPoolName": "minraji1df54186_identitypool_1df54186",
+					"identityPoolName": "minraji134fba57_identitypool_134fba57",
 					"allowUnauthenticatedIdentities": false,
-					"resourceNameTruncated": "minraj1df54186",
-					"userPoolName": "minraji1df54186_userpool_1df54186",
+					"resourceNameTruncated": "minraj134fba57",
+					"userPoolName": "minraji134fba57_userpool_134fba57",
 					"autoVerifiedAttributes": "email",
 					"mfaConfiguration": "OFF",
 					"mfaTypes": "SMS Text Message",
@@ -92,9 +92,9 @@
 					"userpoolClientRefreshTokenValidity": 30,
 					"userpoolClientWriteAttributes": "email",
 					"userpoolClientReadAttributes": "email",
-					"userpoolClientLambdaRole": "minraj1df54186_userpoolclient_lambda_role",
+					"userpoolClientLambdaRole": "minraj134fba57_userpoolclient_lambda_role",
 					"userpoolClientSetAttributes": false,
-					"resourceName": "minraji1df54186",
+					"resourceName": "minraji134fba57",
 					"authSelections": "identityPoolAndUserPool",
 					"authRoleArn": {
 						"Fn::GetAtt": [
@@ -118,7 +118,7 @@
 		"apiminraji": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-220447-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-162217-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"Parameters": {
 					"CreateAPIKey": 0,
 					"AppSyncApiName": "minraji",
@@ -126,12 +126,12 @@
 					"DynamoDBEnableServerSideEncryption": "false",
 					"AuthCognitoUserPoolId": {
 						"Fn::GetAtt": [
-							"authminraji1df54186",
+							"authminraji134fba57",
 							"Outputs.UserPoolId"
 						]
 					},
-					"S3DeploymentBucket": "amplify-minraji-test-220447-deployment",
-					"S3DeploymentRootKey": "amplify-appsync-files/489925eb1baf52813c8764583954a2ba6043bdaa",
+					"S3DeploymentBucket": "amplify-minraji-test-162217-deployment",
+					"S3DeploymentRootKey": "amplify-appsync-files/cb4a2338c34b0abd3c4bc5fa99f85fdcee2d4008",
 					"env": "test"
 				}
 			}
@@ -140,7 +140,7 @@
 			"DependsOn": [
 				"AuthRole",
 				"UnauthRole",
-				"authminraji1df54186"
+				"authminraji134fba57"
 			],
 			"Type": "AWS::Lambda::Function",
 			"Properties": {
@@ -223,7 +223,7 @@
 				},
 				"idpId": {
 					"Fn::GetAtt": [
-						"authminraji1df54186",
+						"authminraji134fba57",
 						"Outputs.IdentityPoolId"
 					]
 				},
