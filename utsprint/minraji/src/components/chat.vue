@@ -11,7 +11,6 @@
         </div>
     </div>
     <el-input placeholder="メッセージを入力(Enterで送信)" v-model="content" @keydown.enter.native="sendMessage"></el-input>
-    <!-- <button v-on:click="sendMessage">送信</button> -->
     <div class="error">{{ this.error }}</div>
   </div>
 </div>

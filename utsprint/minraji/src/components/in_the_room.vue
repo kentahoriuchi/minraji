@@ -2,7 +2,7 @@
 <div>
   <div class="title">
     <h2>ルームの中の画面</h2>
-    <youtube :video-id="videoId" ref="youtube" @playing="playing"></youtube> 
+    <youtube :video-id="video_url" ref="youtube" @playing="playing"></youtube> 
   </div>
   <footer>
     <router-link to="/room"> room page </router-link>
@@ -24,16 +24,10 @@ export default {
   name: 'room',
   data(){
     return {
-      movie: "",
-      room_number: [],
-      userData: [],
-      a: [],
-      messages: [],
       video_url: "",
-      userName: "",
       subscription: {},
       error: "",
-      videoId: '7bIBZ6M0-tU'
+      // videoId: '7bIBZ6M0-tU'
     }
   },
   methods :{
@@ -52,8 +46,8 @@ export default {
   async created(){
     this.userName = (await Auth.currentAuthenticatedUser()).username;
     const userid = await API.graphql(graphqlOperation(listUsers, { filter: {'username':{eq: this.userName}}}))
-    this.movie = userid.data.listUsers.items[0].roomid.movie
-    console.log(this.movie)
+    this.video_url = userid.data.listUsers.items[0].roomid.movie
+    console.log(this.video_url)
   },
 }
 </script>

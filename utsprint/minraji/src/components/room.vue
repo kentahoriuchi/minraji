@@ -5,7 +5,6 @@
   </div>
   <div class="main-contents">
     <router-link to="/room_create"> create room </router-link>
-
     <div id='room' v-for="room in rooms" :key="room.id">
           <button v-on:click="gotoroom">{{room.id}}</button>
     </div>
@@ -29,13 +28,10 @@ export default {
   name: 'chat',
   data(){
     return {
-      messages: [],
-      content: "",
       userName: "",
-      subscription: {},
+      // subscription: {},
       error: "",
       rooms: [],
-      userData: [],
       room_id: ""
     }
   },
@@ -45,7 +41,6 @@ export default {
         .then(rooms => this.rooms = rooms.data.listRooms.items)
         .catch(error => this.error = JSON.stringify(error))
       console.log(this.rooms)
-      // this.rooms = this.rooms.data.listRooms.items
     },
     async gotoroom(){
       //ユーザーの認証とかをやる

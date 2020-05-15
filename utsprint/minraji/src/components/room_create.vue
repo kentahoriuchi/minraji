@@ -9,9 +9,6 @@
       <input type="button" v-on:click="roomCreate" value="room create">
     </form>
     <br>
-    <!-- <div id='room_number' v-for="room in room_number" :key="room.id">
-          <button value='${room.number}'>{{room.number}}</button> -->
-    <!-- </div> -->
     <button v-on:click="fetch">room_test</button>
     <br>
     <button v-on:click="userRead">room_test2</button>
@@ -29,17 +26,13 @@ import { listRooms } from '../graphql/queries';
 import { listUsers } from '../graphql/queries';
 import router from '../router/router'
 export default {
-
   name: 'room',
   data(){
     return {
       room_number: [],
       userData: [],
-      a: [],
-      messages: [],
-      video_url: "",
       userName: "",
-      subscription: {},
+      // subscription: {},
       error: ""
     }
   },
@@ -58,10 +51,8 @@ export default {
         .catch(error => this.error = JSON.stringify(error))
       this.userData = []
     },
-
     roomCreate(){
       const id = new Date().getTime() + this.userName
-
       const input_movie = document.getElementById("movie").value
       console.log(input_movie)
       const room = {
@@ -70,16 +61,8 @@ export default {
       }
       API.graphql(graphqlOperation(createRoom, { input: room }))
         .catch(error => this.error = JSON.stringify(error))
-
-      // console.log(document.getElementById("room_number").textContent)
-      // const room_name = 'room' + document.getElementById("room_number").textContent
       router.push({name:'room'})
     },
-
-    sendMoviedata(){
-
-    },
-
     fetch(){
       API.graphql(graphqlOperation(listRooms, { limit: 100 }))
       .then(room_number => this.room_number = room_number.data.listRooms.items)
