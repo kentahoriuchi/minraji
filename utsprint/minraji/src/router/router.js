@@ -9,6 +9,7 @@ import Room_create from '@/components/room_create'
 import SampleAuth from "../views/SampleAuth";
 import In_the_room from '@/components/in_the_room'
 import Movie from '@/components/Movie'
+import Signout from '@/components/Signout'
 
 // Amplify読み込み
 import {  AmplifyEventBus } from 'aws-amplify-vue'
@@ -41,10 +42,10 @@ function getUser() {
 AmplifyEventBus.$on('authState', async (state) => {
     if (state === 'signedOut'){
         user = null;
-        router.push({path: '/login'});
+        router.push({path: '/'});
     } else if (state === 'signedIn') {
         user = await getUser();
-        router.push({path: '/'});
+        router.push({path: '/signout'});
     }
 });
 
@@ -59,9 +60,14 @@ const router = new Router({
       component: SampleAuth
     },
     {
+        path: '/signout',
+        name: 'signin_home',
+        component: Home
+    },
+    {
       path: '/',
-      name: 'home',
-      component: Home,
+      name: 'signout_home',
+      component: Signout,
       meta:{ requireAuth:true}
     },
     {
