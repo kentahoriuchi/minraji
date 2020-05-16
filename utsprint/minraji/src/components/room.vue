@@ -59,7 +59,7 @@ export default {
         username: this.userName,
         userRoomidId: room.id
       }
-      console.log(userroomid)
+      console.log('useroom id is ' + userroomid)
       API.graphql(graphqlOperation(updateUser, { input: userroomid }))
         .catch(error => this.error = JSON.stringify(error))
       // }

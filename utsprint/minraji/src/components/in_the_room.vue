@@ -3,9 +3,15 @@
 <div>
   <div class="title">
     <h2>ルームの中の画面</h2>
-
     <!-- video-id youtubeの動画のid -->
-    <youtube :video-id="video_url" ref="youtube" @playing="playing"></youtube> 
+    <youtube :video-id="video_url" ref="youtube" 
+      @playing="playing" 
+      @cued="cued" 
+      @ready="ready" 
+      @ended="ended" 
+      @paused="paused"
+      @buffering="buffering">
+    </youtube> 
   </div>
   <footer>
     <!-- 待機部屋に移動 -->
@@ -22,13 +28,13 @@ import { Auth } from 'aws-amplify'
 import { listUsers } from '../graphql/queries';
 import Vue from 'vue'
 import VueYoutube from 'vue-youtube'
+//import { deleteRoom, updateRoom } from '../graphql/mutations'
 import { deleteRoom } from '../graphql/mutations'
 import router from '../router/router'
 
 Vue.use(VueYoutube)
 
 export default {
-
   name: 'room',
   data(){
     return {
@@ -36,15 +42,47 @@ export default {
       subscription: {},
       error: "",
       roomid: "",
+      createdTime: 1589620500,
+      // playerVars: {
+      //   autoplay: 1
+      // }
       // videoId: '7bIBZ6M0-tU'
     }
   },
   methods :{
-    playVideo() {
-      this.player.playVideo()
+    async playVideo() {
+      await this.player.playVideo()
+      // Do something after the playVideo command
+      this.player.seekTo(10)
+    },
+    ready() {
+      console.log("Now we are ready for stream!!!")
+      //this.player.addEventListener(this.player.onStateChange, )
+      console.log(this.player.getPlayerState())
+      // this.player.seekTo(Math.floor(new Date().getTime()/1000) - this.createdTime)
+      // this.playVideo()
+      this.player.seekTo("10")
     },
     playing() {
       console.log('we are watching!!!')
+      console.log(this.player.getPlayerState())
+      // this.player.seekTo(10)
+    },
+    cued() {
+      console.log('cued')
+      console.log(this.player.getPlayerState())
+    },
+    ended() {
+      console.log('ended')
+      console.log(this.player.getPlayerState())
+    },
+    paused() {
+      console.log('paused')
+      console.log(this.player.getPlayerState())
+    },
+    buffering() {
+      console.log('buffering')
+      console.log(this.player.getPlayerState())
     },
     delete_room(){
       const roomi = {
@@ -55,7 +93,6 @@ export default {
         .catch(error => this.error = JSON.stringify(error))
       router.push({name:'room'})
     }
-    
   },
   computed: {
     player() {
@@ -68,9 +105,30 @@ export default {
     this.video_url = userid.data.listUsers.items[0].roomid.movie
     this.roomid = userid.data.listUsers.items[0].roomid.id
     console.log(this.video_url)
+    //this.createdTime = get_created_time(userid)
   },
 }
+/*
+function get_created_time(userid){
+  if (userid.data.listUsers.items[0].roomid.time !== /\d{10}/g) {
+    const room ={
+      id: userid.data.listUsers.items[0].roomid.id,
+      time: Math.floor(new Date().getTime()/1000)
+    }
+    console.log("time is NOT set in this room. The time is " + room.time + " now and was set.")
+    console.log("room is " + room.id)
+    API.graphql(graphqlOperation(updateRoom, { input: room}))
+    .then(console.log("set successfully!"))
+    .catch(error => this.error = JSON.stringify(error))
+    return new room.time
+  }
+  else{
+    console.log("time is set in this room. the time is " + userid.data.listUsers.items[0].roomid.time)
+    return userid.data.listUsers.items[0].roomid.time
+  }
+}
+*/
+//function sendSeek(seconds) {
+  // this.player.seekTo(this.seconds)
+//}
 </script>
-
-
-
