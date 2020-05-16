@@ -18,7 +18,7 @@
 	
 </header>
 
-<!--<router-link to="../views/SampleAuth"> ログイン</router-link>-->
+<!--<router-link to="../views/SampleAuth">  ログイン</router-link>-->
 
     <router-link to="/chat"> chat page </router-link>
     <br>
