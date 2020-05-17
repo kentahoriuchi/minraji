@@ -55,6 +55,7 @@
 </template>
 
 <script>
+
 export default {
   mounted() {
     const hash = this.$route.hash;

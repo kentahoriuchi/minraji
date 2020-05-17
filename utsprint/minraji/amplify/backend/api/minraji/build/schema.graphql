@@ -14,6 +14,7 @@ type Room {
   id: ID!
   movie: String
   users(filter: ModelUserFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelUserConnection
+  time: Int
 }
 
 enum ModelSortDirection {
@@ -222,6 +223,7 @@ type ModelRoomConnection {
 input ModelRoomFilterInput {
   id: ModelIDInput
   movie: ModelStringInput
+  time: ModelIntInput
   and: [ModelRoomFilterInput]
   or: [ModelRoomFilterInput]
   not: ModelRoomFilterInput
@@ -230,11 +232,13 @@ input ModelRoomFilterInput {
 input CreateRoomInput {
   id: ID
   movie: String
+  time: Int
 }
 
 input UpdateRoomInput {
   id: ID!
   movie: String
+  time: Int
 }
 
 input DeleteRoomInput {
@@ -243,6 +247,7 @@ input DeleteRoomInput {
 
 input ModelRoomConditionInput {
   movie: ModelStringInput
+  time: ModelIntInput
   and: [ModelRoomConditionInput]
   or: [ModelRoomConditionInput]
   not: ModelRoomConditionInput
