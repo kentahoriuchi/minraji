@@ -18,6 +18,17 @@
     <button v-on:click="userRead">room_test2</button>
     <div class="error">{{ this.error }}</div>
   </div>
+  <footer>
+    <ul class="footer-menu">
+     <li>home ｜</li>
+     <li>about ｜</li>
+     <li>service ｜</li>
+     <li>contact us</li>
+    </ul>
+    <p>© All rights reserved by minraji.</p>
+     
+    </footer>
+
 </div>
 </template>
 
@@ -80,3 +91,18 @@ export default {
   },
 }
 </script>
+
+<style>
+footer{
+    width: 100%;
+    height: 100px;
+    background-color: #174a5c;
+    color: white;
+    text-align: center;
+}
+
+ul.footer-menu li {
+display: inline;
+}
+
+</style>

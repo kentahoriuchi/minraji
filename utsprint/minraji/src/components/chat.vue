@@ -1,5 +1,11 @@
 <template>
 <div>
+<header>
+<h1 class="headline">
+      <a>みんラジ!</a>
+</h1>
+</header>
+<main>
   <div class="title">
     <h2>Amplifyで作るチャットアプリ</h2>
   </div>
@@ -13,7 +19,21 @@
     <el-input placeholder="メッセージを入力(Enterで送信)" v-model="content" @keydown.enter.native="sendMessage"></el-input>
     <div class="error">{{ this.error }}</div>
   </div>
-</div>
+  </main>
+
+  aaaaa
+
+
+<footer>
+  <ul class="footer-menu">
+    <li>home ｜</li>
+    <li>about ｜</li>
+    <li>service ｜</li>
+    <li>contact us</li>
+  </ul>
+  <p>© All rights reserved by minraji.</p>
+</footer>
+</div>  
 </template>
 
 <script>
@@ -88,3 +108,4 @@ export default {
 </script>
 
 <style src="./chat.css" />
+

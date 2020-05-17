@@ -1,9 +1,15 @@
 <template>
 <!-- 待機部屋の画面、部屋が作られると一覧が表示される -->
 <div>
+<header>
+<h1 class="headline">
+      <a>みんラジ!</a>
+</h1>
+</header>
   <div class="title">
     <h2>ルーム画面</h2>
   </div>
+  <main>
   <div class="main-contents">
     <!-- 部屋を作成する画面に移動 -->
     <router-link to="/room_create"> create room </router-link>
@@ -14,6 +20,17 @@
     </div>
     <div class="error">{{ this.error }}</div>
   </div>
+  </main>
+  <footer>
+    <ul class="footer-menu">
+     <li>home ｜</li>
+     <li>about ｜</li>
+     <li>service ｜</li>
+     <li>contact us</li>
+    </ul>
+    <p>© All rights reserved by minraji.</p>
+     
+    </footer>
 </div>
 </template>
 

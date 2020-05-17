@@ -15,6 +15,24 @@
 
 	
 </header>
+<main>
+
+aboutaaaaaa
+aaaaabbbbbb
+
+cccccc
+dddddd
+</main>
+  <footer>
+    <ul class="footer-menu">
+     <li>home ｜</li>
+     <li>about ｜</li>
+     <li>service ｜</li>
+     <li>contact us</li>
+    </ul>
+    <p>© All rights reserved by minraji.</p>
+     
+    </footer>
 
     
   </div>
@@ -48,6 +66,8 @@ header .headline{
 
 }
 
+
+
 .nav-list {
     line-height: 100px;
     float: left;
@@ -71,11 +91,33 @@ header .headline{
   border-radius: 4px;/*角の丸み*/
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
   font-weight: bold;
+  height:100px;
 }
 
 .button:active {
   border-bottom: solid 2px #fd9535;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
+
+main {
+  height: 500px;
+  width: 100%;
+  padding: 15px 0;
+  /*background-color: #337079;*/
+  /*background: #dfefff;*/
+}
+
+
+footer{
+    width: 100%;
+    height: 100px;
+    background-color: #174a5c;
+    color: white;
+    text-align: center;
+}
+
+ul.footer-menu li {
+display: inline;
 }
 
 
