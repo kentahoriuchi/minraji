@@ -6,18 +6,22 @@
       <a>みんラジ!</a>
 </h1>
 </header>
-    <h2 class="title">ルーム広場</h2>
   <main>
+  <h2 class="title" align="right">ルーム広場</h2>
    <router-link to="/signout" id="back-home-button"> ホームに戻る</router-link>
   <div class="main-contents">
     <!-- 部屋を作成する画面に移動 -->
     <router-link to="/room_create" id="create-room-button">ルームを作成する</router-link>
 
     <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
+    <p>
+    作成したルーム一覧
+    </p>
     <div id='room' v-for="room in rooms" :key="room.id">
-          <button v-on:click="gotoroom">{{room.id}}</button>
+          <button id = "go-room-button" v-on:click="gotoroom">{{room.id}}</button>
     </div>
     <div class="error">{{ this.error }}</div>
+  
   </div>
   </main>
 </div>
