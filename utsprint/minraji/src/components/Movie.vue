@@ -15,7 +15,11 @@
     </p>
     <button @click="playVideo">play</button>
     <p>
-      <input placeholder="飛ばしたい時間を入力(Enterで送信)" v-model="seconds" @keydown.enter.native="sendSeek">
+      <!--
+      <input placeholder="飛ばしたい時間を入力(Enterで送信)" v-model="seconds" @keydown.enter.native="sendSeek()">
+      -->
+      <input id="seektime" placeholder="飛ばしたい時間を入力(Enterで送信)" type='text' value=""/>
+      <input type="button" v-on:click="sendSeek()" value="時間とばし">
     </p>
   </div>
 </template>
@@ -53,7 +57,8 @@ export default {
       console.log('we are watching!!!')
     },
     sendSeek() {
-      this.player.seekTo(this.seconds)
+      const seconds = document.getElementById("seektime").value
+      this.player.seekTo(seconds)
     },
     sendMessage(){
       // TODO(1) GraphQLエンドポイントにMutationを発行し、メッセージを登録する
@@ -105,13 +110,13 @@ export default {
     videoId(){
       var array1 = this.videoUrl.match(/\?v=([^&]+)/)
       return array1[1]
-    }/*,
+    },
     currentTime: function(){
       return this.$refs.youtube.player.getCurrentTime()
     },
     playerState(){
       return this.$refs.youtube.player.getPlayerState()
-    } */
+    } 
   }
 }
 </script>
