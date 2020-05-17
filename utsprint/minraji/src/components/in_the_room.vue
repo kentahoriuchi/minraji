@@ -21,6 +21,9 @@
 <youtube :video-id="video_url" ref="youtube" @playing="playing"></youtube>
 </section>
     <!-- 待機部屋に移動 -->
+    <button v-on:click="delete_room">delete room</button>
+  </footer>
+
     <router-link to="/room" id="back-room-button">ルーム広場に戻る</router-link>
  <div class="title">
     <h2>ルームの中の画面</h2>
@@ -53,6 +56,7 @@ import { Auth } from 'aws-amplify'
 import { listUsers } from '../graphql/queries';
 import Vue from 'vue'
 import VueYoutube from 'vue-youtube'
+
 //import { deleteRoom, updateRoom } from '../graphql/mutations'
 import { deleteRoom } from '../graphql/mutations'
 import router from '../router/router'
@@ -122,6 +126,7 @@ export default {
     },
     sendSeek(seconds) {
       this.player.seekTo(seconds)
+
     },
     delete_room(){
       const roomi = {
@@ -132,6 +137,7 @@ export default {
         .catch(error => this.error = JSON.stringify(error))
       router.push({name:'room'})
     }
+    
   },
   computed: {
     player() {
