@@ -11,7 +11,12 @@
       <li class="nav-list-item"><a href="Home.vue#home_link2how2use">How to use</a></li>
       <li class="nav-list-item"> <amplify-sign-out></amplify-sign-out></li>
   </ul>	
-  <router-link to="/#link2about">ルームを作成する</router-link>
+  <!--<router-link
+    :to="{
+      name: '/', 
+      hash: '#hashtag'
+      }"
+  >ルームを作成する</router-link>-->
 </header>
 <main>
   <section>
