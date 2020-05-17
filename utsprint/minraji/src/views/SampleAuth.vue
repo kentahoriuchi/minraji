@@ -1,5 +1,6 @@
 <template>
 <div>
+<!--ログイン画面-->
 <header>
 <h1 class="headline">
       <a>みんラジ!</a>
@@ -8,16 +9,7 @@
 
   
   <a id="login-screen"><amplify-authenticator v-bind:authConfig="authConfig"></amplify-authenticator></a>
-  <footer>
-    <ul class="footer-menu">
-     <li>home ｜</li>
-     <li>about ｜</li>
-     <li>service ｜</li>
-     <li>contact us</li>
-    </ul>
-    <p>© All rights reserved by minraji.</p>
-     
-    </footer>
+
 </div>
 </template>
 <script>
@@ -61,16 +53,4 @@ header .headline-login{
   margin-top: 100px;
   text-align: left;
 }
-footer{
-    width: 100%;
-    height: 100px;
-    background-color: #174a5c;
-    color: white;
-    text-align: center;
-}
-
-ul.footer-menu li {
-display: inline;
-}
-
 </style>

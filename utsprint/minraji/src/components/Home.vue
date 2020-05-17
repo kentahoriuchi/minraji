@@ -18,24 +18,15 @@
 	
 </header>
 
-
+<main>
 <!--<router-link to="../views/SampleAuth">  ログイン</router-link>-->
 
-    <router-link to="/chat" class="button"> chat page </router-link>
-    <br>
-    <router-link to="/room" class="button"> room page </router-link>
+    <!--<router-link to="/chat" class="button"> chat page </router-link>
+    <br>-->
+    <router-link to="/room" id="go-room-button">ルーム広場に行く</router-link>
     <br>
     <!--<router-link to="/movie"> 動画ページ色々 </router-link>-->
-     <footer>
-    <ul class="footer-menu">
-     <li>home ｜</li>
-     <li>about ｜</li>
-     <li>service ｜</li>
-     <li>contact us</li>
-    </ul>
-    <p>© All rights reserved by minraji.</p>
-     
-    </footer>
+</main>
   </div>
 </template>
 
@@ -66,6 +57,23 @@ header .headline{
   color: #454545;
 
 }
+#go-room-button {
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #fd9535;/*背景色*/
+  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+
+#gp-room-button:active {
+  border-bottom: solid 2px #fd9535;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
 .button {
   position: relative;
   display: inline-block;
@@ -94,6 +102,13 @@ header .headline{
   list-style: none;
   display: inline-block;
   margin: 30px;
+}
+main {
+  height: 100px;
+  width: 100%;
+  padding: 15px 0;
+  /*background-color: #337079;*/
+  /*background: #dfefff;*/
 }
 
 footer{

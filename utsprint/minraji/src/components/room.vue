@@ -6,13 +6,12 @@
       <a>みんラジ!</a>
 </h1>
 </header>
-  <div class="title">
-    <h2>ルーム画面</h2>
-  </div>
+    <h2 class="title">ルーム広場</h2>
   <main>
+   <router-link to="/signout" id="back-home-button"> ホームに戻る</router-link>
   <div class="main-contents">
     <!-- 部屋を作成する画面に移動 -->
-    <router-link to="/room_create"> create room </router-link>
+    <router-link to="/room_create" id="create-room-button">ルームを作成する</router-link>
 
     <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
     <div id='room' v-for="room in rooms" :key="room.id">
@@ -21,16 +20,6 @@
     <div class="error">{{ this.error }}</div>
   </div>
   </main>
-  <footer>
-    <ul class="footer-menu">
-     <li>home ｜</li>
-     <li>about ｜</li>
-     <li>service ｜</li>
-     <li>contact us</li>
-    </ul>
-    <p>© All rights reserved by minraji.</p>
-     
-    </footer>
 </div>
 </template>
 

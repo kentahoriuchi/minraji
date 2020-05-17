@@ -10,30 +10,16 @@
         <a>Home</a>
       </li>
       <li class="nav-list-item">About</li>
-      <li class="nav-list-item"> <router-link to="/login" class="button">ログイン</router-link></li>
+      <li class="nav-list-item"> <router-link to="/login" id="login-button">ログイン</router-link></li>
     </ul>
 
 	
 </header>
 <main>
 
-aboutaaaaaa
-aaaaabbbbbb
+how to use, serviceの説明をする
 
-cccccc
-dddddd
 </main>
-  <footer>
-    <ul class="footer-menu">
-     <li>home ｜</li>
-     <li>about ｜</li>
-     <li>service ｜</li>
-     <li>contact us</li>
-    </ul>
-    <p>© All rights reserved by minraji.</p>
-     
-    </footer>
-
     
   </div>
 </template>
@@ -80,7 +66,7 @@ header .headline{
   margin: 0 20px;
 }
 
-.button {
+#login-button {
   position: relative;
   display: inline-block;
   padding: 0.25em 0.5em;
@@ -94,7 +80,7 @@ header .headline{
   height:100px;
 }
 
-.button:active {
+#logoin-button:active {
   border-bottom: solid 2px #fd9535;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
@@ -106,19 +92,5 @@ main {
   /*background-color: #337079;*/
   /*background: #dfefff;*/
 }
-
-
-footer{
-    width: 100%;
-    height: 100px;
-    background-color: #174a5c;
-    color: white;
-    text-align: center;
-}
-
-ul.footer-menu li {
-display: inline;
-}
-
 
 </style>

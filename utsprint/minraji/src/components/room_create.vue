@@ -1,9 +1,16 @@
 <template>
 <!-- 部屋作成の画面 -->
 <div>
+<header>
+<h1 class="headline">
+      <a>みんラジ!</a>
+</h1>
+</header>
+<main>
   <div class="title">
-    <h2>ルーム作成画面</h2>
+    <h2>ルーム作成ページ</h2>
   </div>
+  <router-link to="/room" id="back-room-button">ルーム広場に戻る</router-link>
   <div class="main-contents">
     <!-- 動画のidを入力させる、入力欄と送信ボタン -->
     <form id="movie1">
@@ -18,17 +25,7 @@
     <button v-on:click="userRead">room_test2</button>
     <div class="error">{{ this.error }}</div>
   </div>
-  <footer>
-    <ul class="footer-menu">
-     <li>home ｜</li>
-     <li>about ｜</li>
-     <li>service ｜</li>
-     <li>contact us</li>
-    </ul>
-    <p>© All rights reserved by minraji.</p>
-     
-    </footer>
-
+ </main>
 </div>
 </template>
 
@@ -93,16 +90,21 @@ export default {
 </script>
 
 <style>
-footer{
-    width: 100%;
-    height: 100px;
-    background-color: #174a5c;
-    color: white;
-    text-align: center;
+#back-room-button {
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #fd9535;/*背景色*/
+  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
 }
 
-ul.footer-menu li {
-display: inline;
+#back-room-button:active {
+  border-bottom: solid 2px #fd9535;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
-
 </style>
