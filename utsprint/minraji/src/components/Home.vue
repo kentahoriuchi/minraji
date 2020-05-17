@@ -17,6 +17,7 @@
 	
 </header>
 
+
 <main>
 <!--<router-link to="../views/SampleAuth">  ログイン</router-link>-->
 
@@ -24,6 +25,7 @@
     <br>-->
     <router-link to="/room" id="go-room-button-at-home">ルーム広場に行く</router-link>
     <br>
+    <router-link to="/movie"> 動画表示用 </router-link>
     <!--<router-link to="/movie"> 動画ページ色々 </router-link>-->
 <section>
 <section>
@@ -51,6 +53,7 @@
 </section>
 
 </main>
+
   </div>
 </template>
 

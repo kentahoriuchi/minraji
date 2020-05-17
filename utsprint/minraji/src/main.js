@@ -5,7 +5,11 @@ import router from './router/router'
 // import 'element-ui/lib/theme-chalk/index.css';
 // import locale from 'element-ui/lib/locale/lang/ja';
 
-//Element UI 全削除しました
+// //Element UI 
+// import ElementUI from 'element-ui'
+// import locale from 'element-ui/lib/locale/lang/ja'
+// import 'element-ui/lib/theme-chalk/index.css'
+// import 'element-ui/lib/theme-chalk/display.css'
 //import awsconfig from './aws-exports';
 import Amplify, * as AmplifyModules from 'aws-amplify';
 import { AmplifyPlugin } from 'aws-amplify-vue';
