@@ -1,12 +1,13 @@
 <template>
 <div>
 <!--ログイン画面-->
-<header>
+<!--
+  <header>
 <h1 class="headline">
       <a>みんラジ!</a>
 </h1>
 </header>
-
+-->
   
   <a id="login-screen"><amplify-authenticator v-bind:authConfig="authConfig"></amplify-authenticator></a>
 

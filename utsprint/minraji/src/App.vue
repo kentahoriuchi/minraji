@@ -5,6 +5,7 @@
       <router-view/>
     </p>
 
+<!-- 
     <footer>
     <ul class="footer-menu">
      <li>home ｜</li>
@@ -15,7 +16,7 @@
     <p>© All rights reserved by minraji.</p>
      
     </footer>
-
+ -->
 
   </div>
 

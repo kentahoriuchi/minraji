@@ -17,12 +17,7 @@
     <!-- video-id youtubeの動画のid -->
     <!--<youtube :video-id="video_url" ref="youtube" @playing="playing"></youtube> -->
 </section>
-<section>
-<youtube :video-id="video_url" ref="youtube" @playing="playing"></youtube>
-</section>
     <!-- 待機部屋に移動 -->
-    <button v-on:click="delete_room">delete room</button>
-  </footer>
 
     <router-link to="/room" id="back-room-button">ルーム広場に戻る</router-link>
  <div class="title">
@@ -37,7 +32,7 @@
       @buffering="buffering">
     </youtube> 
     <button v-on:click="playVideo">play</button>
-    <foryoutube :videoId='JyMPBn25wP4'></foryoutube>
+    <!-- <foryoutube :videoId='JyMPBn25wP4'></foryoutube> -->
   </div>
 
 </main>
@@ -60,15 +55,15 @@ import VueYoutube from 'vue-youtube'
 //import { deleteRoom, updateRoom } from '../graphql/mutations'
 import { deleteRoom } from '../graphql/mutations'
 import router from '../router/router'
-import foryoutube from './foryoutube'
+// import foryoutube from './foryoutube'
 
 Vue.use(VueYoutube)
 
 export default {
   name: 'room',
-  components: {
-    foryoutube
-  },
+  // components: {
+  //   foryoutube
+  // },
   data(){
     return {
       video_url: "",
@@ -122,7 +117,7 @@ export default {
       console.log('buffering')
       console.log(this.player.getPlayerState())
       setTimeout(console.log('7777777'),5000)
-      this.sendSeek(30)
+      await this.sendSeek(30)
     },
     sendSeek(seconds) {
       this.player.seekTo(seconds)
