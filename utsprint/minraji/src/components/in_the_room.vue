@@ -5,7 +5,6 @@
     <h2>ルームの中の画面</h2>
     <!-- video-id youtubeの動画のid -->
     <youtube :video-id="video_url" ref="youtube" 
-      :player-vars="playerVars"
       @playing="playing" 
       @cued="cued" 
       @ready="ready" 
@@ -13,8 +12,8 @@
       @paused="paused"
       @buffering="buffering">
     </youtube> 
-    <button @click="playVideo">play</button>
-    <foryoutube :player-vars="playerVars"></foryoutube>
+    <button v-on:click="playVideo">play</button>
+    <foryoutube :videoId='JyMPBn25wP4'></foryoutube>
   </div>
 
   <footer>
@@ -51,35 +50,39 @@ export default {
       error: "",
       roomid: "",
       createdTime: 1589620500,
-      playerVars: {
-        autoplay: 0
-      }
+      // playerVars: {
+      //   autoplay: 0
+      // }
       // videoId: '7bIBZ6M0-tU'
     }
   },
   methods :{
-    playVideo() {
-      // await this.player.playVideo()
+    async playVideo() {
       // await this.player.seekTo(10,true)
-      this.sendSeek("10")
+      await this.sendSeek(30)
+      this.player.playVideo()
+      console.log(await this.player.getPlayerState())
       // Do something after the playVideo command
       // this.player.seekTo(10)
     },
-    ready() {
+    async ready() {
       console.log("Now we are ready for stream!!!")
       //this.player.addEventListener(this.player.onStateChange, )
-      console.log(this.player.getPlayerState())
+      console.log(await this.player.getPlayerState())
+      this.sendSeek(30)
       // this.player.seekTo(Math.floor(new Date().getTime()/1000) - this.createdTime)
       // this.playVideo()
     },
-    playing() {
+    async playing() {
+      // await this.sendSeek(30)
       console.log('we are watching!!!')
       console.log(this.player.getPlayerState())
       // this.player.seekTo(10)
     },
-    cued() {
+    async cued() {
       console.log('cued')
-      console.log(this.player.getPlayerState())
+      console.log(await this.player.getPlayerState())
+
     },
     ended() {
       console.log('ended')
@@ -89,9 +92,11 @@ export default {
       console.log('paused')
       console.log(this.player.getPlayerState())
     },
-    buffering() {
+    async buffering() {
       console.log('buffering')
       console.log(this.player.getPlayerState())
+      setTimeout(console.log('7777777'),5000)
+      this.sendSeek(30)
     },
     sendSeek(seconds) {
       this.player.seekTo(seconds)

@@ -4,7 +4,14 @@
     <p>
       <input placeholder="URLを入力" v-model="videoUrl">
     </p>
-    <youtube :video-id="videoId" ref="youtube" @playing="playing"></youtube> 
+    <youtube :video-id="videoId" ref="youtube"
+    :player-vars="playerVars"
+      @playing="playing" 
+      @cued="cued" 
+      @ready="ready" 
+      @ended="ended" 
+      @paused="paused"
+      @buffering="buffering">></youtube> 
     <p>
       Original URL  : "{{videoUrl}}"
       generated ID  : "{{videoId}}"
@@ -56,9 +63,34 @@ export default {
     playing() {
       console.log('we are watching!!!')
     },
-    sendSeek() {
+    async ready() {
+      console.log("Now we are ready for stream!!!")
+      //this.player.addEventListener(this.player.onStateChange, )
+      console.log(await this.player.getPlayerState())
+      // this.player.seekTo(Math.floor(new Date().getTime()/1000) - this.createdTime)
+      // this.playVideo()
+    },
+    cued() {
+      console.log('cued')
+      console.log(this.player.getPlayerState())
+    },
+    ended() {
+      console.log('ended')
+      console.log(this.player.getPlayerState())
+    },
+    paused() {
+      console.log('paused')
+      console.log(this.player.getPlayerState())
+    },
+    buffering() {
+      console.log('buffering')
+      console.log(this.player.getPlayerState())
+    },
+    async sendSeek() {
       const seconds = document.getElementById("seektime").value
+      console.log(await this.player.getPlayerState())
       this.player.seekTo(seconds)
+      console.log(await this.player.getPlayerState())
     },
     sendMessage(){
       // TODO(1) GraphQLエンドポイントにMutationを発行し、メッセージを登録する

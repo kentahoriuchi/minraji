@@ -94,7 +94,7 @@
           return
         }
 
-        this.player.cueVideoById({ 'videoId': videoId, 'startSeconds':"10.0"})
+        this.player.cueVideoById({ 'videoId': videoId})
       },
       resizeProportionally () {
         this.player.getIframe().then(iframe => {
