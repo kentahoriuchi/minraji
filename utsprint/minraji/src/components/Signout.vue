@@ -6,19 +6,29 @@
       <a>みんラジ!</a>
 </h1>
     <ul class="nav-list">
-      <li class="nav-list-item">
-        <a>Home</a>
-      </li>
-      <li class="nav-list-item">About</li>
-      <li class="nav-list-item"> <router-link to="/login" id="login-button">ログイン</router-link></li>
-    </ul>
-
-	
+      <li class="nav-list-item"><a href="#link2about">About</a></li>
+      <li class="nav-list-item"><a href="#link2service">Service</a></li>
+      <li class="nav-list-item"><a href="#link2how2use">How to use</a></li>
+      <li class="nav-list-item"> <router-link to="/login" id="login-button">ログインする</router-link></li>
+    </ul>	
 </header>
 <main>
+<section>
+<section>
+<a name="link2about"><h2>About</h2></a>
+<p>aboutの説明をする aabb</p>
+</section>
 
-how to use, serviceの説明をする
+<section>
+<a name="link2service"><h2>Service</h2></a>
+<p>serviceの説明をする aaaaa</p>
+</section>
 
+<section>
+<a name="link2how2use"><h2>How to use</h2></a>
+<p>how to useの説明をする aaa</p>
+</section>
+</section>
 </main>
     
   </div>
@@ -30,7 +40,7 @@ how to use, serviceの説明をする
 
 <style>
 header {
-  height: 100px;
+  height: 120px;
   width: 100%;
   padding: 15px 0;
   /*background-color: #337079;*/
@@ -67,9 +77,9 @@ header .headline{
 }
 
 #login-button {
-  position: relative;
+  /*position: relative*/
   display: inline-block;
-  padding: 0.25em 0.5em;
+  padding: 0.15em 0.5em;
   text-decoration: none;
   color: #FFF;
   background: #fd9535;/*背景色*/
@@ -77,7 +87,7 @@ header .headline{
   border-radius: 4px;/*角の丸み*/
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
   font-weight: bold;
-  height:100px;
+  height:80px;
 }
 
 #logoin-button:active {
@@ -86,7 +96,7 @@ header .headline{
 }
 
 main {
-  height: 500px;
+  height: 1000px;
   width: 100%;
   padding: 15px 0;
   /*background-color: #337079;*/

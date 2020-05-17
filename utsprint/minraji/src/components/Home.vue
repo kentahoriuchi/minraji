@@ -8,10 +8,9 @@
       <a>みんラジ!</a>
 </h1>
     <ul class="nav-list">
-      <li class="nav-list-item">
-        <a>Home</a>
-      </li>
-      <li class="nav-list-item">About</li>
+      <li class="nav-list-item"><a href="#link2about">About</a></li>
+      <li class="nav-list-item"><a href="#link2service">Service</a></li>
+      <li class="nav-list-item"><a href="#link2how2use">How to use</a></li>
       <li class="nav-list-item"> <amplify-sign-out></amplify-sign-out></li>
     </ul>
 
@@ -23,20 +22,44 @@
 
     <!--<router-link to="/chat" class="button"> chat page </router-link>
     <br>-->
-    <router-link to="/room" id="go-room-button">ルーム広場に行く</router-link>
+    <router-link to="/room" id="go-room-button-at-home">ルーム広場に行く</router-link>
     <br>
     <!--<router-link to="/movie"> 動画ページ色々 </router-link>-->
+<section>
+<section>
+<a name="link2about" id="home_link2about"><h2>About</h2></a>
+<p>aboutの説明をする aabb</p>
+</section>
+
+<section>
+<a name="link2service" id="home_link2service"><h2>Service</h2></a>
+<p>serviceの説明をする aaaaa</p>
+</section>
+
+<section>
+<a name="link2how2use" id="home_link2how2use"><h2>How to use</h2></a>
+<p>how to useの説明をする aaa</p>
+</section>
+</section>
+
 </main>
   </div>
 </template>
 
 <script>
-
+export default {
+  mounted() {
+    const hash = this.$route.hash;
+    if (hash && hash.match(/^#.+$/)) {
+      this.$scrollTo(hash);
+    }
+  }
+};
 </script>
 
 <style>
 header {
-  height: 100px;
+  height: 120px;
   width: 100%;
   padding: 15px 0;
   /*background-color: #337079;*/
@@ -57,7 +80,8 @@ header .headline{
   color: #454545;
 
 }
-#go-room-button {
+
+#go-room-button-at-home {
   position: relative;
   display: inline-block;
   padding: 0.25em 0.5em;
@@ -70,7 +94,7 @@ header .headline{
   font-weight: bold;
 }
 
-#gp-room-button:active {
+#gp-room-button-at-home:active {
   border-bottom: solid 2px #fd9535;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
@@ -104,7 +128,7 @@ header .headline{
   margin: 30px;
 }
 main {
-  height: 100px;
+  height: 1000px;
   width: 100%;
   padding: 15px 0;
   /*background-color: #337079;*/

@@ -3,27 +3,44 @@
 <div>
 <header>
 <h1 class="headline">
-      <a>みんラジ!</a>
+  <a>みんラジ!</a>
 </h1>
+ <ul class="nav-list">
+      <li class="nav-list-item"><a href="Home.vue#home_link2about">About</a></li>
+      <li class="nav-list-item"><a href="Home.vue#home_link2service">Service</a></li>
+      <li class="nav-list-item"><a href="Home.vue#home_link2how2use">How to use</a></li>
+      <li class="nav-list-item"> <amplify-sign-out></amplify-sign-out></li>
+  </ul>	
+  <router-link to="/#link2about">ルームを作成する</router-link>
 </header>
-  <main>
-  <h2 class="title" align="right">ルーム広場</h2>
-   <router-link to="/signout" id="back-home-button"> ホームに戻る</router-link>
-  <div class="main-contents">
-    <!-- 部屋を作成する画面に移動 -->
-    <router-link to="/room_create" id="create-room-button">ルームを作成する</router-link>
+<main>
+  <section>
+    <section>
+      <h2>ルーム広場</h2>
+      <p>ここはルームに入る待機場所です。「ルームを作成する」ボタンを押したらルームを作成できます。</p>
+      <!--<router-link to="/signout" id="back-home-button"> ホームに戻る</router-link>-->
+    </section>
+   
+    
+      <!-- 部屋を作成する画面に移動 -->
+      <router-link to="/room_create" id="create-room-button">ルームを作成する</router-link>
 
-    <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
-    <p>
-    作成したルーム一覧
-    </p>
-    <div id='room' v-for="room in rooms" :key="room.id">
-          <button id = "go-room-button" v-on:click="gotoroom">{{room.id}}</button>
-    </div>
-    <div class="error">{{ this.error }}</div>
-  
-  </div>
-  </main>
+      <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
+    <section>
+      <div class="main-contents">
+      <h2>作成したルーム一覧</h2>
+      <p>作成されたルーム一覧です。自分が作ったルームに入りましょう。</p>
+      <!--<router-link to="/signout" id="back-home-button"> ホームに戻る</router-link>-->
+      <div id='room' v-for="room in rooms" :key="room.id">
+        <button id = "go-room-button" v-on:click="gotoroom">{{room.id}}</button>
+      </div>
+      <div class="error">{{ this.error }}</div>
+      </div>
+    </section>
+      
+    
+  </section>
+</main>
 </div>
 </template>
 

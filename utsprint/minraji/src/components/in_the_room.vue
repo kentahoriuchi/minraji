@@ -5,15 +5,23 @@
 <h1 class="headline">
       <a>みんラジ!</a>
 </h1>
+<ul class="nav-list">
+      <li class="nav-list-item"><a href="#link2about">About</a></li>
+      <li class="nav-list-item"><a href="#link2service">Service</a></li>
+      <li class="nav-list-item"><a href="#link2how2use">How to use</a></li>
+      <li class="nav-list-item"> <amplify-sign-out></amplify-sign-out></li>
+  </ul>	
 </header>
 <main>
-  <div class="title">
-    <h2>ルームの中の画面</h2>
-
+<section>
+    <h2>ルーム</h2>
+    <p>ここはルームの中です。動画をみてラジオ体操をしましょう。</p>
     <!-- video-id youtubeの動画のid -->
-    <youtube :video-id="video_url" ref="youtube" @playing="playing"></youtube> 
-  </div>
-  
+    <!--<youtube :video-id="video_url" ref="youtube" @playing="playing"></youtube> -->
+</section>
+<section>
+<youtube :video-id="video_url" ref="youtube" @playing="playing"></youtube>
+</section>
     <!-- 待機部屋に移動 -->
     <router-link to="/room" id="back-room-button">ルーム広場に戻る</router-link>
  
@@ -65,6 +73,29 @@ export default {
 </script>
 
 <style>
+header {
+  height: 120px;
+  width: 100%;
+  padding: 15px 0;
+  /*background-color: #337079;*/
+  background: #dfefff;
+
+}
+
+header .headline{
+  /*background: #dfefff;
+  box-shadow: 0px 0px 0px 5px #dfefff;
+  border: dashed 1px #96c2fe;
+  padding: 0.2em 0.5em;
+  color: #454545;*/
+  line-height: 100px;
+  float: left;
+  font-size: 50px;
+  margin-left: 100px;
+  color: #454545;
+
+}
+
 #back-room-button {
   position: relative;
   display: inline-block;

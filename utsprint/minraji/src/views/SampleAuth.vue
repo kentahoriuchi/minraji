@@ -28,7 +28,7 @@ export default {
 </script>
 <style>
 header {
-  height: 100px;
+  height: 120px;
   width: 100%;
   padding: 15px 0;
   /*background-color: #337079;*/
