@@ -60,7 +60,7 @@ export default {
         userRoomidId: room.id
       }
       console.log(userroomid)
-      API.graphql(graphqlOperation(updateUser, { input: userroomid }))
+      await API.graphql(graphqlOperation(updateUser, { input: userroomid }))
         .catch(error => this.error = JSON.stringify(error))
       // }
       // else{
