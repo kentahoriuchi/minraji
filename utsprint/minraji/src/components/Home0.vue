@@ -5,12 +5,12 @@
             <a>みんラジ!</a>
         </h1>
 </header>
-  
-    <p id ="message_id" v-html="message"><p>
-    <p>
-      ここはホーム画面です。aaaaaaa
-    </p>
+    <router-link to="/chat"> chat page </router-link>
+    <br>
+    <router-link to="/room"> room page </router-link>
     <amplify-sign-out></amplify-sign-out>
+    <br>
+    <router-link to="/movie"> 動画ページ色々 </router-link>
     <footer>
      
     </footer>
@@ -18,13 +18,7 @@
 </template>
 
 <script>
-export default {
-  data: function() {
-    return {
-      message: '吾輩は猫である。<br>名前はまだない。'
-    }
-  }
-}
+
 </script>
 
 <style>
