@@ -6,7 +6,8 @@
   <a>みんラジ!</a>
 </h1>
  <ul class="nav-list">
-      <li class="nav-list-item"><router-link to="/signout" id="back-home-button"> ホーム</router-link></li>
+      <li class="nav-list-item"><router-link to="/" id="back-home-button"> ホーム</router-link></li>
+      <li class="nav-list-item"><!-- 部屋を作成する画面に移動 --><router-link to="/room_create" id="create-room-button">ルームを作成する</router-link></li>
       <li class="nav-list-item"> <amplify-sign-out></amplify-sign-out></li>
   </ul>	
   <!--<router-link
@@ -20,16 +21,13 @@
   <section>
     <section>
       <h2>ルーム広場</h2>
-      <p>ここはルームに入る待機場所です。「ルームを作成する」ボタンを押したらルームを作成できます。</p>
+      <p>ここはルームに入る待機場所です。「ルームを作成する」ボタンを押したら、ルームを作成するページに移動するので
+      そこでルームを作成してください。
+      </p>
+      <router-link to="/room_create" id="create-room-button">ルームを作成する</router-link>
     </section>
    
-    
-      <!-- 部屋を作成する画面に移動 -->
-      <router-link to="/room_create" id="create-room-button">ルームを作成する</router-link>
-
-
-    <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
-    
+      <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
     <section>
       <calendar></calendar>
       <div class="main-contents">
