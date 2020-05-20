@@ -1,22 +1,16 @@
 <template>
   <div id="app">
- 
     <p>
       <router-view/>
     </p>
-
-<!-- 
     <footer>
     <ul class="footer-menu">
-     <li>home ｜</li>
-     <li>about ｜</li>
-     <li>service ｜</li>
-     <li>contact us</li>
+     <li><router-link to="/"> home</router-link> ｜</li>
+     <li><router-link to="/"> about</router-link>｜</li>
+     <li><router-link to="/"> service</router-link></li>
     </ul>
     <p>© All rights reserved by minraji.</p>
-     
     </footer>
- -->
 
   </div>
 
@@ -29,7 +23,7 @@
 <style>
 footer{
     width: 100%;
-    height: 100px;
+    height: 400px;
     background-color: #174a5c;
     color: white;
     text-align: center;

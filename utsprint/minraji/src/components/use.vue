@@ -1,0 +1,87 @@
+<template>
+  <div>
+<header>
+<h1 class="headline">
+      <a>みんラジ!</a>
+</h1>
+<div>
+    <ul class="nav-list">
+      <li class="nav-list-item"><router-link to="/" id="back-home-button"> ホーム</router-link></li>
+      <li class="nav-list-item" ><router-link to="/room" id="go-room-button-at-use">ルーム広場に行く</router-link></li>
+      <li class="nav-list-item"><amplify-sign-out></amplify-sign-out></li>
+    </ul>
+</div>
+</header>
+<main>
+    <section>
+<a name="link2how2use" id="home_link2how2use"><h2>How to use</h2></a>
+<h3>1. 新規会員登録</h3>
+<p>まず「ログインする」ボタンを押しましょう。そうすればログインページに移動します。
+  ログイン画面の「新規登録」を押してください。メールアドレスが必要です。
+</p>
+<h3>2. ログイン</h3>
+<p>新規登録が済んだ方もしくはすでに登録した方は、
+「ログインする」ボタンを押してログイン画面に登録したユーザー名とパスワードを入力してログインしましょう。</p>
+<h3>3. ルーム広場に行く</h3>
+<p>「ルーム広場に行く」ボタンを押しましょう。ルーム広場はラジオ体操する前の待機場所です。</p>
+<h3>4. ルームを作成する</h3>
+<p>ルーム広場にある「ルームを作成する」ボタンを押しましょう。ルームを作成するページに飛びます。
+自分の好きな体操の動画のURLを入力してください。</p>
+<h3>5. 作成したルームにいく</h3>
+<p>ルームを作成したら、「ルーム広場に戻る」ボタンを押してください。
+ルーム一覧にある自分が作成したルームのボタンを押してください。ルームに移動できます。</p>
+<h3>6. ラジオ体操</h3>
+<p>人と一緒に動画をみてラジオ体操をしましょう。終わったらルームから出ましょう。
+  ラジオ体操が終わったら「ルーム広場に戻る」ボタンを押してルーム広場に戻りましょう。
+  <img src="../image/computer_school_girl.png" id="computer_school_girl" alt="ラジオ体操" width="300" height="300">
+  <img src="../image/radio_taisou.png" id="radio_taiso2" alt="ラジオ体操" width="300" height="300">
+</p>
+</section>
+</main>
+
+  </div>
+</template>
+
+<script>
+
+</script>
+
+<style>
+#back-home-button {
+  font-size: 1.4em;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #4235fd;/*背景色*/
+  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+  
+#back-home-button:active {
+  border-bottom: solid 2px #fd9535;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
+#go-room-button-at-use {
+  font-size: 1.4em;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #fd9535;/*背景色*/
+  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+
+#gp-room-button-at-use:active {
+  border-bottom: solid 2px #fd9535;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
+
+</style>
