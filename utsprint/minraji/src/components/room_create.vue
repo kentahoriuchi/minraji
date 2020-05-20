@@ -80,11 +80,14 @@ export default {
     roomCreate(){
       const id = new Date().getTime() + this.userName
       const input_movie = document.getElementById("movie").value
-      console.log(input_movie)
+      const movie_title = document.getElementById("title").value
+      console.log(movie_title)
       const room = {
         id : id,
-        movie : input_movie
+        movie : input_movie,
+        tilte : movie_title
       }
+      console.log(room)
       API.graphql(graphqlOperation(createRoom, { input: room }))
         .catch(error => this.error = JSON.stringify(error))
       router.push({name:'room'})

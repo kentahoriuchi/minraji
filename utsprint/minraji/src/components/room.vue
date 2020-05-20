@@ -29,6 +29,7 @@
    
       <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
     <section>
+      <calendar></calendar>
       <div class="main-contents">
       <h2>作成したルーム一覧</h2>
       <p>作成されたルーム一覧です。自分が作ったルームに入りましょう。</p>
@@ -56,9 +57,14 @@ import { updateUser } from "../graphql/mutations";
 import { listRooms } from '../graphql/queries';
 import { listUsers } from '../graphql/queries';
 import router from '../router/router'
+import calendar from "./calendar"
+
 window.LOG_LEVEL = 'VERBOSE';
 export default {
   name: 'chat',
+  components: {
+    calendar
+  },
   data(){
     return {
       userName: "",
