@@ -9,7 +9,8 @@ import Room_create from '@/components/room_create'
 import SampleAuth from "../views/SampleAuth";
 import In_the_room from '@/components/in_the_room'
 import Movie from '@/components/Movie'
-import Signout from '@/components/Signout'
+//import Signout from '@/components/Signout'
+import use from '@/components/use'
 
 // Amplify読み込み
 import {  AmplifyEventBus } from 'aws-amplify-vue'
@@ -45,7 +46,7 @@ AmplifyEventBus.$on('authState', async (state) => {
         router.push({path: '/'});
     } else if (state === 'signedIn') {
         user = await getUser();
-        router.push({path: '/signout'});
+        router.push({path: '/'});
     }
 });
 
@@ -60,18 +61,21 @@ const router = new Router({
       component: SampleAuth
     },
     {
-        path: '/signout',
-        name: 'signin_home',
-        component: Signout
-        //component: Home
+        path: '/',
+        //path: '/signin',
+        name: 'home',
+        //component: Signout
+        component: Home,
+        meta:{requireAuth:true}
     },
-    {
+    
+    /*{
       path: '/',
       name: 'signout_home',
-      //component: Signout,
-      component: Home,
-      meta:{ requireAuth:true}
-    },
+      component: Signout,
+      //component: Home,
+      //meta:{requireAuth:true}
+    },*/
     {
         path: '/chat',
         name: 'chat',
@@ -97,11 +101,18 @@ const router = new Router({
         name: 'Movie',
         component: Movie
     },
+    {
+        path: '/use',
+        name: 'Use',
+        component: use
+    },
   ]
 })
 
 router.beforeResolve(async (to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
+        // このルートはログインされているかどうか認証が必要です。
+    // もしされていないならば、ログインページにリダイレクトします。
         user = await getUser();
         if (!user) {
             return next({
