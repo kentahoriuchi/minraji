@@ -36,10 +36,12 @@ export const onCreateUser = /* GraphQL */ `
       roomid {
         id
         movie
+        tilte
         users {
           nextToken
         }
         time
+        reservedtime
       }
     }
   }
@@ -52,10 +54,12 @@ export const onUpdateUser = /* GraphQL */ `
       roomid {
         id
         movie
+        tilte
         users {
           nextToken
         }
         time
+        reservedtime
       }
     }
   }
@@ -68,10 +72,12 @@ export const onDeleteUser = /* GraphQL */ `
       roomid {
         id
         movie
+        tilte
         users {
           nextToken
         }
         time
+        reservedtime
       }
     }
   }
@@ -81,6 +87,7 @@ export const onCreateRoom = /* GraphQL */ `
     onCreateRoom {
       id
       movie
+      tilte
       users {
         items {
           id
@@ -89,6 +96,7 @@ export const onCreateRoom = /* GraphQL */ `
         nextToken
       }
       time
+      reservedtime
     }
   }
 `;
@@ -97,6 +105,7 @@ export const onUpdateRoom = /* GraphQL */ `
     onUpdateRoom {
       id
       movie
+      tilte
       users {
         items {
           id
@@ -105,6 +114,7 @@ export const onUpdateRoom = /* GraphQL */ `
         nextToken
       }
       time
+      reservedtime
     }
   }
 `;
@@ -113,6 +123,7 @@ export const onDeleteRoom = /* GraphQL */ `
     onDeleteRoom {
       id
       movie
+      tilte
       users {
         items {
           id
@@ -121,6 +132,7 @@ export const onDeleteRoom = /* GraphQL */ `
         nextToken
       }
       time
+      reservedtime
     }
   }
 `;

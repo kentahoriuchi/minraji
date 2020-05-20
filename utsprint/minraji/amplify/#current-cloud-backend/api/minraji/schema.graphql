@@ -28,8 +28,10 @@ type Room
   {
   id: ID!
   movie: String
+  tilte: String
   users: [User] @connection(name: "MemberLinks")
   time: Int
+  reservedtime: Int
   # user: User! @connection(name: "UserRoom")
 	# createdAt: String
 	# updatedAt: String

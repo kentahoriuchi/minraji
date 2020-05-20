@@ -56,19 +56,19 @@ const router = new Router({
     {
       path: '/login',
       name: 'login',
-      //component: Login
+    //   component: Login
       component: SampleAuth
     },
     {
         path: '/signout',
         name: 'signin_home',
         component: Signout
-        //component: Home
+        // component: Home
     },
     {
       path: '/',
       name: 'signout_home',
-      //component: Signout,
+    //   component: Signout,
       component: Home,
       meta:{ requireAuth:true}
     },

@@ -19,7 +19,8 @@
 
   <div class="main-contents">
     <!-- 動画のidを入力させる、入力欄と送信ボタン -->
-    <form id="movie1">
+    <form>
+      <input id="title" placeholder="タイトル入力(Enterで送信)" size="50" type='text' value=""/>
       <input id="movie" placeholder="Youtube リンク入力(Enterで送信)" size="50" type='text' value=""/>
       <input type="button" v-on:click="roomCreate" value="ルームを作る" id="room-create-button">
     </form>
@@ -74,11 +75,14 @@ export default {
     roomCreate(){
       const id = new Date().getTime() + this.userName
       const input_movie = document.getElementById("movie").value
-      console.log(input_movie)
+      const movie_title = document.getElementById("title").value
+      console.log(movie_title)
       const room = {
         id : id,
-        movie : input_movie
+        movie : input_movie,
+        tilte : movie_title
       }
+      console.log(room)
       API.graphql(graphqlOperation(createRoom, { input: room }))
         .catch(error => this.error = JSON.stringify(error))
       router.push({name:'room'})

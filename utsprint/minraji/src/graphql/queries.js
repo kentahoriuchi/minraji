@@ -34,10 +34,12 @@ export const getUser = /* GraphQL */ `
       roomid {
         id
         movie
+        tilte
         users {
           nextToken
         }
         time
+        reservedtime
       }
     }
   }
@@ -55,7 +57,9 @@ export const listUsers = /* GraphQL */ `
         roomid {
           id
           movie
+          tilte
           time
+          reservedtime
         }
       }
       nextToken
@@ -67,6 +71,7 @@ export const getRoom = /* GraphQL */ `
     getRoom(id: $id) {
       id
       movie
+      tilte
       users {
         items {
           id
@@ -75,6 +80,7 @@ export const getRoom = /* GraphQL */ `
         nextToken
       }
       time
+      reservedtime
     }
   }
 `;
@@ -88,10 +94,12 @@ export const listRooms = /* GraphQL */ `
       items {
         id
         movie
+        tilte
         users {
           nextToken
         }
         time
+        reservedtime
       }
       nextToken
     }
