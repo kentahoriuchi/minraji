@@ -14,6 +14,10 @@
 <section>
     <h2>ルーム</h2>
     <p>ここはルームの中です。動画をみてラジオ体操をしましょう。</p>
+    参加者 : {{members.length}} 名
+    <div  v-for="member in members" :key="member.id">
+      {{member.username}}
+    </div>
     <!-- video-id youtubeの動画のid -->
     <!--<youtube :video-id="video_url" ref="youtube" @playing="playing"></youtube> -->
 </section>
@@ -51,6 +55,7 @@ import { Auth } from 'aws-amplify'
 import { listUsers } from '../graphql/queries';
 import Vue from 'vue'
 import VueYoutube from 'vue-youtube'
+import { getRoom } from '../graphql/queries';
 
 //import { deleteRoom, updateRoom } from '../graphql/mutations'
 import { deleteRoom } from '../graphql/mutations'
@@ -71,6 +76,7 @@ export default {
       error: "",
       roomid: "",
       createdTime: 1589620500,
+      members: [],
       // playerVars: {
       //   autoplay: 0
       // }
@@ -143,8 +149,12 @@ export default {
   async created(){
     this.userName = (await Auth.currentAuthenticatedUser()).username;
     const userid = await API.graphql(graphqlOperation(listUsers, { filter: {'username':{eq: this.userName}}}))
+    console.log(userid.data.listUsers.items[0])
+    console.log(userid.data.listUsers.items[0].roomid)
     this.video_url = userid.data.listUsers.items[0].roomid.movie
     this.roomid = userid.data.listUsers.items[0].roomid.id
+    const member = await API.graphql(graphqlOperation(getRoom,{id: this.roomid}))
+    this.members = member.data.getRoom.users.items
     console.log(this.video_url)
     //this.createdTime = get_created_time(userid)
   },

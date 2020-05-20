@@ -36,6 +36,7 @@
       <!--<router-link to="/signout" id="back-home-button"> ホームに戻る</router-link>-->
       <div id='room' v-for="room in rooms" :key="room.id">
         <button id = "go-room-button" v-on:click="gotoroom(room.id)">{{room.id}}</button>
+        参加者 : {{members[0]}} 名
       </div>
       <div class="error">{{ this.error }}</div>
       </div>
@@ -55,6 +56,7 @@ import { Auth } from 'aws-amplify'
 import { createUser } from "../graphql/mutations";
 import { updateUser } from "../graphql/mutations";
 import { listRooms } from '../graphql/queries';
+import { getRoom } from '../graphql/queries';
 import { listUsers } from '../graphql/queries';
 import router from '../router/router'
 window.LOG_LEVEL = 'VERBOSE';
@@ -63,6 +65,7 @@ export default {
   data(){
     return {
       userName: "",
+      members: [],
       // subscription: {},
       error: "",
       rooms: [],
@@ -70,21 +73,26 @@ export default {
     }
   },
   methods :{
-    fetch(){
-      API.graphql(graphqlOperation(listRooms,{limit:10}))
-        .then(rooms => this.rooms = rooms.data.listRooms.items)
-        .catch(error => this.error = JSON.stringify(error))
+    async fetch(){
+      const room_temp = await API.graphql(graphqlOperation(listRooms,{limit:10}))
+      this.rooms = room_temp.data.listRooms.items
+      for(let i = 0; i < this.rooms.length; i++){
+        let member = await API.graphql(graphqlOperation(getRoom,{id: this.rooms[i].id}))
+        this.members.push(member.getRoom.users.items.length)
+      }
       console.log(this.rooms)
     },
     async gotoroom(temp){
       //ユーザーの認証とかをやる
       const roomid = await API.graphql(graphqlOperation(listUsers, { filter: {'username':{eq: this.userName}}}))
       const userroom = roomid.data.listUsers.items[0]
-      // console.log(userroom.roomid)
+      console.log(userroom)
       // if (!userroom.roomid){
       console.log(document.getElementById("room").textContent)
-      var room_a = await API.graphql(graphqlOperation(listRooms, { filter: {'id':{eq: temp}}}))
-      var room = room_a.data.listRooms.items[0]
+      var room_a = await API.graphql(graphqlOperation(getRoom,{id: temp}))
+      console.log(room_a.data.getRoom.users.items)
+      this.members = room_a.data.getRoom.users.items
+      var room = room_a.data.getRoom.users
       const userroomid = {
         id: userroom.id,
         username: this.userName,
