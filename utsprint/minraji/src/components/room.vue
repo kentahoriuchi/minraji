@@ -35,7 +35,7 @@
       <p>作成されたルーム一覧です。自分が作ったルームに入りましょう。</p>
       <!--<router-link to="/signout" id="back-home-button"> ホームに戻る</router-link>-->
       <div id='room' v-for="room in rooms" :key="room.id">
-        <button id = "go-room-button" v-on:click="gotoroom(room.id)">{{room.id}}</button>
+        <button id = "go-room-button" v-on:click="gotoroom(room.id)">{{room.tilte}}</button>
         参加者 : {{members[0]}} 名
       </div>
       <div class="error">{{ this.error }}</div>
