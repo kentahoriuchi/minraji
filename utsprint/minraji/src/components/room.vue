@@ -10,12 +10,7 @@
       <li class="nav-list-item"><!-- 部屋を作成する画面に移動 --><router-link to="/room_create" id="create-room-button">ルームを作成する</router-link></li>
       <li class="nav-list-item"> <amplify-sign-out></amplify-sign-out></li>
   </ul>	
-  <!--<router-link
-    :to="{
-      name: '/', 
-      hash: '#hashtag'
-      }"
-  >ルームを作成する</router-link>-->
+
 </header>
 <main>
   <section>
@@ -33,7 +28,6 @@
       <div class="main-contents">
       <h2>作成したルーム一覧</h2>
       <p>作成されたルーム一覧です。自分が作ったルームに入りましょう。</p>
-      <!--<router-link to="/signout" id="back-home-button"> ホームに戻る</router-link>-->
       <div id='room' v-for="room in rooms" :key="room.id">
         <button id = "go-room-button" v-on:click="gotoroom(room.id)">{{room.tilte}}</button>
         参加者 : {{members[0]}} 名
@@ -52,16 +46,19 @@
 
 <script>
 import API, {  graphqlOperation } from '@aws-amplify/api';
-import { Auth } from 'aws-amplify'
-import { createUser } from "../graphql/mutations";
-import { updateUser } from "../graphql/mutations";
+// import { Auth } from 'aws-amplify'
+import router from '../router/router'
+import calendar from "./calendar"
 import { listRooms } from '../graphql/queries';
 import { getRoom } from '../graphql/queries';
 import { listUsers } from '../graphql/queries';
-import router from '../router/router'
-import calendar from "./calendar"
+// import { getUser } from '../graphql/queries';
+// import { createUser } from "../graphql/mutations";
+import { updateUser } from "../graphql/mutations";
+import UserStore from '../mobx/UserStore'
 
 window.LOG_LEVEL = 'VERBOSE';
+
 export default {
   name: 'chat',
   components: {
@@ -114,20 +111,10 @@ export default {
     }
   },
   async created(){
-    this.userName = (await Auth.currentAuthenticatedUser()).username;
-    var user = await API.graphql(graphqlOperation(listUsers, { filter: {'username':{eq: this.userName}}}))
-    console.log(user.data.listUsers.items.length)
-    console.log(!user.data.listUsers.items.length)
-    if (!user.data.listUsers.items.length){
-      const newuser = {
-        id: new Date().getTime() + this.userName,
-        username: this.userName
-      }
-      API.graphql(graphqlOperation(createUser, { input: newuser }))
-        .catch(error => this.error = JSON.stringify(error))
-      console.log(newuser)
-    }
-    this.fetch()
+    const { username } = await UserStore
+    console.log(UserStore)
+    this.userName = username
+    // this.fetch()
   }
 }
 </script>

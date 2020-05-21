@@ -45,11 +45,9 @@
 
 <script>
 import API, {  graphqlOperation } from '@aws-amplify/api';
-import { Auth } from 'aws-amplify'
-import { createUser } from "../graphql/mutations";
 import { createRoom } from "../graphql/mutations";
 import { listRooms } from '../graphql/queries';
-import { listUsers } from '../graphql/queries';
+import UserStore from '../mobx/UserStore'
 import router from '../router/router'
 export default {
   name: 'room',
@@ -63,20 +61,6 @@ export default {
     }
   },
   methods :{
-    userRead(){
-      API.graphql(graphqlOperation(listUsers, { filter: {'username':{eq: this.userName}}}))
-        .then(userData => this.userData = userData.data.listUsers.items)
-      console.log(Array.from(this.userData))
-      if (Array.from(this.userData) !== []) return
-      console.log(this.userData)
-      const newuser = {
-        id: new Date().getTime() + this.userName,
-        username: this.userName
-      }
-      API.graphql(graphqlOperation(createUser, { input: newuser }))
-        .catch(error => this.error = JSON.stringify(error))
-      this.userData = []
-    },
     roomCreate(){
       const id = new Date().getTime() + this.userName
       const input_movie = document.getElementById("movie").value
@@ -100,7 +84,8 @@ export default {
     }
   },
   async created(){
-    this.userName = (await Auth.currentAuthenticatedUser()).username;
+    const { username } = await UserStore
+    this.userName = username
     this.fetch()
   },
 }

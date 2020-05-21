@@ -33,8 +33,8 @@
     <!--<router-link to="/movie"> 動画表示用 </router-link>-->
     <!--<router-link to="/movie"> 動画ページ色々 </router-link>-->
 <section>
-<section>
 
+<section>
 <a name="link2about" id="home_link2about"><h2>About</h2></a>
 <p>このサイトは東京大学で行われている<a href="https://sites.google.com/g.ecc.u-tokyo.ac.jp/utokyo-project-sprint/" target="_blank">Utokyo Project Sprint</a>に参加しているサービスです。
 新型コロナウイルスによって生じた困難をネットサービスで解決または改善を目的としているプロジェクトです。

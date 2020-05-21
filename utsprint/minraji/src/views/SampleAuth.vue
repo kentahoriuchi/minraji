@@ -32,6 +32,7 @@ export default {
   name: "login",
   data() {
     return {
+      // 電話番号を不要にする
       authConfig: {
         signUpConfig: {
           hiddenDefaults: ["phone_number"]
@@ -41,6 +42,7 @@ export default {
   }
 };
 </script>
+
 <style>
 header {
   height: 120px;
