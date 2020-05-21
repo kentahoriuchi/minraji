@@ -23,11 +23,12 @@
 
 <style>
 footer{
-    width: 100%;
-    height: 400px;
-    background-color: #174a5c;
-    color: white;
-    text-align: center;
+  top: 3000px;
+  width: 100%;
+  height: 400px;
+  background-color: #174a5c;
+  color: white;
+  text-align: center;
 }
 
 ul.footer-menu li {

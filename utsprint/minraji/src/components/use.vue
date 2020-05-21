@@ -7,8 +7,9 @@
 <div>
     <ul class="nav-list">
       <li class="nav-list-item"><router-link to="/" id="back-home-button"> ホーム</router-link></li>
-      <li class="nav-list-item" ><router-link to="/room" id="go-room-button-at-use">ルーム広場に行く</router-link></li>
-      <li class="nav-list-item"><amplify-sign-out></amplify-sign-out></li>
+      <li class="nav-list-item" v-if="signedIn"><router-link to="/room" id="go-room-button-at-use">ルーム広場に行く</router-link></li>
+      <li class="nav-list-item"  v-if="signedIn"><amplify-sign-out></amplify-sign-out></li>
+      <li class="nav-list-item"  v-if="!signedIn"> <router-link to="/login" id="login-button">ログインする</router-link></li>
     </ul>
 </div>
 </header>
@@ -33,8 +34,10 @@
 <h3>6. ラジオ体操</h3>
 <p>人と一緒に動画をみてラジオ体操をしましょう。終わったらルームから出ましょう。
   ラジオ体操が終わったら「ルーム広場に戻る」ボタンを押してルーム広場に戻りましょう。
-  <img src="../image/computer_school_girl.png" id="computer_school_girl" alt="ラジオ体操" width="300" height="300">
-  <img src="../image/radio_taisou.png" id="radio_taiso2" alt="ラジオ体操" width="300" height="300">
+</p>
+<p>
+  <img src="../image/computer_school_girl.png" id="computer_school_girl" alt="ラジオ体操" width=20%>
+  <img src="../image/radio_taisou.png" id="radio_taiso2" alt="ラジオ体操" width=20%>
 </p>
 </section>
 </main>
@@ -43,6 +46,42 @@
 </template>
 
 <script>
+import { Auth } from 'aws-amplify'
+import { AmplifyEventBus } from 'aws-amplify-vue'
+
+window.LOG_LEVEL = 'VERBOSE';
+
+export default {
+  name: 'home',
+  data(){
+    return {
+      signedIn: false,
+      username: ''
+    }
+  },
+  async beforeCreate() {
+    // Auth.currentAuthenticatedUser()でユーザ情報を取得する。
+    // 取得できなければ認証ステータスをfalseに設定する
+    try {
+      let cognitoUser = await Auth.currentAuthenticatedUser()
+      this.signedIn = true
+      this.username = cognitoUser.username
+    } catch (err) {
+      this.signedIn = false
+    }
+    // 認証ステータスが変わった時に呼び出されるイベントを登録
+    AmplifyEventBus.$on('authState', async  info => {
+      if (info === 'signedIn') {
+        let cognitoUser = await Auth.currentAuthenticatedUser()
+        this.signedIn = true
+        this.username = cognitoUser.username
+      } else {
+        this.signedIn = false
+      }
+    });
+  }
+};
+
 
 </script>
 
@@ -55,14 +94,14 @@
   text-decoration: none;
   color: #FFF;
   background: #4235fd;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
+  border-bottom: solid 2px #4235fd;/*少し濃い目の色に*/
   border-radius: 4px;/*角の丸み*/
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
   font-weight: bold;
 }
   
 #back-home-button:active {
-  border-bottom: solid 2px #fd9535;
+  border-bottom: solid 2px #4235fd;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
 #go-room-button-at-use {

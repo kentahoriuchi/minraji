@@ -23,7 +23,7 @@
     </p>
   </section>
 
-  <div class="main-contents">
+  <div align="center" class="main-contents">
     <!-- 動画のidを入力させる、入力欄と送信ボタン -->
     <form id="movie1">
       <input id="movie" placeholder="Youtubeのリンク入力をしてください(Enterで送信できます)" size="40" type='text' value=""/>
@@ -80,12 +80,12 @@ export default {
     roomCreate(){
       const id = new Date().getTime() + this.userName
       const input_movie = document.getElementById("movie").value
-      const movie_title = document.getElementById("title").value
-      console.log(movie_title)
+      //const movie_title = document.getElementById("title").value
+      //console.log(movie_title)
       const room = {
         id : id,
-        movie : input_movie,
-        tilte : movie_title
+        movie : input_movie//,
+        //tilte : movie_title
       }
       console.log(room)
       API.graphql(graphqlOperation(createRoom, { input: room }))
@@ -123,7 +123,7 @@ header .headline{
   padding: 0.2em 0.5em;
   color: #454545;*/
   line-height: 100px;
-  float: left;
+  /*float: left;*/
   font-size: 50px;
   margin-left: 100px;
   color: #454545;

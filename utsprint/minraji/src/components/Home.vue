@@ -13,6 +13,7 @@
       <li class="nav-list-item"><a href="#link2service">Service</a></li>
       <li class="nav-list-item"><router-link to="/use" id="go-how-to-use-button">How to use</router-link></li>
     <li class="nav-list-item" ><router-link to="/room" id="go-room-button-at-home">ルーム広場に行く</router-link></li>
+    <li class="nav-list-item"><router-link to="/cal_page" id="cal-room-button">予定を確認する</router-link></li>
       <li class="nav-list-item"><amplify-sign-out></amplify-sign-out></li>
     </ul>
 </div>
@@ -20,6 +21,7 @@
 <ul class="nav-list">
       <li class="nav-list-item"><a href="#link2about">About</a></li>
       <li class="nav-list-item"><a href="#link2service">Service</a></li>
+      <li class="nav-list-item"><router-link to="/use" id="go-how-to-use-button">How to use</router-link></li>
       <li class="nav-list-item"> <router-link to="/login" id="login-button">ログインする</router-link></li>
     </ul>	
 
@@ -54,7 +56,9 @@
 私たちはラジオ体操に焦点を当てました。
 多くの人は、学校の体育の授業で友達とラジオ体操を一緒にやった、または町内会で行われている朝の体操で町の人とラジオ体操を一緒にやった経験があると思います。
 老若男女の誰もが知っているかつ気軽にできるラジオ体操だからこそ、在宅で行うハードルは低いと思います。
-<img src="../image/radio_taisou.png" id="radio_taiso1" alt="ラジオ体操" width="300" height="300">
+</p>
+<p>
+<img src="../image/radio_taisou.png" id="radio_taiso1" alt="ラジオ体操" align="center" width=20%>
 </p>
 家の中でラジオ体操や筋トレをやろうと意気込んでも、三日坊主になり長続きするのは難しいです。これは1人でやっているため、他人の目や強制力がないことが原因だと言えます。
 他人と一緒にやれば、あの子が続けているから私も頑張って続けようと思えるはずです。
@@ -158,8 +162,9 @@ header .headline{
   border: dashed 1px #96c2fe;
   padding: 0.2em 0.5em;
   color: #454545;*/
+ 
   line-height: 100px;
-  float: left;
+  /*float: left;*/
   font-size: 50px;
   margin-left: 100px;
   color: #454545;
@@ -235,6 +240,25 @@ header .headline{
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
   font-weight: bold;
   height:80px;
+}
+
+#cal-room-button {
+  font-size: 1.4em;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #fd9535;/*背景色*/
+  border-bottom: solid 2px #3b280c;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+
+#cal-room-button:active {
+  border-bottom: solid 2px #fd9535;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
 
 .nav-list {
