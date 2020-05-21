@@ -80,12 +80,12 @@ export default {
     roomCreate(){
       const id = new Date().getTime() + this.userName
       const input_movie = document.getElementById("movie").value
-      const movie_title = document.getElementById("title").value
-      console.log(movie_title)
+      //const movie_title = document.getElementById("title").value
+      //console.log(movie_title)
       const room = {
         id : id,
-        movie : input_movie,
-        tilte : movie_title
+        movie : input_movie//,
+        //tilte : movie_title
       }
       console.log(room)
       API.graphql(graphqlOperation(createRoom, { input: room }))
@@ -113,9 +113,7 @@ header {
   padding: 15px 0;
   /*background-color: #337079;*/
   background: #dfefff;
-
 }
-
 header .headline{
   /*background: #dfefff;
   box-shadow: 0px 0px 0px 5px #dfefff;
@@ -127,7 +125,6 @@ header .headline{
   font-size: 50px;
   margin-left: 100px;
   color: #454545;
-
 }
 main {
   height: 1000px;
@@ -167,12 +164,10 @@ main {
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
   font-weight: bold;
 }
-
 #back-room-button-header:active {
   border-bottom: solid 2px #fd9535;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
-
 #back-room-button {
   font-size: 1.4em;
   position: relative;
@@ -187,12 +182,10 @@ main {
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
   font-weight: bold;
 }
-
 #back-room-button:active {
   border-bottom: solid 2px #fd9535;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
-
 #room-create-button {
   font-size: 1.4em;
   position: relative;

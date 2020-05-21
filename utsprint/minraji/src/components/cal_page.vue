@@ -7,7 +7,7 @@
 </h1>
  <ul class="nav-list">
       <li class="nav-list-item"><router-link to="/" id="back-home-button"> ホーム</router-link></li>
-      <li class="nav-list-item"><!-- 部屋を作成する画面に移動 --><router-link to="/room_create" id="create-room-button">ルームを作成する</router-link></li>
+      <li class="nav-list-item"><router-link to="/room" id="back-room-button-header">ルーム広場に行く</router-link></li>
       <li class="nav-list-item"> <amplify-sign-out></amplify-sign-out></li>
   </ul>	
   <!--<router-link
@@ -19,30 +19,11 @@
 </header>
 <main>
   <section>
-    <section>
-      <h2>ルーム広場</h2>
-      <p>ここはルームに入る待機場所です。「ルームを作成する」ボタンを押したら、ルームを作成するページに移動するので
-      そこでルームを作成してください。
-      </p>
-      <router-link to="/room_create" id="create-room-button">ルームを作成する</router-link>
-    </section>
+    
    
-      <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
+    
     <section>
-      <!--<calendar></calendar>-->
-      <div class="main-contents">
-      <h2>作成したルーム一覧</h2>
-      <p>作成されたルーム一覧です。自分が作ったルームに入りましょう。下にあるルームボタンを押したら作成したルームに入れます。</p>
-      <!--<router-link to="/signout" id="back-home-button"> ホームに戻る</router-link>-->
-      <div id='room' v-for="room in rooms" :key="room.id">
-        <section>
-        <button id = "go-room-button" v-on:click="gotoroom(room.id)">{{room.id}}</button>
-        <div id="join-member">参加者 : {{members[0]}} 名</div>
-        <p></p>
-        </section>
-      </div>
-      <div class="error">{{ this.error }}</div>
-      </div>
+      <calendar></calendar>
     </section>
       
     
@@ -62,12 +43,13 @@ import { listRooms } from '../graphql/queries';
 import { getRoom } from '../graphql/queries';
 import { listUsers } from '../graphql/queries';
 import router from '../router/router'
-//import calendar from "./calendar"
+import calendar from "./calendar"
+
 window.LOG_LEVEL = 'VERBOSE';
 export default {
   name: 'chat',
   components: {
-    //calendar
+    calendar
   },
   data(){
     return {
@@ -134,4 +116,44 @@ export default {
 }
 </script>
 
-<style src="./chat.css" />
+<style>
+
+#back-home-button {
+  font-size: 1.4em;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #4235fd;/*背景色*/
+  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+  
+#back-home-button:active {
+  border-bottom: solid 2px #fd9535;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
+
+#back-room-button {
+  font-size: 1.4em;
+  position: relative;
+  left: 600px;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #fd9535;/*背景色*/
+  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+
+#back-room-button:active {
+  border-bottom: solid 2px #fd9535;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
+</style>
