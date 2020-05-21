@@ -23,7 +23,7 @@
     </p>
   </section>
 
-  <div align="center" class="main-contents">
+  <div class="main-contents">
     <!-- 動画のidを入力させる、入力欄と送信ボタン -->
     <form id="movie1">
       <input id="movie" placeholder="Youtubeのリンク入力をしてください(Enterで送信できます)" size="40" type='text' value=""/>
@@ -113,9 +113,7 @@ header {
   padding: 15px 0;
   /*background-color: #337079;*/
   background: #dfefff;
-
 }
-
 header .headline{
   /*background: #dfefff;
   box-shadow: 0px 0px 0px 5px #dfefff;
@@ -123,11 +121,10 @@ header .headline{
   padding: 0.2em 0.5em;
   color: #454545;*/
   line-height: 100px;
-  /*float: left;*/
+  float: left;
   font-size: 50px;
   margin-left: 100px;
   color: #454545;
-
 }
 main {
   height: 1000px;
@@ -167,12 +164,10 @@ main {
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
   font-weight: bold;
 }
-
 #back-room-button-header:active {
   border-bottom: solid 2px #fd9535;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
-
 #back-room-button {
   font-size: 1.4em;
   position: relative;
@@ -187,12 +182,10 @@ main {
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
   font-weight: bold;
 }
-
 #back-room-button:active {
   border-bottom: solid 2px #fd9535;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
-
 #room-create-button {
   font-size: 1.4em;
   position: relative;

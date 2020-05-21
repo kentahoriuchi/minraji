@@ -37,7 +37,7 @@
 </p>
 <p>
   <img src="../image/computer_school_girl.png" id="computer_school_girl" alt="ラジオ体操" width=20%>
-  <img src="../image/radio_taisou.png" id="radio_taiso2" alt="ラジオ体操" width=20%>
+  <img src="../image/radio_taisou.png" id="radio_taiso" alt="ラジオ体操" width=20%>
 </p>
 </section>
 </main>
@@ -122,5 +122,15 @@ export default {
   border-bottom: solid 2px #fd9535;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
+
+#computer_school_girl {
+  position: relative;
+  left:200px;
+}
+#radio_taiso{
+  position: relative;
+  left:500px;
+}
+
 
 </style>
