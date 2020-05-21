@@ -24,14 +24,18 @@
    
       <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
     <section>
-      <calendar></calendar>
+      <!-- <calendar></calendar> -->
       <div class="main-contents">
       <h2>作成したルーム一覧</h2>
       <p>作成されたルーム一覧です。自分が作ったルームに入りましょう。</p>
       <div id='room' v-for="room in rooms" :key="room.id">
         <button id = "go-room-button" v-on:click="gotoroom(room.id)">{{room.tilte}}</button>
-        参加者 : {{members[0]}} 名
+        参加者 : {{room.numberofmember}} 名
       </div>
+      <!-- <div id='overlay' v-show='showContent'>
+        <p>これがモーダルウィンドウです。</p>
+        <p><button v-on:click='closeModel'>close</button></p>
+      </div> -->
       <div class="error">{{ this.error }}</div>
       </div>
     </section>
@@ -46,14 +50,11 @@
 
 <script>
 import API, {  graphqlOperation } from '@aws-amplify/api';
-// import { Auth } from 'aws-amplify'
 import router from '../router/router'
-import calendar from "./calendar"
+// import calendar from "./calendar"
 import { listRooms } from '../graphql/queries';
 import { getRoom } from '../graphql/queries';
-import { listUsers } from '../graphql/queries';
-// import { getUser } from '../graphql/queries';
-// import { createUser } from "../graphql/mutations";
+import { updateRoom } from "../graphql/mutations";
 import { updateUser } from "../graphql/mutations";
 import UserStore from '../mobx/UserStore'
 
@@ -61,60 +62,62 @@ window.LOG_LEVEL = 'VERBOSE';
 
 export default {
   name: 'chat',
-  components: {
-    calendar
-  },
+  // components: {
+    // calendar
+  // },
   data(){
     return {
       userName: "",
+      userId: "",
       members: [],
-      // subscription: {},
       error: "",
       rooms: [],
-      room_id: ""
+      showContent: false,
+      // subscription: {},
     }
   },
   methods :{
     async fetch(){
-      const room_temp = await API.graphql(graphqlOperation(listRooms,{limit:10}))
-      this.rooms = room_temp.data.listRooms.items
-      for(let i = 0; i < this.rooms.length; i++){
-        let member = await API.graphql(graphqlOperation(getRoom,{id: this.rooms[i].id}))
-        this.members.push(member.getRoom.users.items.length)
-      }
-      console.log(this.rooms)
+      //部屋データを取得
+      const roomlimit = 100  // 表示する部屋の数のmax
+      const rooms = await API.graphql(graphqlOperation(listRooms,{limit:roomlimit}))
+      this.rooms = rooms.data.listRooms.items
     },
-    async gotoroom(temp){
-      //ユーザーの認証とかをやる
-      const roomid = await API.graphql(graphqlOperation(listUsers, { filter: {'username':{eq: this.userName}}}))
-      const userroom = roomid.data.listUsers.items[0]
-      console.log(userroom)
-      // if (!userroom.roomid){
-      console.log(document.getElementById("room").textContent)
-      var room_a = await API.graphql(graphqlOperation(getRoom,{id: temp}))
-      console.log(room_a.data.getRoom.users.items)
-      this.members = room_a.data.getRoom.users.items
-      var room = room_a.data.getRoom.users
-      const userroomid = {
-        id: userroom.id,
+    async gotoroom(id){
+      //ユーザー部屋入室情報追加
+      const updateuserinput = {
+        id: this.userId,
         username: this.userName,
-        userRoomidId: room.id
+        userRoomidId: id
       }
-      console.log(userroomid)
-      await API.graphql(graphqlOperation(updateUser, { input: userroomid }))
+      await API.graphql(graphqlOperation(updateUser, { input: updateuserinput }))
         .catch(error => this.error = JSON.stringify(error))
+      // 部屋の人数更新
+      const getroom = await API.graphql(graphqlOperation(getRoom,{id: id}))
+      // if(roominfo.data.getRoom.privatepassword){
+      //   this.showContent = true
       // }
-      // else{
-      //   console.log('already room in')
-      // }
+      const roommember = getroom.data.getRoom.numberofmember
+      const addroommenber = {
+        id: id,
+        numberofmember: roommember + 1
+      }
+      console.log(roommember)
+      await API.graphql(graphqlOperation(updateRoom, { input: addroommenber }))
+        .catch(error => this.error = JSON.stringify(error))
+
       router.push('/room/in')
-    }
+    },
+    // closeModel: function(){
+    //   this.showContent = false
+    // }
   },
   async created(){
-    const { username } = await UserStore
+    const { username,userid } = await UserStore
     console.log(UserStore)
     this.userName = username
-    // this.fetch()
+    this.userId = userid 
+    this.fetch()
   }
 }
 </script>
