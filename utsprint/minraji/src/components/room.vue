@@ -108,6 +108,7 @@ export default {
 
       router.push('/room/in')
     },
+    
     // closeModel: function(){
     //   this.showContent = false
     // }
