@@ -40,7 +40,7 @@
       }
     },
     methods: {
-      addCalendarEvwnts(a) {
+      addCalendarEvwnts(arg) {
         if (confirm("新しいスケジュールを" + arg.dateStr + "に追加しますか ?")) {
           this.calendarEvents.push({
             title: "",

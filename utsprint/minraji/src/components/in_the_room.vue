@@ -16,18 +16,20 @@
 <section>
     <h2>ルーム</h2>
 
-    <p>ここはルームの中です。動画をみてラジオ体操をしましょう。</p>
+    <p>ここはルームの中です。動画をみてラジオ体操をしましょう。
+      ラジオ体操が終わったら「ルームを消す」ボタンを押して、「ルーム広場に戻る」ボタンを押しましょう。</p>
+    
+    <h2>参加者一覧</h2>
     参加者 : {{members.length}} 名
     <div  v-for="member in members" :key="member.id">
       {{member.username}}
     </div>
+   
     
     <!-- video-id youtubeの動画のid -->
     <!--<youtube :video-id="video_url" ref="youtube" @playing="playing"></youtube> -->
 </section>
     
-  <!-- ルームを消す-->
-  <button v-on:click="delete_room">ルームを消す</button>
 <section>   
     <!-- video-id youtubeの動画のid -->
     <div align="center"><youtube :video-id="video_url" ref="youtube" 
@@ -43,7 +45,12 @@
     <button v-on:click="playVideo" id="play-button">play</button>
     <!-- <foryoutube :videoId='JyMPBn25wP4'></foryoutube> -->
     <br>
-    <router-link to="/room" id="back-room-button">ルーム広場に戻る</router-link>
+    <table>
+    <tr>
+    <td><router-link to="/room" id="back-room-button">ルーム広場に戻る</router-link></td>
+    <td><!-- ルームを消す--><button id="delete-room-button" v-on:click="delete_room">ルームを消す</button></td>
+    </tr>
+    </table>
 
 
 </section>
@@ -274,7 +281,6 @@ header .headline{
 #back-room-button {
   font-size: 1.4em;
   position: relative;
-  left: 600px;
   display: inline-block;
   padding: 0.25em 0.5em;
   text-decoration: none;
@@ -293,9 +299,10 @@ header .headline{
 
 
 #play-button {
-  font-size: 1.4em;
+  font-size: 1.55em;
   position: relative;
-  left: 400px;
+  top:75px;
+  left: 500px;
   display: inline-block;
   padding: 0.25em 0.5em;
   text-decoration: none;
@@ -311,6 +318,29 @@ header .headline{
   border-bottom: solid 2px #fd9535;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
+
+#delete-room-button {
+  font-size: 1.65em;
+  position: relative;
+  left: 600px;
+  top:20px;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #fd9535;/*背景色*/
+  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+
+#delete-room-button:active {
+  border-bottom: solid 2px #fd9535;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
+
+
 </style>
 
 
