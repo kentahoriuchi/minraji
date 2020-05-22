@@ -35,6 +35,8 @@ export const getUser = /* GraphQL */ `
         id
         movie
         tilte
+        numberofmember
+        privatepassword
         users {
           nextToken
         }
@@ -58,6 +60,8 @@ export const listUsers = /* GraphQL */ `
           id
           movie
           tilte
+          numberofmember
+          privatepassword
           time
           reservedtime
         }
@@ -72,6 +76,8 @@ export const getRoom = /* GraphQL */ `
       id
       movie
       tilte
+      numberofmember
+      privatepassword
       users {
         items {
           id
@@ -95,6 +101,8 @@ export const listRooms = /* GraphQL */ `
         id
         movie
         tilte
+        numberofmember
+        privatepassword
         users {
           nextToken
         }

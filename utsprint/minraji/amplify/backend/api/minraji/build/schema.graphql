@@ -14,6 +14,8 @@ type Room {
   id: ID!
   movie: String
   tilte: String
+  numberofmember: Int
+  privatepassword: String
   users(filter: ModelUserFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelUserConnection
   time: Int
   reservedtime: Int
@@ -226,6 +228,8 @@ input ModelRoomFilterInput {
   id: ModelIDInput
   movie: ModelStringInput
   tilte: ModelStringInput
+  numberofmember: ModelIntInput
+  privatepassword: ModelStringInput
   time: ModelIntInput
   reservedtime: ModelIntInput
   and: [ModelRoomFilterInput]
@@ -237,6 +241,8 @@ input CreateRoomInput {
   id: ID
   movie: String
   tilte: String
+  numberofmember: Int
+  privatepassword: String
   time: Int
   reservedtime: Int
 }
@@ -245,6 +251,8 @@ input UpdateRoomInput {
   id: ID!
   movie: String
   tilte: String
+  numberofmember: Int
+  privatepassword: String
   time: Int
   reservedtime: Int
 }
@@ -256,6 +264,8 @@ input DeleteRoomInput {
 input ModelRoomConditionInput {
   movie: ModelStringInput
   tilte: ModelStringInput
+  numberofmember: ModelIntInput
+  privatepassword: ModelStringInput
   time: ModelIntInput
   reservedtime: ModelIntInput
   and: [ModelRoomConditionInput]

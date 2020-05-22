@@ -29,6 +29,8 @@ type Room
   id: ID!
   movie: String
   tilte: String
+  numberofmember: Int
+  privatepassword: String
   users: [User] @connection(name: "MemberLinks")
   time: Int
   reservedtime: Int

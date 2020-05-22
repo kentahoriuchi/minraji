@@ -7,7 +7,8 @@
 </h1>
   <ul class="nav-list">
       <li class="nav-list-item"><router-link to="/" id="back-home-button"> ホーム</router-link></li>
-      <li class="nav-list-item"><!-- 待機部屋に移動 --><router-link to="/room" id="back-room-button-header">ルーム広場に戻る</router-link></li>
+      <!-- ボタンにしたら、形変わってしまった・・↓ -->
+      <li class="nav-list-item"><!-- 待機部屋に移動 --><button v-on:click="leave_room" id="back-room-button-header">ルーム広場に戻る</button></li>
       <li class="nav-list-item"><amplify-sign-out></amplify-sign-out></li>
   </ul>	
 </header>
@@ -26,7 +27,7 @@
 </section>
     
   <!-- ルームを消す-->
-  <!--<button v-on:click="delete_room">ルームを消す</button>-->
+  <button v-on:click="delete_room">ルームを消す</button>
 <section>   
     <!-- video-id youtubeの動画のid -->
     <div align="center"><youtube :video-id="video_url" ref="youtube" 
@@ -52,15 +53,15 @@
 
 <script>
 import API, {  graphqlOperation } from '@aws-amplify/api';
-import { Auth } from 'aws-amplify'
-import { listUsers } from '../graphql/queries';
 import Vue from 'vue'
 import VueYoutube from 'vue-youtube'
 import { getRoom } from '../graphql/queries';
-
-//import { deleteRoom, updateRoom } from '../graphql/mutations'
+import { getUser } from '../graphql/queries';
 import { deleteRoom } from '../graphql/mutations'
 import router from '../router/router'
+import UserStore from '../mobx/UserStore'
+import { updateUser } from "../graphql/mutations";
+import { updateRoom } from "../graphql/mutations";
 // import foryoutube from './foryoutube'
 
 Vue.use(VueYoutube)
@@ -75,9 +76,11 @@ export default {
       video_url: "",
       subscription: {},
       error: "",
-      roomid: "",
+      roomId: "",
       createdTime: 1589620500,
       members: [],
+      userName: "",
+      userId: "",
       // playerVars: {
       //   autoplay: 0
       // }
@@ -130,14 +133,31 @@ export default {
       this.player.seekTo(seconds)
 
     },
-    delete_room(){
+    async delete_room(){
       const roomi = {
-        id: this.roomid
+        id: this.roomId
       }
       console.log(roomi)
-      API.graphql(graphqlOperation(deleteRoom, { input: roomi}))
+      await API.graphql(graphqlOperation(deleteRoom, { input: roomi}))
         .catch(error => this.error = JSON.stringify(error))
       router.push({name:'room'})
+    },
+    async leave_room(){
+      const updatedata = {
+        id: this.userId,
+        userRoomidId: null
+      }
+      const roominfo = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
+      const roommember = roominfo.data.getRoom.numberofmember
+      const addroommenber = {
+        id: this.roomId,
+        numberofmember: roommember - 1
+      }
+      await API.graphql(graphqlOperation(updateUser, { input: updatedata }))
+        .catch(error => this.error = JSON.stringify(error))
+      await API.graphql(graphqlOperation(updateRoom, { input: addroommenber }))
+        .catch(error => this.error = JSON.stringify(error))
+      router.push('/room')
     }
     
   },
@@ -148,13 +168,16 @@ export default {
 
   },
   async created(){
-    this.userName = (await Auth.currentAuthenticatedUser()).username;
-    const userid = await API.graphql(graphqlOperation(listUsers, { filter: {'username':{eq: this.userName}}}))
-    console.log(userid.data.listUsers.items[0])
-    console.log(userid.data.listUsers.items[0].roomid)
-    this.video_url = userid.data.listUsers.items[0].roomid.movie
-    this.roomid = userid.data.listUsers.items[0].roomid.id
-    const member = await API.graphql(graphqlOperation(getRoom,{id: this.roomid}))
+    const { username,userid } = await UserStore
+    console.log(UserStore)
+    this.userName = username
+    this.userId = userid 
+    const user_id = await API.graphql(graphqlOperation(getUser,{id: this.userId}))
+    console.log(user_id.data.getUser.roomid)
+    const room_info = user_id.data.getUser.roomid
+    this.video_url = room_info.movie
+    this.roomId = room_info.id
+    const member = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
     this.members = member.data.getRoom.users.items
     console.log(this.video_url)
     //this.createdTime = get_created_time(userid)

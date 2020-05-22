@@ -49,6 +49,8 @@ export const createUser = /* GraphQL */ `
         id
         movie
         tilte
+        numberofmember
+        privatepassword
         users {
           nextToken
         }
@@ -70,6 +72,8 @@ export const updateUser = /* GraphQL */ `
         id
         movie
         tilte
+        numberofmember
+        privatepassword
         users {
           nextToken
         }
@@ -91,6 +95,8 @@ export const deleteUser = /* GraphQL */ `
         id
         movie
         tilte
+        numberofmember
+        privatepassword
         users {
           nextToken
         }
@@ -109,6 +115,8 @@ export const createRoom = /* GraphQL */ `
       id
       movie
       tilte
+      numberofmember
+      privatepassword
       users {
         items {
           id
@@ -130,6 +138,8 @@ export const updateRoom = /* GraphQL */ `
       id
       movie
       tilte
+      numberofmember
+      privatepassword
       users {
         items {
           id
@@ -151,6 +161,8 @@ export const deleteRoom = /* GraphQL */ `
       id
       movie
       tilte
+      numberofmember
+      privatepassword
       users {
         items {
           id
