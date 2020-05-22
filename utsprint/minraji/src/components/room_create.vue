@@ -14,7 +14,8 @@
 <main>
   <section>
     <h2>ルーム作成</h2>
-    <p>ここはルーム作成ページです。youtubeにあるラジオ体操の動画のURLを下のボックスにいれて「ルームを作る」ボタンを押してください。
+    <p>ここはルーム作成ページです。ルームタイトルにルーム名を記入して、youtubeにあるラジオ体操の動画のURLを下のボックスにいれて「ルームを作る」ボタンを押してください。
+      プレイベートルームを希望の方は、「プライベートルームにする」にチェックをつけてパスワードを入力してください。
       「ルームを作る」ボタンを押したら自動的にルーム広場に戻ります。ルーム広場では作成したルームに入ってください。
     </p>
     <p>
@@ -26,11 +27,17 @@
   <div class="main-contents">
     <!-- 動画のidを入力させる、入力欄と送信ボタン -->
     <form id="movie1">
+      <div id="input1">
       <input id="title" placeholder="ルームタイトルを入力してください" size="30" type='text' value=""/>
-      <input id="movie" placeholder="Youtubeのリンク入力をしてください(Enterで送信できます)" size="40" type='text' value=""/>
+      <input id="movie" placeholder="Youtubeのリンク入力をしてください" size="30" type='text' value=""/>
+      </div>
+      <div id="input2">
+      <input type='checkbox' id="check" />プライベートルームにする
       <input id="password" placeholder="パスワードを入力してください" size="30" type='text' value=""/>
-      <input type='checkbox' id="check" />private mode
+      </div>
+      <div id="input3">
       <input type="button" v-on:click="roomCreate" value="ルームを作る" id="room-create-button">
+      </div>
     </form>
     
     <div class="error">{{ this.error }}</div>
@@ -185,10 +192,40 @@ main {
   font-weight: bold;
 }
 #movie {
-  width:800px;
-  height:100px;
+  position:relative;
+  left:5px;
+  width:20%;
+  height:15px;
 }
 #movie::placeholder{
   font-size:1.4em;
+}
+
+#title {
+  position:relative;
+  width:20%;
+  height:15px;
+}
+#title::placeholder{
+  font-size:1.4em;
+}
+#password {
+  width:20%;
+  height:15px;
+}
+#paasword::placeholder{
+  font-size:1.4em;
+}
+#input1 {
+  position:relative;
+  top:5px;
+}
+#input2 {
+  position:relative;
+  top:10px;
+}
+#input3 {
+  position:relative;
+  top:15px;
 }
 </style>
