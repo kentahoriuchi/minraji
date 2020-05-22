@@ -14,7 +14,7 @@ header .headline{
   padding: 0.2em 0.5em;
   color: #454545;*/
   line-height: 100px;
-  float: left;
+  /*float: left;*/
   font-size: 50px;
   margin-left: 100px;
   color: #454545;
@@ -55,16 +55,16 @@ main {
   padding: 0.25em 0.5em;
   text-decoration: none;
   color: #FFF;
-  background: #4235fd;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
+  background: #aaf71b;/*背景色*/
+  border-bottom: solid 2px #4235fd;/*少し濃い目の色に*/
   border-radius: 4px;/*角の丸み*/
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
   font-weight: bold;
 }
   
 #back-home-button:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+  border-bottom: solid 2px #4235fd;
+  box-shadow: 0 0 2px rgba(105, 75, 175, 0.3);
 }
 
 #create-room-button {
@@ -87,7 +87,7 @@ main {
 }
 
 #go-room-button {
-  font-size: 1.4em;
+  font-size: 2em;
   position: relative;
   display: inline-block;
   padding: 0.25em 0.5em;
@@ -105,9 +105,28 @@ main {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
 
+#cal-room-button {
+  font-size: 1.4em;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #fd9535;/*背景色*/
+  border-bottom: solid 2px #3b280c;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+
+#cal-room-button:active {
+  border-bottom: solid 2px #fd9535;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
+
 
 .main-contents {
-    float: left;
+    /*float: left;*/
     width: 100%;
 }
 .message_base {
@@ -149,3 +168,8 @@ main {
   color: red;
 }
 
+#join-member {
+    font-size: 20px;
+    text-decoration:underline;/*下線を引く*/
+    text-decoration-color:#FF0000;/*下線を赤色*/
+}

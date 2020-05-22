@@ -11,8 +11,8 @@
     </ul>
     <p>© All rights reserved by minraji.</p>
     </footer>
-
   </div>
+  
 
 </template>
 
@@ -23,11 +23,14 @@
 
 <style>
 footer{
-    width: 100%;
-    height: 400px;
-    background-color: #174a5c;
-    color: white;
-    text-align: center;
+  position:relative;
+  width: 100%;
+  height: 200px;
+  background-color: #174a5c;
+  color: white;
+  text-align: center;
+  /*position: fixed;
+  bottom: 0;*/
 }
 
 ul.footer-menu li {

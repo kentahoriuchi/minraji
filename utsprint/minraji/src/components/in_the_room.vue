@@ -48,8 +48,6 @@
 
 </section>
 </main>
-  <footer>
-  </footer>
 </div>
 </template>
 
@@ -229,7 +227,7 @@ header .headline{
   padding: 0.2em 0.5em;
   color: #454545;*/
   line-height: 100px;
-  float: left;
+  /*float: left;*/
   font-size: 50px;
   margin-left: 100px;
   color: #454545;

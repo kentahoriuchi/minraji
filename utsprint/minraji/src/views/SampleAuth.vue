@@ -68,7 +68,7 @@ header .headline{
 }
 .nav-list {
     line-height: 100px;
-    float: left;
+    /*float: left;*/
     margin-left: 30px;
     list-style: none;
 }

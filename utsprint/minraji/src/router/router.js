@@ -11,6 +11,7 @@ import In_the_room from '@/components/in_the_room'
 import Movie from '@/components/Movie'
 //import Signout from '@/components/Signout'
 import use from '@/components/use'
+import cal_page from '@/components/cal_page'
 
 // Amplify読み込み
 import {  AmplifyEventBus } from 'aws-amplify-vue'
@@ -106,7 +107,21 @@ const router = new Router({
         name: 'Use',
         component: use
     },
-  ]
+    {
+        path: '/cal_page',
+        name: 'Cal_page',
+        component: cal_page
+    },
+  ],
+  scrollBehavior(to, from, savedPosition) {//ページ遷移したときに一番上に飛ぶようにスクロールする
+    if (savedPosition) {
+        sessionStorage.setItem('positionY', savedPosition.y);
+        return savedPosition
+    } else {
+        sessionStorage.setItem('positionY', 0);
+        return { x: 0, y: 0 }
+    }
+}
 })
 
 router.beforeResolve(async (to, from, next) => {
