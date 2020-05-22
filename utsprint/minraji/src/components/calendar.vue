@@ -10,6 +10,12 @@
 </template>
 
 <script>
+  import API, {  graphqlOperation } from '@aws-amplify/api';
+  // import calendar from "./calendar"
+  import { listRooms } from '../graphql/queries';
+
+  import UserStore from '../mobx/UserStore'
+
   import FullCalendar from '@fullcalendar/vue'
   import dayGridPlugin from '@fullcalendar/daygrid'
   import timeGridPlugin from "@fullcalendar/timegrid";
@@ -23,6 +29,11 @@
     },
     data() {
       return {
+        userName: "",
+        userId: "",
+        members: [],
+        error: "",
+        rooms: [],
         locale: jaLocale, // 日本語化
         // カレンダーヘッダーのデザイン
         calendarHeader: {
@@ -40,15 +51,39 @@
       }
     },
     methods: {
-      addCalendarEvwnts(arg) {
-        if (confirm("新しいスケジュールを" + arg.dateStr + "に追加しますか ?")) {
+      async fetch(){
+        //部屋データを取得
+        const roomlimit = 100  // 表示する部屋の数のmax
+        const rooms = await API.graphql(graphqlOperation(listRooms,{limit:roomlimit}))
+        this.rooms = rooms.data.listRooms.items
+        // console.log("in fetch")
+        // console.log(this.rooms)
+        this.addCalendarEvents(this.rooms)
+      },
+      addCalendarEvents(rooms){
+        console.log("add eventの中")
+        for (const room in rooms){
+          console.log(rooms[0].id)
+          console.log(rooms[0].tilte)
+          console.log(rooms[0].createdAt)
           this.calendarEvents.push({
-            title: "",
-            start: arg.date,
-            allDay: arg.allDay
+            title: rooms[room].tilte,
+            // start: new Date().getTime() //rooms[room].createdAt
+            start: rooms[room].createdAt
           });
         }
       }
+    },
+    async created(){
+      const { username,userid } = await UserStore
+      console.log(UserStore)
+      this.userName = username
+      this.userId = userid 
+      this.fetch()
+      // console.log("fetch finished!")
+      // console.log("add eventの前")
+      // this.addCalendarEvents()
+      // console.log("add eventの後")
     }
   }
 </script>

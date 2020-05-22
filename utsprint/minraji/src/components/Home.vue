@@ -17,6 +17,7 @@
       <li class="nav-list-item"><input type="button" name="buttonName" id="question-button" value="アンケートに答える" onClick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeeWIQ5NyHNrhWfj9K_ZJS8sZ_wD0ZJTYCOpQr1qm9KkUDLBQ/viewform?usp=sf_link','_blank')" /></li>
       <li class="nav-list-item"><amplify-sign-out></amplify-sign-out></li>
     </ul>
+    <router-link to="/calendar">カレンダーページ</router-link>
 </div>
 <div v-if="!signedIn">
 <ul class="nav-list">
