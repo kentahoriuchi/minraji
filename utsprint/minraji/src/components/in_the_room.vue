@@ -6,9 +6,9 @@
       <a>みんラジ!</a>
 </h1>
   <ul class="nav-list">
-      <li class="nav-list-item"><router-link to="/" id="back-home-button"> ホーム</router-link></li>
+      <li class="nav-list-item"><router-link to="/"><button id="back-home-button">ホーム</button></router-link></li>
       <!-- ボタンにしたら、形変わってしまった・・↓ -->
-      <li class="nav-list-item"><!-- 待機部屋に移動 --><button v-on:click="leave_room" id="back-room-button-header">ルーム広場に戻る</button></li>
+      <li class="nav-list-item"><!-- 待機部屋に移動 --><button v-on:click="leave_room" id="go-room-button">ルーム広場に戻る</button></li>
       <li class="nav-list-item"><amplify-sign-out></amplify-sign-out></li>
   </ul>	
 </header>
@@ -17,12 +17,13 @@
     <h2>ルーム</h2>
 
     <p>ここはルームの中です。動画をみてラジオ体操をしましょう。
-      ラジオ体操が終わったら「ルームを消す」ボタンを押して、「ルーム広場に戻る」ボタンを押しましょう。</p>
-    
+      ラジオ体操が終わったら「ルームを消す」ボタンを押して、ルーム広場に戻りましょう。</p>
+    <div id="all-members">  
     <h2>参加者一覧</h2>
     参加者 : {{members.length}} 名
     <div  v-for="member in members" :key="member.id">
       {{member.username}}
+    </div>
     </div>
    
     
@@ -42,15 +43,13 @@
     </youtube>
     </div>
     <br>
-    <button v-on:click="playVideo" id="play-button">play</button>
     <!-- <foryoutube :videoId='JyMPBn25wP4'></foryoutube> -->
-    <br>
-    <table>
-    <tr>
-    <td><router-link to="/room" id="back-room-button">ルーム広場に戻る</router-link></td>
-    <td><!-- ルームを消す--><button id="delete-room-button" v-on:click="delete_room">ルームを消す</button></td>
-    </tr>
-    </table>
+    
+  <div id="two-buttons">
+      <button v-on:click="playVideo" id="play-button">play</button>
+  <!-- ルームを消す--><button id="delete-room-button" v-on:click="delete_room">ルームを消す</button>
+  </div>
+    
 
 
 </section>
@@ -217,130 +216,6 @@ function get_created_time(userid){
 
 </script>
 
-<style>
-header {
-  height: 120px;
-  width: 100%;
-  padding: 15px 0;
-  /*background-color: #337079;*/
-  background: #dfefff;
-
-}
-
-header .headline{
-  /*background: #dfefff;
-  box-shadow: 0px 0px 0px 5px #dfefff;
-  border: dashed 1px #96c2fe;
-  padding: 0.2em 0.5em;
-  color: #454545;*/
-  line-height: 100px;
-  /*float: left;*/
-  font-size: 50px;
-  margin-left: 100px;
-  color: #454545;
-}
-
-#back-home-button {
-  font-size: 1.4em;
-  position: relative;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-  
-#back-home-button:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-#back-room-button-header {
-  font-size: 1.4em;
-  position: relative;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-
-#back-room-button-header:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-#back-room-button {
-  font-size: 1.4em;
-  position: relative;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-
-#back-room-button:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-
-#play-button {
-  font-size: 1.55em;
-  position: relative;
-  top:75px;
-  left: 500px;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-
-#play-button:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-#delete-room-button {
-  font-size: 1.65em;
-  position: relative;
-  left: 600px;
-  top:20px;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-
-#delete-room-button:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-
-</style>
+<style src="./chat.css" />
 
 

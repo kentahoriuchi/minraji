@@ -6,8 +6,8 @@
   <a>みんラジ!</a>
 </h1>
  <ul class="nav-list">
-      <li class="nav-list-item"><router-link to="/" id="back-home-button"> ホーム</router-link></li>
-      <li class="nav-list-item"><!-- 部屋を作成する画面に移動 --><router-link to="/room_create" id="create-room-button">ルームを作成する</router-link></li>
+      <li class="nav-list-item"><router-link to="/"><button id="back-home-button">ホーム</button></router-link></li>
+      <li class="nav-list-item"><!-- 部屋を作成する画面に移動 --><router-link to="/room_create"><button id="create-room-button">ルームを作成する</button></router-link></li>
       <li class="nav-list-item"> <amplify-sign-out></amplify-sign-out></li>
   </ul>	
 
@@ -19,7 +19,7 @@
       <p>ここはルームに入る待機場所です。「ルームを作成する」ボタンを押したら、ルームを作成するページに移動するので
       そこでルームを作成してください。
       </p>
-      <router-link to="/room_create" id="create-room-button">ルームを作成する</router-link>
+      <router-link to="/room_create"><button id="create-room-button">ルームを作成する</button></router-link>
     </section>
    
       <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
@@ -30,7 +30,7 @@
       <h2>作成したルーム一覧</h2>
       <p>作成されたルーム一覧です。自分が作ったルームに入りましょう。</p>
       <div id='room' v-for="room in rooms" :key="room.id">
-        <button id = "go-room-button" v-on:click="gotoroom(room.id)">{{room.tilte}}</button>
+        <button id = "go-my-room-button" v-on:click="gotoroom(room.id)">{{room.tilte}}</button>
         参加者 : {{room.numberofmember}} 名
 
       </div>
