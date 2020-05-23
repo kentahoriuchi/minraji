@@ -7,6 +7,21 @@ export const onCreateMessage = /* GraphQL */ `
       id
       username
       content
+      roomid {
+        id
+        movie
+        tilte
+        numberofmember
+        privatepassword
+        users {
+          nextToken
+        }
+        time
+        reservedtime
+        messages {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -16,6 +31,21 @@ export const onUpdateMessage = /* GraphQL */ `
       id
       username
       content
+      roomid {
+        id
+        movie
+        tilte
+        numberofmember
+        privatepassword
+        users {
+          nextToken
+        }
+        time
+        reservedtime
+        messages {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -25,6 +55,21 @@ export const onDeleteMessage = /* GraphQL */ `
       id
       username
       content
+      roomid {
+        id
+        movie
+        tilte
+        numberofmember
+        privatepassword
+        users {
+          nextToken
+        }
+        time
+        reservedtime
+        messages {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -44,6 +89,9 @@ export const onCreateUser = /* GraphQL */ `
         }
         time
         reservedtime
+        messages {
+          nextToken
+        }
       }
     }
   }
@@ -64,6 +112,9 @@ export const onUpdateUser = /* GraphQL */ `
         }
         time
         reservedtime
+        messages {
+          nextToken
+        }
       }
     }
   }
@@ -84,6 +135,9 @@ export const onDeleteUser = /* GraphQL */ `
         }
         time
         reservedtime
+        messages {
+          nextToken
+        }
       }
     }
   }
@@ -105,6 +159,14 @@ export const onCreateRoom = /* GraphQL */ `
       }
       time
       reservedtime
+      messages {
+        items {
+          id
+          username
+          content
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -125,6 +187,14 @@ export const onUpdateRoom = /* GraphQL */ `
       }
       time
       reservedtime
+      messages {
+        items {
+          id
+          username
+          content
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -145,6 +215,14 @@ export const onDeleteRoom = /* GraphQL */ `
       }
       time
       reservedtime
+      messages {
+        items {
+          id
+          username
+          content
+        }
+        nextToken
+      }
     }
   }
 `;

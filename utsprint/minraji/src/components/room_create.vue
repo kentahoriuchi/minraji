@@ -28,8 +28,14 @@
     <form id="movie1">
       <input id="title" placeholder="ルームタイトルを入力してください" size="30" type='text' value=""/>
       <input id="movie" placeholder="Youtubeのリンク入力をしてください(Enterで送信できます)" size="40" type='text' value=""/>
+    
+      <input type="time" id="reservedtime"  size="30" value=""/>
+      <br>
       <input id="password" placeholder="パスワードを入力してください" size="30" type='text' value=""/>
       <input type='checkbox' id="check" />private mode
+      <br>
+      <p id="errormessage"></p>
+      
       <input type="button" v-on:click="roomCreate" value="ルームを作る" id="room-create-button">
     </form>
     
@@ -63,11 +69,24 @@ export default {
 
       const inputmovie = document.getElementById("movie").value
       const movietitle = document.getElementById("title").value
+      const reservedtime = document.getElementById("reservedtime").value
       var password = document.getElementById("password").value
       const privatemode = document.getElementById("check").checked
+
+      console.log(reservedtime)
       //プライベートモードの時、パスワード所持
       if(!privatemode){
         password = null
+      }
+      if(!inputmovie || !movietitle || !reservedtime){
+        var erromessage = document.getElementById("errormessage")
+        erromessage.innerHTML = "ルーム情報が無効です"
+        return
+      }
+      if(privatemode && !password){
+        var erromessagepassword = document.getElementById("errormessage")
+        erromessagepassword.innerHTML = "パスワードを入力してください"
+        return
       }
       console.log(password)
       const createroom = {
@@ -75,7 +94,8 @@ export default {
         movie : inputmovie,
         tilte : movietitle,
         numberofmember : 0,
-        privatepassword: password
+        privatepassword: password,
+        reservedtime: reservedtime
       }
       console.log(createroom)
       await API.graphql(graphqlOperation(createRoom, { input: createroom }))
@@ -190,5 +210,8 @@ main {
 }
 #movie::placeholder{
   font-size:1.4em;
+}
+#errormessage {
+  color:red
 }
 </style>

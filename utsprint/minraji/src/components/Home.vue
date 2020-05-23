@@ -11,6 +11,7 @@
     <ul class="nav-list">
       <li class="nav-list-item"><a href="#link2about">About</a></li>
       <li class="nav-list-item"><a href="#link2service">Service</a></li>
+      <router-link to="/mypage" >マイページ</router-link>
       <li class="nav-list-item"><router-link to="/use" id="go-how-to-use-button">How to use</router-link></li>
       <li class="nav-list-item" ><router-link to="/room" id="go-room-button-at-home">ルーム広場に行く</router-link></li>
       <!--<li class="nav-list-item"><router-link to="/cal_page" id="cal-room-button">予定を確認する</router-link></li>-->
