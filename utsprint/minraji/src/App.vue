@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <p>
+    <p id="contents">
       <router-view/>
     </p>
     <footer>
@@ -22,10 +22,15 @@
 </script>
 
 <style>
+
+#app {
+  width: 1400px;
+  margin: 0 auto;
+  /*border: blue 5px solid;*/
+}
 footer{
-  position:relative;
   width: 100%;
-  height: 200px;
+  height: 100px;
   background-color: #174a5c;
   color: white;
   text-align: center;
@@ -35,5 +40,59 @@ footer{
 
 ul.footer-menu li {
 display: inline;
+}
+
+
+@media screen and (max-width: 1000px) {
+  #app {
+    height:400px;
+    border-color: yellow;
+  }
+  #contents {
+    height:3000px;
+    width: 100%;
+  }
+
+  footer{
+  width: 100%;
+  height: 100px;
+  background-color: #174a5c;
+  color: white;
+  text-align: center;
+  /*position: fixed;
+  bottom: 0;*/
+}
+
+ul.footer-menu li {
+display: inline;
+}
+}
+
+@media screen and (max-width: 700px) {
+  #app {
+    height:2000px;
+    width:100%;
+    border-color: red;
+  }
+  #contents {
+    height:2200px;
+    width: 100%;
+  }
+
+  footer{
+  width: 50%;
+  height: 100px;
+  background-color: #174a5c;
+  color: white;
+  text-align: center;
+  /*position: fixed;
+  bottom: 0;*/
+}
+
+ul.footer-menu li {
+display: inline;
+}
+  
+  
 }
 </style>

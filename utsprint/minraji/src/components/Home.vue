@@ -1,30 +1,40 @@
 <template>
-<div>
+<div id="page">
 <header>
 
 <!--this is sign in home screen-->
 
 <h1 class="headline">
-      <a>みんラジ!</a>
+    <a>みんラジ!</a>
 </h1>
 <div v-if="signedIn">
     <ul class="nav-list">
       <li class="nav-list-item"><a href="#link2about">About</a></li>
       <li class="nav-list-item"><a href="#link2service">Service</a></li>
-      <li class="nav-list-item"><router-link to="/use" id="go-how-to-use-button">How to use</router-link></li>
-      <li class="nav-list-item" ><router-link to="/room" id="go-room-button-at-home">ルーム広場に行く</router-link></li>
+      <li class="nav-list-item"><router-link to="/use" ><button id="go-how-to-use-button">How to use</button></router-link></li>
+      <li class="nav-list-item" ><router-link to="/room" ><button id="go-room-button">ルーム広場に行く</button></router-link></li>
       <!--<li class="nav-list-item"><router-link to="/cal_page" id="cal-room-button">予定を確認する</router-link></li>-->
-      <li class="nav-list-item"><input type="button" name="buttonName" id="question-button" value="アンケートに答える" onClick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeeWIQ5NyHNrhWfj9K_ZJS8sZ_wD0ZJTYCOpQr1qm9KkUDLBQ/viewform?usp=sf_link','_blank')" /></li>
+      <li class="nav-list-item"><input type="button" name="buttonName" id="question-button" value="アンケート" onClick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeeWIQ5NyHNrhWfj9K_ZJS8sZ_wD0ZJTYCOpQr1qm9KkUDLBQ/viewform?usp=sf_link','_blank')" /></li>
       <li class="nav-list-item"><amplify-sign-out></amplify-sign-out></li>
     </ul>
 </div>
 <div v-if="!signedIn">
-<ul class="nav-list">
+  
+    <ul class="nav-list">
       <li class="nav-list-item"><a href="#link2about">About</a></li>
       <li class="nav-list-item"><a href="#link2service">Service</a></li>
-      <li class="nav-list-item"><router-link to="/use" id="go-how-to-use-button">How to use</router-link></li>
-      <li class="nav-list-item"> <router-link to="/login" id="login-button">ログインする</router-link></li>
+      <li class="nav-list-item"><router-link to="/use"><button id="go-how-to-use-button">How to use</button></router-link></li>
+      <li class="nav-list-item"> <router-link to="/login"><button id="login-button">ログイン</button></router-link></li>
     </ul>	
+
+    <!--<nav class="menu">
+  <ul>
+    <li><a href="#link2about">About</a></li>
+    <li><a href="#link2service">Service</a></li>
+    <li><router-link to="/use"><button id="go-how-to-use-button">How to use</button></router-link></li>
+    <li><router-link to="/login"><button id="login-button">ログイン</button></router-link></li>
+  </ul>
+</nav>-->
 
 </div>
 </header>
@@ -58,9 +68,9 @@
 多くの人は、学校の体育の授業で友達とラジオ体操を一緒にやった、または町内会で行われている朝の体操で町の人とラジオ体操を一緒にやった経験があると思います。
 老若男女の誰もが知っているかつ気軽にできるラジオ体操だからこそ、在宅で行うハードルは低いと思います。
 </p>
-<p>
-<img src="../image/radio_taisou.png" id="radio_taiso" alt="ラジオ体操"  width=20%>
-</p>
+<!--<div id="radio_taiso">
+<img src="../image/radio_taisou.png" alt="ラジオ体操"  width=10%>
+</div>-->
 家の中でラジオ体操や筋トレをやろうと意気込んでも、三日坊主になり長続きするのは難しいです。これは1人でやっているため、他人の目や強制力がないことが原因だと言えます。
 他人と一緒にやれば、あの子が続けているから私も頑張って続けようと思えるはずです。
 誰かと一緒に時間を共有することが長続きの秘訣だと言えます。
@@ -72,7 +82,7 @@
   サービスをお使い頂いたら、サービスの品質向上のためにアンケートにご協力ください。
 </p>
 <p>
-  <input type="button" name="buttonName" id="question-button" value="アンケートに答える" onClick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeeWIQ5NyHNrhWfj9K_ZJS8sZ_wD0ZJTYCOpQr1qm9KkUDLBQ/viewform?usp=sf_link','_blank')" />
+  <input type="button" name="buttonName" id="question-button" value="アンケート" onClick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeeWIQ5NyHNrhWfj9K_ZJS8sZ_wD0ZJTYCOpQr1qm9KkUDLBQ/viewform?usp=sf_link','_blank')" />
 </p>
 </section>
 </section>
@@ -117,175 +127,7 @@ export default {
   }
 };
 
-/*export default {
-  mounted() {
-    const hash = this.$route.hash;
-    if (hash && hash.match(/^#.+$/)) {
-      this.$scrollTo(hash);
-    }
-  }
-};*/
+
 </script>
 
-<style>
-header {
-  height: 200px;
-  width: 100%;
-  padding: 15px 0;
-  /*background-color: #337079;*/
-  background: #dfefff;
-
-}
-
-header .headline{
-  /*background: #dfefff;
-  box-shadow: 0px 0px 0px 5px #dfefff;
-  border: dashed 1px #96c2fe;
-  padding: 0.2em 0.5em;
-  color: #454545;*/
- 
-  line-height: 100px;
-  /*float: left;*/
-  font-size: 50px;
-  margin-left: 100px;
-  color: #454545;
-
-}
-
-#go-room-button-at-home {
-  font-size: 1.4em;
-  position: relative;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-
-#gp-room-button-at-home:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-#go-how-to-use-button {
-  font-size: 1.4em;
-  position: relative;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-
-#go-how-to-use-button:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-.button {
-  position: relative;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-
-.button:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-#login-button {
-  /*position: relative*/
-  font-size: 1.4em;
-  display: inline-block;
-  padding: 0.15em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-  height:80px;
-}
-
-#cal-room-button {
-  font-size: 1.4em;
-  position: relative;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #3b280c;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-
-#cal-room-button:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-.nav-list {
-    line-height: 400px;
-    float: left;
-    margin-left: 30px;
-    list-style: none;
-}
-.nav-list-item {
-  list-style: none;
-  display: inline-block;
-  margin: 30px;
-}
-
-#radio_taiso{
-  position: relative;
-  left:500px;
-}
-
-#question-button {
-  font-size: 1.4em;
-  position: relative;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-
-#question-button:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-main {
-  height: 2000px;
-  width: 100%;
-  padding: 15px 0;
-  /*background-color: #337079;*/
-  /*background: #dfefff;*/
-}
-
-
-
-</style>
+<style src="./chat.css" />
