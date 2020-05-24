@@ -84,6 +84,7 @@ import UserStore from '../mobx/UserStore'
 import { updateUser } from "../graphql/mutations";
 import { updateRoom } from "../graphql/mutations";
 import { createMessage } from "../graphql/mutations";
+import { onCreateMessage } from '../graphql/subscriptions';
 // import foryoutube from './foryoutube'
 
 Vue.use(VueYoutube)
@@ -96,7 +97,7 @@ export default {
   data(){
     return {
       video_url: "",
-      subscription: {},
+      subscriptionchat: {},
       error: "",
       roomId: "",
       createdTime: 1589620500,
@@ -166,13 +167,14 @@ export default {
       this.showContent = true
     },
     async sendMessage(){
-      const message = document.getElementById("messageinput").value
+      var message = document.getElementById("messageinput")
       const createmessage = {
         id: new Date().getTime() + this.userName,
         username: this.userName,
-        content: message,
+        content: message.value,
         messageRoomidId: this.roomId
       }
+      message.value = ""
       console.log(createmessage)
       await API.graphql(graphqlOperation(createMessage, { input: createmessage }))
         .catch(error => this.error = JSON.stringify(error))
@@ -185,6 +187,18 @@ export default {
       await API.graphql(graphqlOperation(deleteRoom, { input: roomi}))
         .catch(error => this.error = JSON.stringify(error))
       router.push({name:'room'})
+    },
+    subscribe(){
+      // GraphQLエンドポイントにsubscriptionを発行し、mutationを監視する
+      this.subscriptionchat = API.graphql(graphqlOperation(onCreateMessage)).subscribe({
+        next: (eventData) => {
+          const message = eventData.value.data.onCreateMessage;
+          console.log(message.roomid)
+          if(message.roomid.id === this.roomId){
+            this.messages.push(message);
+          }
+        }
+      })
     },
     closeModel: function(){
       this.showContent = false
@@ -211,8 +225,13 @@ export default {
     console.log(this.members)
     console.log(this.video_url)
     this.fetch()
+    this.subscribe()
     //this.createdTime = get_created_time(userid)
   },
+  beforeDestroy() {
+      //チャット画面から離れる際に、UnSubscribeする
+      this.subscription.unsubscribe();
+    },
   async destroyed(){
     const updatedata = {
         id: this.userId,
