@@ -88,7 +88,7 @@
 <script>
 import API, {  graphqlOperation } from '@aws-amplify/api';
 import Vue from 'vue'
-import VueYoutube from 'vue-youtube'
+import VueYoutube, {getIdFromUrl} from 'vue-youtube'
 import { getRoom } from '../graphql/queries';
 import { getUser } from '../graphql/queries';
 import { deleteRoom } from '../graphql/mutations'
@@ -217,7 +217,7 @@ export default {
     const user_id = await API.graphql(graphqlOperation(getUser,{id: this.userId}))
     console.log(user_id.data.getUser.roomid)
     const room_info = user_id.data.getUser.roomid
-    this.video_url = room_info.movie
+    this.video_url = getIdFromUrl(room_info.movie)
     this.roomId = room_info.id
     const member = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
     this.members = member.data.getRoom.users.items

@@ -19,7 +19,9 @@
       <p>ここはルームに入る待機場所です。「ルームを作成する」ボタンを押したら、ルームを作成するページに移動するので
       そこでルームを作成してください。
       </p>
-      <router-link to="/room_create"><button id="create-room-button">ルームを作成する</button></router-link>
+      <router-link to="/room_create" id="create-room-button">ルームを作成する</router-link>
+      <br>
+      <router-link to="/calendar">カレンダーページ</router-link>
     </section>
    
       <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->

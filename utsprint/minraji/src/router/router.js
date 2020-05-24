@@ -9,6 +9,7 @@ import Room_create from '@/components/room_create'
 import SampleAuth from "../views/SampleAuth";
 import In_the_room from '@/components/in_the_room'
 import Movie from '@/components/Movie'
+import calendar from '@/components/calendar'
 //import Signout from '@/components/Signout'
 import use from '@/components/use'
 import cal_page from '@/components/cal_page'
@@ -113,6 +114,11 @@ const router = new Router({
         path: '/cal_page',
         name: 'Cal_page',
         component: cal_page
+    },
+    {
+        path: '/calendar',
+        name: 'calendar',
+        component: calendar
     },
     {
         path: '/chatgroup',
