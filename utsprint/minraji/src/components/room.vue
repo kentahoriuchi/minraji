@@ -24,25 +24,18 @@
    
       <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
     <section>
-
       <!-- <calendar></calendar> -->
       <div class="main-contents">
       <h2>作成したルーム一覧</h2>
       <p>作成されたルーム一覧です。自分が作ったルームに入りましょう。</p>
       <div id='room' v-for="room in rooms" :key="room.id">
-        <button id = "go-room-button" v-on:click="passCheck(room.id)">{{room.tilte}}</button>
+        <button id = "go-room-button" v-on:click="gotoroom(room.id)">{{room.tilte}}</button>
         参加者 : {{room.numberofmember}} 名
-        開始時刻 : {{room.reservedtime}}
-
       </div>
-      <div id='overlay' v-show='showContent'>
-        <input id="passwordinput" placeholder="ルームのパスワードを入力してください" size="30" type='text' value=""/>
-        <button id = "passbottun" v-on:click="passwordInput">send</button>
-        <br>
-        <p id="errormessage"></p>
-        <br>
+      <!-- <div id='overlay' v-show='showContent'>
+        <p>これがモーダルウィンドウです。</p>
         <p><button v-on:click='closeModel'>close</button></p>
-      </div>
+      </div> -->
       <div class="error">{{ this.error }}</div>
       </div>
     </section>
@@ -61,7 +54,6 @@ import router from '../router/router'
 // import calendar from "./calendar"
 import { listRooms } from '../graphql/queries';
 import { getRoom } from '../graphql/queries';
-
 import { updateRoom } from "../graphql/mutations";
 import { updateUser } from "../graphql/mutations";
 import UserStore from '../mobx/UserStore'
@@ -70,11 +62,9 @@ window.LOG_LEVEL = 'VERBOSE';
 
 export default {
   name: 'chat',
-
   // components: {
     // calendar
   // },
-
   data(){
     return {
       userName: "",
@@ -83,9 +73,6 @@ export default {
       error: "",
       rooms: [],
       showContent: false,
-      password: "",
-      passcheck: false,
-      roomId: ""
       // subscription: {},
     }
   },
@@ -96,21 +83,23 @@ export default {
       const rooms = await API.graphql(graphqlOperation(listRooms,{limit:roomlimit}))
       this.rooms = rooms.data.listRooms.items
     },
-    async gotoroom(){
+    async gotoroom(id){
       //ユーザー部屋入室情報追加
       const updateuserinput = {
         id: this.userId,
         username: this.userName,
-        userRoomidId: this.roomId
+        userRoomidId: id
       }
       await API.graphql(graphqlOperation(updateUser, { input: updateuserinput }))
         .catch(error => this.error = JSON.stringify(error))
-
       // 部屋の人数更新
-      const getroom = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
+      const getroom = await API.graphql(graphqlOperation(getRoom,{id: id}))
+      // if(roominfo.data.getRoom.privatepassword){
+      //   this.showContent = true
+      // }
       const roommember = getroom.data.getRoom.numberofmember
       const addroommenber = {
-        id: this.roomId,
+        id: id,
         numberofmember: roommember + 1
       }
       console.log(roommember)
@@ -119,38 +108,10 @@ export default {
 
       router.push('/room/in')
     },
-
-    //パスワード関連
-    passwordInput(){
-      // if (event.keyCode !== 13) return 
-      console.log(this.passcheck)
-      let passwordinput = document.getElementById("passwordinput").value
-      if(passwordinput === this.password){
-        this.showContent = false
-        this.gotoroom()
-      }
-      else{
-        var erromessage = document.getElementById("errormessage")
-        erromessage.innerHTML = "パスワードが違います"
-      }
-    },
-    async passCheck(id){
-      this.roomId = id
-      const getroom = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
-      console.log(getroom.data.getRoom.privatepassword)
-      if(getroom.data.getRoom.privatepassword){
-        console.log('passcheck')
-        this.password = getroom.data.getRoom.privatepassword
-        this.showContent = true
-      }
-      else{
-        this.gotoroom()
-      }
-    },
     
-    closeModel: function(){
-      this.showContent = false
-    }
+    // closeModel: function(){
+    //   this.showContent = false
+    // }
   },
   async created(){
     const { username,userid } = await UserStore
