@@ -7,8 +7,8 @@
 </h1>
   <ul class="nav-list">
 
-      <li class="nav-list-item"><router-link to="/" id="back-home-button"> ホーム</router-link></li>
-      <li class="nav-list-item"><!-- 待機部屋に移動 --><router-link to="/room" id="back-room-button-header">ルーム広場に戻る</router-link></li>
+      <li class="nav-list-item"><router-link to="/"><button id="back-home-button">ホーム</button></router-link></li>
+      <li class="nav-list-item"><!-- 待機部屋に移動 --><router-link to="/room"><button id="go-room-button">ルーム広場に戻る</button></router-link></li>
 
       <li class="nav-list-item"><amplify-sign-out></amplify-sign-out></li>
   </ul>	
@@ -57,7 +57,7 @@
 
     <br>
     <button v-on:click="chat" id="button">chatroom</button>
-    <router-link to="/room" id="back-room-button">ルーム広場に戻る</router-link>
+    <router-link to="/room"><button id="go-room-button">ルーム広場に戻る</button></router-link>
 
     
   <div id="two-buttons">
