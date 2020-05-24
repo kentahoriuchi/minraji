@@ -185,6 +185,7 @@ export default {
     },
     async sendMessage(){
       var message = document.getElementById("messageinput")
+      if(!message.value){return}
       const createmessage = {
         id: new Date().getTime() + this.userName,
         username: this.userName,
