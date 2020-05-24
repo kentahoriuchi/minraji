@@ -32,6 +32,7 @@
       <div id='room' v-for="room in rooms" :key="room.id">
         <button id = "go-room-button" v-on:click="passCheck(room.id)">{{room.tilte}}</button>
         参加者 : {{room.numberofmember}} 名
+        開始時刻 : {{room.reservedtime}}
 
       </div>
       <div id='overlay' v-show='showContent'>
