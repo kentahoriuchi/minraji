@@ -36,22 +36,18 @@
         // カレンダーに表示するスケジュール一覧
         calendarEvents: [
           // TODO: データベースから取ってきたやつを反映できるようにする。
-          {
-            title: "報告会",
-            start: "2020-03-10T10:00:00",
-            end: "2020-03-10T12:30:00"
-          },
-          {
-            title: "ミーティング",
-            start: "2020-03-12T10:30:00",
-            end: "2020-03-12T12:30:00"
-          },
-          {
-            title: "打ち合わせ",
-            start: "2020-03-18T13:30:00",
-            end: "2020-03-18T14:30:00"
-          }
         ]
+      }
+    },
+    methods: {
+      addCalendarEvwnts(arg) {
+        if (confirm("新しいスケジュールを" + arg.dateStr + "に追加しますか ?")) {
+          this.calendarEvents.push({
+            title: "",
+            start: arg.date,
+            allDay: arg.allDay
+          });
+        }
       }
     }
   }
