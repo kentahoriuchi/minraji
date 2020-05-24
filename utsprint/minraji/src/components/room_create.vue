@@ -31,8 +31,9 @@
       <input id="title" placeholder="ルームタイトルを入力してください" size="30" type='text' value=""/>
       </div>
       <div id="input2">
-        ルームの開始時刻を入力してください
-        <input type="time" id="reservedtime"  size="30" value=""/>
+        ルームの開始日時を入力してください
+        <input type="date" id="reserveddate"  size="30" value="" name="today"/>
+        <input type="time" id="reservedtime"  size="30" value="" step="300"/>
       </div>
       <div id="input3">
       <input id="movie" placeholder="Youtubeのリンク入力をしてください" size="30" type='text' value=""/>
@@ -79,7 +80,8 @@ export default {
 
       const inputmovie = document.getElementById("movie").value
       const movietitle = document.getElementById("title").value
-      const reservedtime = document.getElementById("reservedtime").value
+      const reserveddate = document.getElementById("reserveddate").value
+      const reservedtime = reserveddate + " " + document.getElementById("reservedtime").value + ":00"
       var password = document.getElementById("password").value
       const privatemode = document.getElementById("check").checked
 
@@ -112,10 +114,22 @@ export default {
         .catch(error => this.error = JSON.stringify(error))
       router.push({name:'room'})
     },
+    initializedate(){
+      var today = new Date();
+      today.setDate(today.getDate());
+      var yyyy = today.getFullYear();
+      var mm = ("0"+(today.getMonth()+1)).slice(-2);
+      var dd = ("0"+today.getDate()).slice(-2);
+      document.getElementById("reserveddate").value=yyyy+'-'+mm+'-'+dd;
+      var hh = ("0"+(today.getHours())).slice(-2);
+      var min = ("0"+(today.getMinutes()+1)).slice(-2);
+      document.getElementById("reservedtime").value= hh+':'+min;
+    }
   },
   async created(){
     const { username } = await UserStore
     this.userName = username
+    this.initializedate()
   },
 }
 </script>
