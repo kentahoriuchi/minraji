@@ -34,12 +34,12 @@
         開始時刻 : {{room.reservedtime}}
       </div>
       <div id='overlay' v-show='showContent'>
-        <input id="passwordinput" placeholder="ルームのパスワードを入力してください" size="30" type='text' value=""/>
-        <button id = "passbottun" v-on:click="passwordInput">send</button>
+        <input id="password-input" placeholder="ルームのパスワードを入力してください" size="20" type='text' value=""/>
+        <button id = "password-send-button" v-on:click="passwordInput">送る</button>
         <br>
         <p id="errormessage"></p>
         <br>
-        <p><button v-on:click='closeModel'>close</button></p>
+        <p><button v-on:click='closeModel' id = "password-close-button">閉じる</button></p>
       </div>
       <div class="error">{{ this.error }}</div>
       </div>
