@@ -41,6 +41,7 @@
       <div id="input4">
         <input id="password" placeholder="パスワードを入力してください" size="30" type='text' value=""/>
       </div>
+      <p id="errormessage"></p>
       <div id="input5">
 
       <input type="button" v-on:click="roomCreate" value="ルームを作る" id="room-create-button">
