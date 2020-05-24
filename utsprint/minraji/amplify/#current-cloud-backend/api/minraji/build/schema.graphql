@@ -2,6 +2,7 @@ type Message {
   id: ID!
   username: String!
   content: String!
+  roomid: Room
 }
 
 type User {
@@ -18,7 +19,8 @@ type Room {
   privatepassword: String
   users(filter: ModelUserFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelUserConnection
   time: Int
-  reservedtime: Int
+  reservedtime: String
+  messages(filter: ModelMessageFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMessageConnection
 }
 
 enum ModelSortDirection {
@@ -139,12 +141,14 @@ input CreateMessageInput {
   id: ID
   username: String!
   content: String!
+  messageRoomidId: ID
 }
 
 input UpdateMessageInput {
   id: ID!
   username: String
   content: String
+  messageRoomidId: ID
 }
 
 input DeleteMessageInput {
@@ -231,7 +235,7 @@ input ModelRoomFilterInput {
   numberofmember: ModelIntInput
   privatepassword: ModelStringInput
   time: ModelIntInput
-  reservedtime: ModelIntInput
+  reservedtime: ModelStringInput
   and: [ModelRoomFilterInput]
   or: [ModelRoomFilterInput]
   not: ModelRoomFilterInput
@@ -244,7 +248,7 @@ input CreateRoomInput {
   numberofmember: Int
   privatepassword: String
   time: Int
-  reservedtime: Int
+  reservedtime: String
 }
 
 input UpdateRoomInput {
@@ -254,7 +258,7 @@ input UpdateRoomInput {
   numberofmember: Int
   privatepassword: String
   time: Int
-  reservedtime: Int
+  reservedtime: String
 }
 
 input DeleteRoomInput {
@@ -267,7 +271,7 @@ input ModelRoomConditionInput {
   numberofmember: ModelIntInput
   privatepassword: ModelStringInput
   time: ModelIntInput
-  reservedtime: ModelIntInput
+  reservedtime: ModelStringInput
   and: [ModelRoomConditionInput]
   or: [ModelRoomConditionInput]
   not: ModelRoomConditionInput

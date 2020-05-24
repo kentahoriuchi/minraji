@@ -129,7 +129,7 @@
                         {
                             "Ref": "APIKeyExpirationEpoch"
                         },
-                        1590648764
+                        1590860071
                     ]
                 }
             },
@@ -454,7 +454,8 @@
             "DependsOn": [
                 "GraphQLSchema",
                 "Room",
-                "User"
+                "User",
+                "Message"
             ]
         },
         "CustomResourcesjson": {

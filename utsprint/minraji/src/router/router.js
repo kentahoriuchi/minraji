@@ -13,6 +13,8 @@ import calendar from '@/components/calendar'
 //import Signout from '@/components/Signout'
 import use from '@/components/use'
 import cal_page from '@/components/cal_page'
+import chatgroup from '@/components/chatgroup'
+import mypage from '@/components/mypage'
 
 // Amplify読み込み
 import {  AmplifyEventBus } from 'aws-amplify-vue'
@@ -117,6 +119,16 @@ const router = new Router({
         path: '/calendar',
         name: 'calendar',
         component: calendar
+    },
+    {
+        path: '/chatgroup',
+        name: 'chatgroup',
+        component: chatgroup
+    },
+    {
+        path: '/mypage',
+        name: 'mypage',
+        component: mypage
     }
   ],
   scrollBehavior(to, from, savedPosition) {//ページ遷移したときに一番上に飛ぶようにスクロールする

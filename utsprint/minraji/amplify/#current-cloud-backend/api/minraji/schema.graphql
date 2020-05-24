@@ -1,7 +1,9 @@
-type Message @model {
+type Message 
+@model {
   id: ID!
   username: String!
   content: String!
+  roomid: Room @connection(name: "MessageLinks")
 }
 
 type User 
@@ -33,7 +35,8 @@ type Room
   privatepassword: String
   users: [User] @connection(name: "MemberLinks")
   time: Int
-  reservedtime: Int
+  reservedtime: String
+  messages: [Message] @connection(name: "MessageLinks")
   # user: User! @connection(name: "UserRoom")
 	# createdAt: String
 	# updatedAt: String

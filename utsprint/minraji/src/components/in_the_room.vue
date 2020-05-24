@@ -6,9 +6,10 @@
       <a>みんラジ!</a>
 </h1>
   <ul class="nav-list">
-      <li class="nav-list-item"><router-link to="/" id="back-home-button"> ホーム</router-link></li>
-      <!-- ボタンにしたら、形変わってしまった・・↓ -->
-      <li class="nav-list-item"><!-- 待機部屋に移動 --><button v-on:click="leave_room" id="back-room-button-header">ルーム広場に戻る</button></li>
+
+      <li class="nav-list-item"><router-link to="/"><button id="back-home-button">ホーム</button></router-link></li>
+      <li class="nav-list-item"><!-- 待機部屋に移動 --><router-link to="/room"><button id="go-room-button">ルーム広場に戻る</button></router-link></li>
+
       <li class="nav-list-item"><amplify-sign-out></amplify-sign-out></li>
   </ul>	
 </header>
@@ -17,12 +18,13 @@
     <h2>ルーム</h2>
 
     <p>ここはルームの中です。動画をみてラジオ体操をしましょう。
-      ラジオ体操が終わったら「ルームを消す」ボタンを押して、「ルーム広場に戻る」ボタンを押しましょう。</p>
-    
+      ラジオ体操が終わったら「ルームを消す」ボタンを押して、ルーム広場に戻りましょう。</p>
+    <div id="all-members">  
     <h2>参加者一覧</h2>
     参加者 : {{members.length}} 名
     <div  v-for="member in members" :key="member.id">
       {{member.username}}
+    </div>
     </div>
    
     
@@ -42,15 +44,40 @@
     </youtube>
     </div>
     <br>
-    <button v-on:click="playVideo" id="play-button">play</button>
-    <!-- <foryoutube :videoId='JyMPBn25wP4'></foryoutube> -->
-    <br>
-    <table>
-    <tr>
-    <td><router-link to="/room" id="back-room-button">ルーム広場に戻る</router-link></td>
-    <td><!-- ルームを消す--><button id="delete-room-button" v-on:click="delete_room">ルームを消す</button></td>
-    </tr>
-    </table>
+    
+    
+  <div id="two-buttons-up">
+      <button v-on:click="playVideo" id="play-button">play</button>
+  <button v-on:click="chat" id="chat-button">チャットする</button>
+  </div>
+
+  <div id="two-buttons-down">
+  <!-- ルームを消す--><button id="delete-room-button" v-on:click="delete_room">ルームを消す</button>
+    <router-link to="/room"><button id="go-room-button">ルーム広場に戻る</button></router-link>
+  </div>
+
+
+  <div id='overlay' v-show='showContent'>
+  <div v-for="message in messages" :key="message.id">
+    <p v-bind:class="[message.username === userName ? 'message' : 'message_opponent']">{{message.content}}</p>
+    <p v-bind:class="[message.username === userName ? 'username' : 'username_opponent']">{{message.username}}</p>
+  </div>
+  <table>
+  <tr>
+  <div>
+  <input id="messageinput" placeholder="メッセージを入力してください" size="25" type='text' value=""/>
+  </div>
+  </tr>
+  <tr>
+  <div>
+  <button id = "sendMessage" v-on:click="sendMessage">送る</button>
+  <button id="chat-close" v-on:click='closeModel'>閉じる</button>
+  </div>
+  </tr>
+  </table>
+</div>
+    
+    
 
 
 </section>
@@ -69,6 +96,7 @@ import router from '../router/router'
 import UserStore from '../mobx/UserStore'
 import { updateUser } from "../graphql/mutations";
 import { updateRoom } from "../graphql/mutations";
+import { createMessage } from "../graphql/mutations";
 // import foryoutube from './foryoutube'
 
 Vue.use(VueYoutube)
@@ -88,6 +116,8 @@ export default {
       members: [],
       userName: "",
       userId: "",
+      showContent: false,
+      messages: [],
       // playerVars: {
       //   autoplay: 0
       // }
@@ -95,6 +125,11 @@ export default {
     }
   },
   methods :{
+    async fetch(){
+      const getroom = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
+      this.messages = getroom.data.getRoom.messages.items
+      console.log(this.messages)
+    },
     async playVideo() {
       // await this.player.seekTo(10,true)
       await this.sendSeek(30)
@@ -140,6 +175,21 @@ export default {
       this.player.seekTo(seconds)
 
     },
+    chat(){
+      this.showContent = true
+    },
+    async sendMessage(){
+      const message = document.getElementById("messageinput").value
+      const createmessage = {
+        id: new Date().getTime() + this.userName,
+        username: this.userName,
+        content: message,
+        messageRoomidId: this.roomId
+      }
+      console.log(createmessage)
+      await API.graphql(graphqlOperation(createMessage, { input: createmessage }))
+        .catch(error => this.error = JSON.stringify(error))
+    },
     async delete_room(){
       const roomi = {
         id: this.roomId
@@ -149,24 +199,9 @@ export default {
         .catch(error => this.error = JSON.stringify(error))
       router.push({name:'room'})
     },
-    async leave_room(){
-      const updatedata = {
-        id: this.userId,
-        userRoomidId: null
-      }
-      const roominfo = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
-      const roommember = roominfo.data.getRoom.numberofmember
-      const addroommenber = {
-        id: this.roomId,
-        numberofmember: roommember - 1
-      }
-      await API.graphql(graphqlOperation(updateUser, { input: updatedata }))
-        .catch(error => this.error = JSON.stringify(error))
-      await API.graphql(graphqlOperation(updateRoom, { input: addroommenber }))
-        .catch(error => this.error = JSON.stringify(error))
-      router.push('/room')
-    }
-    
+    closeModel: function(){
+      this.showContent = false
+    },
   },
   computed: {
     player() {
@@ -186,9 +221,27 @@ export default {
     this.roomId = room_info.id
     const member = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
     this.members = member.data.getRoom.users.items
+    console.log(this.members)
     console.log(this.video_url)
+    this.fetch()
     //this.createdTime = get_created_time(userid)
   },
+  async destroyed(){
+    const updatedata = {
+        id: this.userId,
+        userRoomidId: null
+      }
+    const roominfo = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
+    const roommember = roominfo.data.getRoom.numberofmember
+    const addroommenber = {
+      id: this.roomId,
+      numberofmember: roommember - 1
+    }
+    await API.graphql(graphqlOperation(updateRoom, { input: addroommenber }))
+      .catch(error => this.error = JSON.stringify(error))
+    await API.graphql(graphqlOperation(updateUser, { input: updatedata }))
+      .catch(error => this.error = JSON.stringify(error))
+  }
 }
 
 /*
@@ -217,130 +270,6 @@ function get_created_time(userid){
 
 </script>
 
-<style>
-header {
-  height: 120px;
-  width: 100%;
-  padding: 15px 0;
-  /*background-color: #337079;*/
-  background: #dfefff;
-
-}
-
-header .headline{
-  /*background: #dfefff;
-  box-shadow: 0px 0px 0px 5px #dfefff;
-  border: dashed 1px #96c2fe;
-  padding: 0.2em 0.5em;
-  color: #454545;*/
-  line-height: 100px;
-  /*float: left;*/
-  font-size: 50px;
-  margin-left: 100px;
-  color: #454545;
-}
-
-#back-home-button {
-  font-size: 1.4em;
-  position: relative;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-  
-#back-home-button:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-#back-room-button-header {
-  font-size: 1.4em;
-  position: relative;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-
-#back-room-button-header:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-#back-room-button {
-  font-size: 1.4em;
-  position: relative;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-
-#back-room-button:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-
-#play-button {
-  font-size: 1.55em;
-  position: relative;
-  top:75px;
-  left: 500px;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-
-#play-button:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-#delete-room-button {
-  font-size: 1.65em;
-  position: relative;
-  left: 600px;
-  top:20px;
-  display: inline-block;
-  padding: 0.25em 0.5em;
-  text-decoration: none;
-  color: #FFF;
-  background: #fd9535;/*背景色*/
-  border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-  border-radius: 4px;/*角の丸み*/
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-  font-weight: bold;
-}
-
-#delete-room-button:active {
-  border-bottom: solid 2px #fd9535;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-}
-
-
-</style>
+<style src="./chat.css" />
 
 
