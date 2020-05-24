@@ -24,10 +24,14 @@
 <style>
 
 #app {
-  width: 1400px;
+  width: 80%;
   margin: 0 auto;
   /*border: blue 5px solid;*/
 }
+#contents {
+    height:1500px;
+    width: 100%;
+  }
 footer{
   width: 100%;
   height: 100px;

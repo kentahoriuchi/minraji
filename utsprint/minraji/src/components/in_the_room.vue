@@ -9,7 +9,6 @@
 
       <li class="nav-list-item"><router-link to="/"><button id="back-home-button">ホーム</button></router-link></li>
       <li class="nav-list-item"><!-- 待機部屋に移動 --><router-link to="/room"><button id="go-room-button">ルーム広場に戻る</button></router-link></li>
-
       <li class="nav-list-item"><amplify-sign-out></amplify-sign-out></li>
   </ul>	
 </header>

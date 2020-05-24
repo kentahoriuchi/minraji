@@ -69,37 +69,3 @@ new Vue({
   router,
   render: h => h(App),
 }).$mount('#app')
-/*
-import Vue from 'vue'
-import App from './App.vue'
-import Amplify, * as AmplifyModules from 'aws-amplify'
-import { AmplifyPlugin } from 'aws-amplify-vue'
-import awsmobile from './aws-exports'
-import { I18n } from '@aws-amplify/core';
-
-I18n.setLanguage("ja");
-
-Amplify.configure(awsmobile)
-
-Vue.use(AmplifyPlugin, AmplifyModules)
-Vue.config.productionTip = false
-
-let languageDict = {
-    ja:{
-        'Sign In Account' : 'アカウントにサインイン',
-        'Username' : 'ユーザ名',
-        'Enter your username' : 'ユーザ名を入力してください',
-        'Password' : 'パスワード',
-        'Enter your password' : 'パスワードを入力してください',
-        'Forget your password? ' : 'パスワードを忘れた場合',
-        'Reset password' : 'パスワードのリセット',
-        'No account? ' : 'まだアカウントがない場合',
-        'Create account' : 'アカウント作成',
-        'Sign In' : 'サインイン',
-    }
-}
-AmplifyModules.I18n.putVocabularies(languageDict)
-
-new Vue({
-  render: h => h(App)
-}).$mount('#app')*/
