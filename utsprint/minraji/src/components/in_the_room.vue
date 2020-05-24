@@ -117,12 +117,13 @@ export default {
       subscriptionchat: {},
       error: "",
       roomId: "",
-      createdTime: 1589620500,
       members: [],
       userName: "",
       userId: "",
       showContent: false,
       messages: [],
+      createdTime: "",
+      nowTime: ""
       // playerVars: {
       //   autoplay: 0
       // }
@@ -174,7 +175,7 @@ export default {
       console.log('buffering')
       console.log(this.player.getPlayerState())
       setTimeout(console.log('7777777'),5000)
-      await this.sendSeek(30)
+      await this.checkTime()
     },
     sendSeek(seconds) {
       this.player.seekTo(seconds)
@@ -220,6 +221,40 @@ export default {
     closeModel: function(){
       this.showContent = false
     },
+    initializedate(){
+      var today = new Date();
+      today.setDate(today.getDate());
+      var yyyy = today.getFullYear();
+      var mm = ("0"+(today.getMonth()+1)).slice(-2);
+      var dd = ("0"+today.getDate()).slice(-2);
+      var hh = ("0"+(today.getHours())).slice(-2);
+      var min = ("0"+(today.getMinutes())).slice(-2);
+      var sec = ("0"+(today.getSeconds())).slice(-2);
+      this.nowTime = yyyy+'-'+mm+'-'+dd +" "+ hh+':'+min+':'+sec;
+    },
+    checkTime(){
+      this.initializedate()
+      const wordsCreated = this.createdTime.split(' ');
+      const wordsNow = this.nowTime.split(' ');
+      console.log( wordsCreated[0])
+      console.log( wordsNow[0])
+      if(wordsCreated[0].match(wordsNow[0]) != /(\d{4})-(\d{2})-(\d{2})/){
+        console.log("day matched!")
+        const timeCreated = wordsCreated[1].split(':')
+        const timeNow = wordsNow[1].split(':')
+        const timeFromStart = (timeNow[0] - timeCreated[0])*3600 + (timeNow[1] - timeCreated[1])*60 + (timeNow[2] - timeCreated[2])
+        console.log(timeFromStart)
+        // console.log("time is far! moving now")
+        if(timeFromStart < 0){
+          this.player.pauseVideo()
+          console.log('waiting')
+          setTimeout(this.player.playVideo(),Math.abs(timeFromStart*1000))
+        }else{
+          this.sendSeek(timeFromStart)  
+        }
+        
+      }
+    }
   },
   computed: {
     player() {
@@ -237,10 +272,13 @@ export default {
     const room_info = user_id.data.getUser.roomid
     this.video_url = getIdFromUrl(room_info.movie)
     this.roomId = room_info.id
+    this.createdTime = room_info.reservedtime
     const member = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
     this.members = member.data.getRoom.users.items
-    console.log(this.members)
-    console.log(this.video_url)
+    // console.log(this.members)
+    // console.log(this.video_url)
+    console.log("created: " + this.createdTime)
+    console.log("now: " + this.nowTime)
     this.fetch()
     this.subscribe()
     //this.createdTime = get_created_time(userid)
