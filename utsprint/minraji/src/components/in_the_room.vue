@@ -6,9 +6,10 @@
       <a>みんラジ!</a>
 </h1>
   <ul class="nav-list">
-      <li class="nav-list-item"><router-link to="/"><button id="back-home-button">ホーム</button></router-link></li>
-      <!-- ボタンにしたら、形変わってしまった・・↓ -->
-      <li class="nav-list-item"><!-- 待機部屋に移動 --><button v-on:click="leave_room" id="go-room-button">ルーム広場に戻る</button></li>
+
+      <li class="nav-list-item"><router-link to="/" id="back-home-button"> ホーム</router-link></li>
+      <li class="nav-list-item"><!-- 待機部屋に移動 --><router-link to="/room" id="back-room-button-header">ルーム広場に戻る</router-link></li>
+
       <li class="nav-list-item"><amplify-sign-out></amplify-sign-out></li>
   </ul>	
 </header>
@@ -30,6 +31,15 @@
     <!-- video-id youtubeの動画のid -->
     <!--<youtube :video-id="video_url" ref="youtube" @playing="playing"></youtube> -->
 </section>
+<div id='overlay' v-show='showContent'>
+  <div v-for="message in messages" :key="message.id">
+    <p v-bind:class="[message.username === userName ? 'message' : 'message_opponent']">{{message.content}}</p>
+    <p v-bind:class="[message.username === userName ? 'username' : 'username_opponent']">{{message.username}}</p>
+  </div>
+  <input id="messageinput" placeholder="メッセージを入力してください" size="30" type='text' value=""/>
+  <button id = "sendMessage" v-on:click="sendMessage">send</button>
+  <p><button v-on:click='closeModel'>close</button></p>
+</div>
     
 <section>   
     <!-- video-id youtubeの動画のid -->
@@ -44,6 +54,11 @@
     </div>
     <br>
     <!-- <foryoutube :videoId='JyMPBn25wP4'></foryoutube> -->
+
+    <br>
+    <button v-on:click="chat" id="button">chatroom</button>
+    <router-link to="/room" id="back-room-button">ルーム広場に戻る</router-link>
+
     
   <div id="two-buttons">
       <button v-on:click="playVideo" id="play-button">play</button>
@@ -68,6 +83,7 @@ import router from '../router/router'
 import UserStore from '../mobx/UserStore'
 import { updateUser } from "../graphql/mutations";
 import { updateRoom } from "../graphql/mutations";
+import { createMessage } from "../graphql/mutations";
 // import foryoutube from './foryoutube'
 
 Vue.use(VueYoutube)
@@ -87,6 +103,8 @@ export default {
       members: [],
       userName: "",
       userId: "",
+      showContent: false,
+      messages: [],
       // playerVars: {
       //   autoplay: 0
       // }
@@ -94,6 +112,11 @@ export default {
     }
   },
   methods :{
+    async fetch(){
+      const getroom = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
+      this.messages = getroom.data.getRoom.messages.items
+      console.log(this.messages)
+    },
     async playVideo() {
       // await this.player.seekTo(10,true)
       await this.sendSeek(30)
@@ -139,6 +162,21 @@ export default {
       this.player.seekTo(seconds)
 
     },
+    chat(){
+      this.showContent = true
+    },
+    async sendMessage(){
+      const message = document.getElementById("messageinput").value
+      const createmessage = {
+        id: new Date().getTime() + this.userName,
+        username: this.userName,
+        content: message,
+        messageRoomidId: this.roomId
+      }
+      console.log(createmessage)
+      await API.graphql(graphqlOperation(createMessage, { input: createmessage }))
+        .catch(error => this.error = JSON.stringify(error))
+    },
     async delete_room(){
       const roomi = {
         id: this.roomId
@@ -148,24 +186,9 @@ export default {
         .catch(error => this.error = JSON.stringify(error))
       router.push({name:'room'})
     },
-    async leave_room(){
-      const updatedata = {
-        id: this.userId,
-        userRoomidId: null
-      }
-      const roominfo = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
-      const roommember = roominfo.data.getRoom.numberofmember
-      const addroommenber = {
-        id: this.roomId,
-        numberofmember: roommember - 1
-      }
-      await API.graphql(graphqlOperation(updateUser, { input: updatedata }))
-        .catch(error => this.error = JSON.stringify(error))
-      await API.graphql(graphqlOperation(updateRoom, { input: addroommenber }))
-        .catch(error => this.error = JSON.stringify(error))
-      router.push('/room')
-    }
-    
+    closeModel: function(){
+      this.showContent = false
+    },
   },
   computed: {
     player() {
@@ -185,9 +208,27 @@ export default {
     this.roomId = room_info.id
     const member = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
     this.members = member.data.getRoom.users.items
+    console.log(this.members)
     console.log(this.video_url)
+    this.fetch()
     //this.createdTime = get_created_time(userid)
   },
+  async destroyed(){
+    const updatedata = {
+        id: this.userId,
+        userRoomidId: null
+      }
+    const roominfo = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
+    const roommember = roominfo.data.getRoom.numberofmember
+    const addroommenber = {
+      id: this.roomId,
+      numberofmember: roommember - 1
+    }
+    await API.graphql(graphqlOperation(updateRoom, { input: addroommenber }))
+      .catch(error => this.error = JSON.stringify(error))
+    await API.graphql(graphqlOperation(updateUser, { input: updatedata }))
+      .catch(error => this.error = JSON.stringify(error))
+  }
 }
 
 /*

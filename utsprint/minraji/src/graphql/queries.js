@@ -7,6 +7,21 @@ export const getMessage = /* GraphQL */ `
       id
       username
       content
+      roomid {
+        id
+        movie
+        tilte
+        numberofmember
+        privatepassword
+        users {
+          nextToken
+        }
+        time
+        reservedtime
+        messages {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -21,6 +36,15 @@ export const listMessages = /* GraphQL */ `
         id
         username
         content
+        roomid {
+          id
+          movie
+          tilte
+          numberofmember
+          privatepassword
+          time
+          reservedtime
+        }
       }
       nextToken
     }
@@ -42,6 +66,9 @@ export const getUser = /* GraphQL */ `
         }
         time
         reservedtime
+        messages {
+          nextToken
+        }
       }
     }
   }
@@ -87,6 +114,14 @@ export const getRoom = /* GraphQL */ `
       }
       time
       reservedtime
+      messages {
+        items {
+          id
+          username
+          content
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -108,6 +143,9 @@ export const listRooms = /* GraphQL */ `
         }
         time
         reservedtime
+        messages {
+          nextToken
+        }
       }
       nextToken
     }

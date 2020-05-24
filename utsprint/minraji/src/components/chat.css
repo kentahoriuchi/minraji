@@ -971,6 +971,12 @@ margin: 20px;
     text-decoration:underline;/*下線を引く*/
     text-decoration-color:#FF0000;/*下線を赤色*/
 }
+
+
+#errormessage {
+  color:red
+}
+
 /*use.vue*/
 #computer_school_girl {
   position: relative;
@@ -1104,3 +1110,4 @@ iframe {
 
 
 }
+

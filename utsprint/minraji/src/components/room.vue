@@ -24,7 +24,6 @@
    
       <!-- 部屋情報を一つずつ取ってきて表示する、押すとそれぞれの画面に移動する -->
     <section>
-
       <!-- <calendar></calendar> -->
       <div class="main-contents">
       <h2>作成したルーム一覧</h2>
@@ -32,7 +31,7 @@
       <div id='room' v-for="room in rooms" :key="room.id">
         <button id = "go-my-room-button" v-on:click="gotoroom(room.id)">{{room.tilte}}</button>
         参加者 : {{room.numberofmember}} 名
-
+        開始時刻 : {{room.reservedtime}}
       </div>
       <!-- <div id='overlay' v-show='showContent'>
         <p>これがモーダルウィンドウです。</p>
@@ -56,7 +55,6 @@ import router from '../router/router'
 // import calendar from "./calendar"
 import { listRooms } from '../graphql/queries';
 import { getRoom } from '../graphql/queries';
-
 import { updateRoom } from "../graphql/mutations";
 import { updateUser } from "../graphql/mutations";
 import UserStore from '../mobx/UserStore'
@@ -65,11 +63,9 @@ window.LOG_LEVEL = 'VERBOSE';
 
 export default {
   name: 'chat',
-
   // components: {
     // calendar
   // },
-
   data(){
     return {
       userName: "",
