@@ -311,6 +311,10 @@ margin: 30px;
   top:25px;
 }
 
+#errormessage {
+  color:red
+}
+
 #room-create-button {
   font-size: 1.2em;
   position: relative;
@@ -406,6 +410,25 @@ margin: 30px;
     font-size: 50px;
     margin-left: 100px;
     color: #454545;
+  
+  }
+
+  #overlay{
+    /*　要素を重ねた時の順番　*/
+    z-index:1;
+  
+    /*　画面全体を覆う設定　*/
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.5);
+  
+    /*　画面の中央に要素を表示させる設定　*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
   
   }
 
@@ -660,6 +683,10 @@ margin: 30px;
   top:25px;
 }
 
+#errormessage {
+  color:red
+}
+
 #room-create-button {
   font-size: 1.2em;
   position: relative;
@@ -756,6 +783,25 @@ header .headline{
   line-height: 10px;
   font-size: 30px;
   color: #454545;
+}
+
+#overlay{
+  /*　要素を重ねた時の順番　*/
+  z-index:1;
+
+  /*　画面全体を覆う設定　*/
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.5);
+
+  /*　画面の中央に要素を表示させる設定　*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 
 #back-home-button {
@@ -973,10 +1019,6 @@ margin: 20px;
 }
 
 
-#errormessage {
-  color:red
-}
-
 /*use.vue*/
 #computer_school_girl {
   position: relative;
@@ -1033,6 +1075,10 @@ margin: 20px;
 #input5 {
   position:relative;
   top:25px;
+}
+
+#errormessage {
+  color:red
 }
 
 #room-create-button {
