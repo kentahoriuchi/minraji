@@ -185,6 +185,7 @@ export default {
     },
     async sendMessage(){
       var message = document.getElementById("messageinput")
+      if(!message.value){return}
       const createmessage = {
         id: new Date().getTime() + this.userName,
         username: this.userName,
@@ -192,7 +193,6 @@ export default {
         messageRoomidId: this.roomId
       }
       message.value = ""
-      console.log(createmessage)
       await API.graphql(graphqlOperation(createMessage, { input: createmessage }))
         .catch(error => this.error = JSON.stringify(error))
     },
