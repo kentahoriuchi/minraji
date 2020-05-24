@@ -58,9 +58,13 @@
 
 
   <div id='overlay' v-show='showContent'>
-  <div v-for="message in messages" :key="message.id">
-    <p v-bind:class="[message.username === userName ? 'message' : 'message_opponent']">{{message.content}}</p>
-    <p v-bind:class="[message.username === userName ? 'username' : 'username_opponent']">{{message.username}}</p>
+    <div id="main-contents">
+    <div v-for="message in messages" :key="message.id">
+    <div id="message_base">
+    <div v-bind:class="[message.username === userName ? 'message' : 'message_opponent']">{{message.content}}</div>
+    <div v-bind:class="[message.username === userName ? 'username' : 'username_opponent']">{{message.username}}</div>
+    </div>
+    </div>
   </div>
   <table>
   <tr>

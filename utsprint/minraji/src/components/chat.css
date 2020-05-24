@@ -188,55 +188,54 @@ margin: 30px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
 
-
-.main-contents {
-  text-align:center;
-  width: 100%;
-}
-.message_base {
-  overflow: auto;
-  max-height:500px;
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  background-color: #eee;
-  box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.2) inset;
-}
-.message {
-  width: 30%;
-  margin:10px 10px 10px auto;
-  padding: 20px;
-  background-color: #7ade40;
-  border-radius: 10px;
-  word-wrap: break-word;
-}
-.message_opponent {
-  width: 30%;
-  margin:10px;
-  padding: 20px;
-  background-color: #f8f8f8;
-  border-radius: 10px;
-  word-wrap: break-word;
-}
-.username {
-    text-align: right;
-    margin: -12px 10px 0px 0px;
-    font-size: 14px;
-}
-.username_opponent {
-    text-align: left;
-    margin: -12px 0px 0px 10px;
-    font-size: 14px;
-}
-  
-.error {
-  color: red;
-}
-
 #join-member {
     font-size: 20px;
     text-decoration:underline;/*下線を引く*/
     text-decoration-color:#FF0000;/*下線を赤色*/
 }
+
+#password-input{
+  font-size: 1.2em;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #FFF;/*背景色*/
+  border-bottom: solid 2px #FFF;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+
+#password-send-button{
+  font-size: 1.2em;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #e20505;/*背景色*/
+  border-bottom: solid 2px #e20505;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+
+#password-close-button {
+  font-size: 1.2em;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #e20505;/*背景色*/
+  border-bottom: solid 2px #e20505;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+
 /*use.vue*/
 #computer_school_girl {
   position: relative;
@@ -344,13 +343,58 @@ margin: 30px;
 
 }
 
+/*chatを縦に表示*/
+.main-contents {
+  float: left;
+  width: 100%;
+}
+.message_base {
+    overflow: auto;
+    max-height:500px;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    background-color: #eee;
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.2) inset;
+}
+
+.message {
+  width: 30%;
+  margin:10px 10px 10px auto;
+  padding: 20px;
+  background-color: #7ade40;
+  border-radius: 10px;
+  word-wrap: break-word;
+}
+.message_opponent {
+  width: 30%;
+  margin:10px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  word-wrap: break-word;
+}
+.username {
+    text-align: right;
+    margin: -12px 10px 0px 0px;
+    font-size: 14px;
+}
+.username_opponent {
+    text-align: left;
+    margin: -12px 0px 0px 10px;
+    font-size: 14px;
+}
+  
+.error {
+  color: red;
+}
+
 #messageinput{
   font-size: 1.2em;
   position: relative;
   display: inline-block;
   padding: 0.25em 0.5em;
   text-decoration: none;
-  color: #FFF;
+  color: rgb(0, 0, 0);
   background: #FFF;/*背景色*/
   border-bottom: solid 2px #FFF;/*少し濃い目の色に*/
   border-radius: 4px;/*角の丸み*/
@@ -697,6 +741,48 @@ margin: 30px;
       text-decoration-color:#FF0000;/*下線を赤色*/
   }
 
+  #password-input{
+    font-size: 1.2em;
+    position: relative;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    color: #FFF;
+    background: #FFF;/*背景色*/
+    border-bottom: solid 2px #FFF;/*少し濃い目の色に*/
+    border-radius: 4px;/*角の丸み*/
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+    font-weight: bold;
+  }
+  
+  #password-send-button{
+    font-size: 1.2em;
+    position: relative;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    color: #FFF;
+    background: #e20505;/*背景色*/
+    border-bottom: solid 2px #e20505;/*少し濃い目の色に*/
+    border-radius: 4px;/*角の丸み*/
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+    font-weight: bold;
+  }
+  
+  #password-close-button {
+    font-size: 1.2em;
+    position: relative;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    color: #FFF;
+    background: #e20505;/*背景色*/
+    border-bottom: solid 2px #e20505;/*少し濃い目の色に*/
+    border-radius: 4px;/*角の丸み*/
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+    font-weight: bold;
+  }
+
   /*use.vue*/
   #computer_school_girl {
     position: relative;
@@ -805,13 +891,58 @@ margin: 30px;
 
 }
 
+/*chatを縦に表示*/
+.main-contents {
+  float: left;
+  width: 100%;
+}
+.message_base {
+    overflow: auto;
+    max-height:500px;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    background-color: #eee;
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.2) inset;
+}
+
+.message {
+  width: 30%;
+  margin:10px 10px 10px auto;
+  padding: 20px;
+  background-color: #7ade40;
+  border-radius: 10px;
+  word-wrap: break-word;
+}
+.message_opponent {
+  width: 30%;
+  margin:10px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  word-wrap: break-word;
+}
+.username {
+    text-align: right;
+    margin: -12px 10px 0px 0px;
+    font-size: 14px;
+}
+.username_opponent {
+    text-align: left;
+    margin: -12px 0px 0px 10px;
+    font-size: 14px;
+}
+  
+.error {
+  color: red;
+}
+
 #messageinput{
   font-size: 1.2em;
   position: relative;
   display: inline-block;
   padding: 0.25em 0.5em;
   text-decoration: none;
-  color: #FFF;
+  color: rgb(0, 0, 0);
   background: #FFF;/*背景色*/
   border-bottom: solid 2px #FFF;/*少し濃い目の色に*/
   border-radius: 4px;/*角の丸み*/
@@ -1126,18 +1257,20 @@ margin: 20px;
 }
 
 
+/*chatを縦に表示*/
 .main-contents {
-  text-align:center;
-  width: 100%;
+  float: left;
+  width: 80%;
 }
 .message_base {
-  overflow: auto;
-  max-height:500px;
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  background-color: #eee;
-  box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.2) inset;
+    overflow: auto;
+    max-height:500px;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    background-color: #eee;
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.2) inset;
 }
+
 .message {
   width: 30%;
   margin:10px 10px 10px auto;
@@ -1173,6 +1306,49 @@ margin: 20px;
     font-size: 20px;
     text-decoration:underline;/*下線を引く*/
     text-decoration-color:#FF0000;/*下線を赤色*/
+}
+
+#password-input{
+  font-size: 1.2em;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #FFF;/*背景色*/
+  border-bottom: solid 2px #FFF;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+  width:80%;
+}
+
+#password-send-button{
+  font-size: 0.6em;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #e20505;/*背景色*/
+  border-bottom: solid 2px #e20505;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+
+#password-close-button {
+  font-size: 0.6em;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #e20505;/*背景色*/
+  border-bottom: solid 2px #e20505;/*少し濃い目の色に*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
 }
 
 
@@ -1289,7 +1465,7 @@ margin: 20px;
   display: inline-block;
   padding: 0.25em 0.5em;
   text-decoration: none;
-  color: #FFF;
+  color: rgb(0, 0, 0);
   background: #FFF;/*背景色*/
   border-bottom: solid 2px #FFF;/*少し濃い目の色に*/
   border-radius: 4px;/*角の丸み*/
