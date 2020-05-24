@@ -31,6 +31,7 @@
       <div id='room' v-for="room in rooms" :key="room.id">
         <button id = "go-room-button" v-on:click="gotoroom(room.id)">{{room.tilte}}</button>
         参加者 : {{room.numberofmember}} 名
+        開始時刻 : {{room.reservedtime}}
       </div>
       <!-- <div id='overlay' v-show='showContent'>
         <p>これがモーダルウィンドウです。</p>
