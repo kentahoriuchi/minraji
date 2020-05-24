@@ -11,11 +11,8 @@
     <ul class="nav-list">
       <li class="nav-list-item"><a href="#link2about">About</a></li>
       <li class="nav-list-item"><a href="#link2service">Service</a></li>
-
-      <router-link to="/mypage" >マイページ</router-link>
-      <li class="nav-list-item"><router-link to="/use" id="go-how-to-use-button">How to use</router-link></li>
-      <li class="nav-list-item" ><router-link to="/room" id="go-room-button-at-home">ルーム広場に行く</router-link></li>
-
+      <li class="nav-list-item"><router-link to="/use" ><button id="go-how-to-use-button">How to use</button></router-link></li>
+      <li class="nav-list-item" ><router-link to="/room" ><button id="go-room-button">ルーム広場に行く</button></router-link></li>
       <!--<li class="nav-list-item"><router-link to="/cal_page" id="cal-room-button">予定を確認する</router-link></li>-->
       <li class="nav-list-item"><input type="button" name="buttonName" id="question-button" value="アンケート" onClick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeeWIQ5NyHNrhWfj9K_ZJS8sZ_wD0ZJTYCOpQr1qm9KkUDLBQ/viewform?usp=sf_link','_blank')" /></li>
       <li class="nav-list-item"><amplify-sign-out></amplify-sign-out></li>
@@ -42,12 +39,6 @@
 </div>
 </header>
 <main>
-<!--<router-link to="../views/SampleAuth">  ログイン</router-link>-->
-
-    <!--<router-link to="/chat" class="button"> chat page </router-link>
-    <br>-->
-    <!--<router-link to="/movie"> 動画表示用 </router-link>-->
-    <!--<router-link to="/movie"> 動画ページ色々 </router-link>-->
 <section>
 
 <section>
