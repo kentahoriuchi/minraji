@@ -31,15 +31,6 @@
     <!-- video-id youtubeの動画のid -->
     <!--<youtube :video-id="video_url" ref="youtube" @playing="playing"></youtube> -->
 </section>
-<div id='overlay' v-show='showContent'>
-  <div v-for="message in messages" :key="message.id">
-    <p v-bind:class="[message.username === userName ? 'message' : 'message_opponent']">{{message.content}}</p>
-    <p v-bind:class="[message.username === userName ? 'username' : 'username_opponent']">{{message.username}}</p>
-  </div>
-  <input id="messageinput" placeholder="メッセージを入力してください" size="30" type='text' value=""/>
-  <button id = "sendMessage" v-on:click="sendMessage">send</button>
-  <p><button v-on:click='closeModel'>close</button></p>
-</div>
     
 <section>   
     <!-- video-id youtubeの動画のid -->
@@ -53,17 +44,39 @@
     </youtube>
     </div>
     <br>
-    <!-- <foryoutube :videoId='JyMPBn25wP4'></foryoutube> -->
-
-    <br>
-    <button v-on:click="chat" id="button">chatroom</button>
-    <router-link to="/room"><button id="go-room-button">ルーム広場に戻る</button></router-link>
-
     
-  <div id="two-buttons">
+    
+  <div id="two-buttons-up">
       <button v-on:click="playVideo" id="play-button">play</button>
-  <!-- ルームを消す--><button id="delete-room-button" v-on:click="delete_room">ルームを消す</button>
+  <button v-on:click="chat" id="chat-button">チャットする</button>
   </div>
+
+  <div id="two-buttons-down">
+  <!-- ルームを消す--><button id="delete-room-button" v-on:click="delete_room">ルームを消す</button>
+    <router-link to="/room"><button id="go-room-button">ルーム広場に戻る</button></router-link>
+  </div>
+
+
+  <div id='overlay' v-show='showContent'>
+  <div v-for="message in messages" :key="message.id">
+    <p v-bind:class="[message.username === userName ? 'message' : 'message_opponent']">{{message.content}}</p>
+    <p v-bind:class="[message.username === userName ? 'username' : 'username_opponent']">{{message.username}}</p>
+  </div>
+  <table>
+  <tr>
+  <div>
+  <input id="messageinput" placeholder="メッセージを入力してください" size="25" type='text' value=""/>
+  </div>
+  </tr>
+  <tr>
+  <div>
+  <button id = "sendMessage" v-on:click="sendMessage">送る</button>
+  <button id="chat-close" v-on:click='closeModel'>閉じる</button>
+  </div>
+  </tr>
+  </table>
+</div>
+    
     
 
 

@@ -29,20 +29,21 @@
     <form id="movie1">
       <div id="input1">
       <input id="title" placeholder="ルームタイトルを入力してください" size="30" type='text' value=""/>
-
-      <input type="time" id="reservedtime"  size="30" value=""/>
       </div>
       <div id="input2">
-      <input id="movie" placeholder="Youtubeのリンク入力をしてください" size="30" type='text' value=""/>
+        ルームの開始時刻を入力してください
+        <input type="time" id="reservedtime"  size="30" value=""/>
       </div>
       <div id="input3">
-      <input type='checkbox' id="check" />プライベートルームにする
+      <input id="movie" placeholder="Youtubeのリンク入力をしてください" size="30" type='text' value=""/>
       </div>
       <div id="input4">
-        <input id="password" placeholder="パスワードを入力してください" size="30" type='text' value=""/>
+      <input type='checkbox' id="check" />プライベートルームにする
       </div>
       <div id="input5">
-
+        <input id="password" placeholder="パスワードを入力してください" size="30" type='text' value=""/>
+      </div>
+      <div id="input6">
       <input type="button" v-on:click="roomCreate" value="ルームを作る" id="room-create-button">
       </div>
     </form>
