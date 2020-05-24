@@ -24,7 +24,7 @@
 <style>
 
 #app {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   /*border: blue 5px solid;*/
 }
