@@ -1,10 +1,11 @@
 <template>
 <div>
-  <div class="p-modal" :class="{'is-open': isModalActive}">
-    <p>ポップアップテスト</p>
-    <p>{{roomtitle}}</p>
-    <p><button v-on:click='openItem'>close</button></p>
-  </div>
+  
+    
+  <main>
+  
+
+  <div id = "calendar-parameter">
     <FullCalendar 
       default-view="dayGridMonth"
       @eventClick="eventClick"
@@ -14,8 +15,23 @@
       :plugins="calendarPlugins"
       :events="calendarEvents"
       :selectable="calendarSelectable"
-    /> 
+      
+    />
   </div>
+
+  <div class="p-modal" :class="{'is-open': isModalActive}">
+    <p>ポップアップテスト</p>
+    <p>{{roomtitle}}</p>
+    <p><button v-on:click='openItem'>close</button></p>
+  </div>
+  <table>
+    <td><router-link to="/"><button id="back-home-button">ホーム</button></router-link></td>
+    <td><router-link to="/room"><button id="go-room-button">ルーム広場に戻る</button></router-link></td>
+    <td><amplify-sign-out></amplify-sign-out></td>
+
+  </table>
+  </main>
+</div>
 </template>
 
 <script>
@@ -30,6 +46,7 @@
   import timeGridPlugin from "@fullcalendar/timegrid";
   import interactionPlugin from "@fullcalendar/interaction";
   import jaLocale from "@fullcalendar/core/locales/ja"; // 日本語化用
+  
 
   export default {
     name: 'calendar',
@@ -115,6 +132,8 @@
       // console.log("add eventの後")
     }
   }
+
+
 </script>
 
 <style lang='scss'>
@@ -144,5 +163,10 @@
     align-items: center;
     justify-content: center;
   }
+}
+
+#calendar-parameter{
+  width:100%;
+ 
 }
 </style>
