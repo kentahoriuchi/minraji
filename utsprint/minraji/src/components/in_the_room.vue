@@ -96,11 +96,14 @@ import { getRoom } from '../graphql/queries';
 import { getUser } from '../graphql/queries';
 import { deleteRoom } from '../graphql/mutations'
 import router from '../router/router'
-import UserStore from '../mobx/UserStore'
+// import UserStore from '../mobx/UserStore'
 import { updateUser } from "../graphql/mutations";
-import { updateRoom } from "../graphql/mutations";
+// import { updateRoom } from "../graphql/mutations";
 import { createMessage } from "../graphql/mutations";
 import { onCreateMessage } from '../graphql/subscriptions';
+import { onUpdateRoom } from '../graphql/subscriptions';
+import { Auth } from 'aws-amplify'
+import { listUsers } from '../graphql/queries';
 // import foryoutube from './foryoutube'
 
 Vue.use(VueYoutube)
@@ -114,6 +117,7 @@ export default {
     return {
       video_url: "",
       subscriptionchat: {},
+      subscriptionmem: {},
       error: "",
       roomId: "",
       members: [],
@@ -215,7 +219,30 @@ export default {
             this.messages.push(message);
           }
         }
+      }),
+      this.subscriptionmem = API.graphql(graphqlOperation(onUpdateRoom)).subscribe({
+        next: (eventData) => {
+          const member = eventData.value.data.onUpdateRoom;
+          console.log(member.users.items)
+          if(member.id === this.roomId){
+            this.members = member.users.items
+          }
+        }
       })
+    },
+    async inituserdata() {
+      try{
+        const user = await Auth.currentAuthenticatedUser()
+        this.userName = user.username
+      } catch (err) {
+        console.log('error getting user data... ', err)
+      }
+      console.log('username:',this.userName)
+      if(this.userName !== ''){
+        const userdata =  await API.graphql(graphqlOperation(listUsers, { filter: {'username':{eq: this.userName}}}))
+        console.log(userdata.data.listUsers.items[0].id)
+        this.userId = userdata.data.listUsers.items[0].id
+      }
     },
     closeModel: function(){
       this.showContent = false
@@ -262,10 +289,7 @@ export default {
 
   },
   async created(){
-    const { username,userid } = await UserStore
-    console.log(UserStore)
-    this.userName = username
-    this.userId = userid 
+    await this.inituserdata()
     const user_id = await API.graphql(graphqlOperation(getUser,{id: this.userId}))
     console.log(user_id.data.getUser.roomid)
     const room_info = user_id.data.getUser.roomid
@@ -274,7 +298,7 @@ export default {
     this.createdTime = room_info.reservedtime
     const member = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
     this.members = member.data.getRoom.users.items
-    // console.log(this.members)
+    console.log(this.members.length)
     // console.log(this.video_url)
     console.log("created: " + this.createdTime)
     console.log("now: " + this.nowTime)
@@ -284,21 +308,14 @@ export default {
   },
   beforeDestroy() {
       //チャット画面から離れる際に、UnSubscribeする
-      this.subscription.unsubscribe();
+      this.subscriptionchat.unsubscribe();
+      this.subscriptionmem.unsubscribe();
     },
   async destroyed(){
     const updatedata = {
         id: this.userId,
         userRoomidId: null
       }
-    const roominfo = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
-    const roommember = roominfo.data.getRoom.numberofmember
-    const addroommenber = {
-      id: this.roomId,
-      numberofmember: roommember - 1
-    }
-    await API.graphql(graphqlOperation(updateRoom, { input: addroommenber }))
-      .catch(error => this.error = JSON.stringify(error))
     await API.graphql(graphqlOperation(updateUser, { input: updatedata }))
       .catch(error => this.error = JSON.stringify(error))
   }

@@ -73,9 +73,9 @@ type Room
 # 	updatedAt: String
 # }
 
-type Subscription {
+# type Subscription {
   # onCreateConvoLink(convoLinkUserId: ID!): ConvoLink
   #   @aws_subscribe(mutations: ["createConvoLink"])
-  onCreateMessage(roomId: ID!): Message
-    @aws_subscribe(mutations: ["createMessage"])
-}
+#   onCreateMessage(roomId: ID!): Message
+#     @aws_subscribe(mutations: ["createMessage"])
+# }

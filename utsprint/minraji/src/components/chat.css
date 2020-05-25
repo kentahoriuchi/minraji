@@ -200,7 +200,7 @@ margin: 30px;
   display: inline-block;
   padding: 0.25em 0.5em;
   text-decoration: none;
-  color: #FFF;
+  color: #000000;
   background: #FFF;/*背景色*/
   border-bottom: solid 2px #FFF;/*少し濃い目の色に*/
   border-radius: 4px;/*角の丸み*/
@@ -717,7 +717,7 @@ margin: 30px;
     display: inline-block;
     padding: 0.25em 0.5em;
     text-decoration: none;
-    color: #FFF;
+    color: #000000;
     background: #FFF;/*背景色*/
     border-bottom: solid 2px #FFF;/*少し濃い目の色に*/
     border-radius: 4px;/*角の丸み*/
@@ -1246,7 +1246,7 @@ margin: 20px;
   display: inline-block;
   padding: 0.25em 0.5em;
   text-decoration: none;
-  color: #FFF;
+  color: #000000;
   background: #FFF;/*背景色*/
   border-bottom: solid 2px #FFF;/*少し濃い目の色に*/
   border-radius: 4px;/*角の丸み*/

@@ -61,7 +61,9 @@
 import API, {  graphqlOperation } from '@aws-amplify/api';
 import router from '../router/router'
 import { createRoom } from "../graphql/mutations";
-import UserStore from '../mobx/UserStore'
+// import UserStore from '../mobx/UserStore'
+import { Auth } from 'aws-amplify'
+import { listUsers } from '../graphql/queries';
 
 export default {
   name: 'room',
@@ -124,11 +126,24 @@ export default {
       var hh = ("0"+(today.getHours())).slice(-2);
       var min = ("0"+(today.getMinutes()+1)).slice(-2);
       document.getElementById("reservedtime").value= hh+':'+min;
-    }
+    },
+    async inituserdata() {
+      try{
+        const user = await Auth.currentAuthenticatedUser()
+        this.userName = user.username
+      } catch (err) {
+        console.log('error getting user data... ', err)
+      }
+      console.log('username:',this.userName)
+      if(this.userName !== ''){
+        const userdata =  await API.graphql(graphqlOperation(listUsers, { filter: {'username':{eq: this.userName}}}))
+        console.log(userdata.data.listUsers.items[0].id)
+        this.userId = userdata.data.listUsers.items[0].id
+      }
+    },
   },
   async created(){
-    const { username } = await UserStore
-    this.userName = username
+    await this.inituserdata()
     this.initializedate()
   },
 }
