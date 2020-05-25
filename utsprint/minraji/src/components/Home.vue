@@ -87,6 +87,9 @@
 <script>
 import { Auth } from 'aws-amplify'
 import { AmplifyEventBus } from 'aws-amplify-vue'
+import API, {  graphqlOperation } from '@aws-amplify/api';
+import { listUsers } from '../graphql/queries';
+import { createUser } from "../graphql/mutations";
 
 window.LOG_LEVEL = 'VERBOSE';
 
@@ -95,7 +98,32 @@ export default {
   data(){
     return {
       signedIn: false,
-      username: ''
+      userName: '',
+      userid: "",
+    }
+  },
+  methods :{
+    async checkIfUserExists(username) {
+      const userdata =  await API.graphql(graphqlOperation(listUsers, { filter: {'username':{eq: username}}}))
+      console.log(userdata.data.listUsers.items)
+      if (!userdata.data.listUsers.items.length){
+        this.createUser()
+      }
+    },
+    async createUser() {
+      try{
+        const newuser = {
+          id: new Date().getTime() + this.userName,
+          username: this.userName
+        }
+        await API.graphql(graphqlOperation(createUser, { input: newuser }))
+        this.user.id = newuser.id
+          
+        console.log('newuser:',newuser)
+      }
+      catch(err){
+        console.log('error creating user data... ', err)
+      }
     }
   },
   async beforeCreate() {
@@ -104,7 +132,7 @@ export default {
     try {
       let cognitoUser = await Auth.currentAuthenticatedUser()
       this.signedIn = true
-      this.username = cognitoUser.username
+      this.userName = cognitoUser.username
     } catch (err) {
       this.signedIn = false
     }
@@ -113,12 +141,13 @@ export default {
       if (info === 'signedIn') {
         let cognitoUser = await Auth.currentAuthenticatedUser()
         this.signedIn = true
-        this.username = cognitoUser.username
+        this.userName = cognitoUser.username
+        this.checkIfUserExists(this.userName)
       } else {
         this.signedIn = false
       }
     });
-  }
+  },
 };
 
 

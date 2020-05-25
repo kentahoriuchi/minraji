@@ -6,7 +6,7 @@ import { createUser } from "../graphql/mutations";
 
 class User {
   constructor(){
-    this.username = ''
+    this.userName = ''
     this.userid = ''
     this.init()
   }
@@ -14,22 +14,24 @@ class User {
   async init() {
     try{
       const user = await Auth.currentAuthenticatedUser()
-      this.username = user.username
+      this.userName = user.username
     } catch (err) {
       console.log('error getting user data... ', err)
     }
-    console.log('username:',this.username)
-    if(this.username !== ''){
-      this.checkIfUserExists(this.username)
+    console.log('username:',this.userName)
+    if(this.userName !== ''){
+      this.checkIfUserExists(this.userName)
     }
   }
 
   async checkIfUserExists(username) {
     const userdata =  await API.graphql(graphqlOperation(listUsers, { filter: {'username':{eq: username}}}))
+    console.log(userdata.data.listUsers.items)
     if (!userdata.data.listUsers.items.length){
       this.createUser()
     }
     else{
+      console.log('------------')
       this.userid = userdata.data.listUsers.items[0].id
     }
   }
@@ -40,9 +42,9 @@ class User {
         id: new Date().getTime() + this.userName,
         username: this.userName
       }
-      API.graphql(graphqlOperation(createUser, { input: newuser }))
-        .then(this.user.id = newuser.id)
-        .catch(error => this.error = JSON.stringify(error))
+      await API.graphql(graphqlOperation(createUser, { input: newuser }))
+      this.user.id = newuser.id
+        
       console.log('newuser:',newuser)
     }
     catch(err){

@@ -38,9 +38,9 @@
         <input id="password-input" placeholder="ルームのパスワードを入力してください" size="20" type='text' value=""/>
         <button id = "password-send-button" v-on:click="passwordInput">送る</button>
         <br>
-        <p id="errormessage"></p>
-        <br>
         <p><button v-on:click='closeModel' id = "password-close-button">閉じる</button></p>
+        <br>
+        <p id="errormessage"></p>
       </div>
       <div class="error">{{ this.error }}</div>
       </div>
@@ -65,9 +65,13 @@ import router from '../router/router'
 // import calendar from "./calendar"
 import { listRooms } from '../graphql/queries';
 import { getRoom } from '../graphql/queries';
-import { updateRoom } from "../graphql/mutations";
+// import { updateRoom } from "../graphql/mutations";
 import { updateUser } from "../graphql/mutations";
-import UserStore from '../mobx/UserStore'
+// import UserStore from '../mobx/UserStore'
+import RoomMember from '../mobx/RoomMember'
+import { Auth } from 'aws-amplify'
+import { listUsers } from '../graphql/queries';
+import { updateRoom } from '../graphql/mutations';
 
 window.LOG_LEVEL = 'VERBOSE';
 
@@ -93,6 +97,7 @@ export default {
   methods :{
     async fetch(){
       //部屋データを取得
+      RoomMember
       const roomlimit = 100  // 表示する部屋の数のmax
       const rooms = await API.graphql(graphqlOperation(listRooms,{limit:roomlimit}))
       this.rooms = rooms.data.listRooms.items
@@ -107,23 +112,22 @@ export default {
       await API.graphql(graphqlOperation(updateUser, { input: updateuserinput }))
         .catch(error => this.error = JSON.stringify(error))
       // 部屋の人数更新
-      const getroom = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
-      const roommember = getroom.data.getRoom.numberofmember
-      const addroommenber = {
-        id: this.roomId,
-        numberofmember: roommember + 1
-      }
-      console.log(roommember)
-      await API.graphql(graphqlOperation(updateRoom, { input: addroommenber }))
-        .catch(error => this.error = JSON.stringify(error))
+      // const getroom = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
+      // const roommember = getroom.data.getRoom.numberofmember
+      // const addroommenber = {
+      //   id: this.roomId,
+      //   numberofmember: roommember + 1
+      // }
+      // console.log(roommember)
+      // await API.graphql(graphqlOperation(updateRoom, { input: addroommenber }))
+      //   .catch(error => this.error = JSON.stringify(error))
 
       router.push('/room/in')
     },
     //パスワード関連
     passwordInput(){
-      // if (event.keyCode !== 13) return 
       console.log(this.passcheck)
-      let passwordinput = document.getElementById("passwordinput").value
+      let passwordinput = document.getElementById("password-input").value
       if(passwordinput === this.password){
         this.showContent = false
         this.gotoroom()
@@ -133,6 +137,7 @@ export default {
         erromessage.innerHTML = "パスワードが違います"
       }
     },
+
     async passCheck(id){
       this.roomId = id
       const getroom = await API.graphql(graphqlOperation(getRoom,{id: this.roomId}))
@@ -146,16 +151,53 @@ export default {
         this.gotoroom()
       }
     },
-    
-    closeModel: function(){
-      this.showContent = false
+    async inituserdata() {
+      try{
+        const user = await Auth.currentAuthenticatedUser()
+        this.userName = user.username
+      } catch (err) {
+        console.log('error getting user data... ', err)
+      }
+      console.log('username:',this.userName)
+      if(this.userName !== ''){
+        const userdata =  await API.graphql(graphqlOperation(listUsers, { filter: {'username':{eq: this.userName}}}))
+        console.log(userdata.data.listUsers.items[0].id)
+        this.userId = userdata.data.listUsers.items[0].id
+      }
+    },
+    async init(){
+    try{
+      const roomlimit = 100  // 表示する部屋の数のmax
+      const getroomlist = await API.graphql(graphqlOperation(listRooms,{limit:roomlimit}))
+      this.rooms = getroomlist.data.listRooms.items
+    } catch (err) {
+      console.log('error getting room data... ', err)
+    }
+    for(var i=0;i < this.rooms.length;i++){
+      console.log(this.rooms[i])
+      var roomid = this.rooms[i].id
+      this.upDateRoom(roomid)
     }
   },
+  async upDateRoom(id){
+    const getroom = await API.graphql(graphqlOperation(getRoom,{id: id}))
+    const membernum = getroom.data.getRoom.users.items.length
+    const updateroommenber = {
+      id: id,
+      numberofmember: membernum
+    }
+    console.log(updateroommenber)
+    await API.graphql(graphqlOperation(updateRoom, { input: updateroommenber }))
+      .catch(error => this.error = JSON.stringify(error))
+  },
+    closeModel: function(){
+      this.showContent = false
+    },
+  },
   async created(){
-    const { username,userid } = await UserStore
-    console.log(UserStore)
-    this.userName = username
-    this.userId = userid 
+    await this.inituserdata()
+    await this.init()
+    console.log(this.userName,this.userId)
     this.fetch()
   }
 }
