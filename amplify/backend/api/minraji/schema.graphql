@@ -1,0 +1,81 @@
+type Message 
+@model {
+  id: ID!
+  username: String!
+  content: String!
+  roomid: Room @connection(name: "MessageLinks")
+}
+
+type User 
+  @model 
+  # @auth(rules: [{ allow: owner, ownerField: "id", queries: null }]) 
+  {
+  id: ID!
+  username: String!
+  roomid: Room @connection(name: "MemberLinks")
+  # conversations: [ConvoLink] @connection(name: "UserLinks")
+  # messages: [Message] @connection(name: "UserMessages")
+	# createdAt: String
+	# updatedAt: String
+}
+
+type Room
+  @model
+  # (
+  #   mutations: { create: "createRoom" }
+  #   queries: { get: "getRoom" }
+  #   subscriptions: null
+  # )
+  # @auth(rules: [{ allow: owner, ownerField: "members" }]) 
+  {
+  id: ID!
+  movie: String
+  tilte: String
+  numberofmember: Int
+  privatepassword: String
+  users: [User] @connection(name: "MemberLinks")
+  time: Int
+  reservedtime: String
+  messages: [Message] @connection(name: "MessageLinks")
+  # user: User! @connection(name: "UserRoom")
+	# createdAt: String
+	# updatedAt: String
+}
+
+
+# type Message 
+#   @model(subscriptions: null, queries: null) 
+#   # @auth(rules: [{ allow: owner, ownerField: "authorId" }]) 
+#   {
+#   id: ID!
+#   author: User @connection(name: "UserMessages", keyField: "authorId")
+#   authorId: String
+#   content: String!
+#   conversation: Conversation! @connection(name: "ConvoMsgs")
+#   messageConversationId: ID!
+# 	createdAt: String
+# 	updatedAt: String
+# }
+
+# type ConvoLink 
+#   @model(
+#     mutations: { create: "createConvoLink", update: "updateConvoLink" }
+#     queries: null
+#     subscriptions: null
+#   ) 
+#   {
+#   id: ID!
+#   user: User! @connection(name: "UserLinks")
+#   convoLinkUserId: ID
+#   conversation: Conversation! @connection(name: "AssociatedLinks")
+#   convoLinkConversationId: ID!
+# 	createdAt: String
+# 	updatedAt: String
+# }
+
+# type Subscription {
+  # onCreateConvoLink(convoLinkUserId: ID!): ConvoLink
+  #   @aws_subscribe(mutations: ["createConvoLink"])
+#   onCreateMessage(roomId: ID!): Message
+#     @aws_subscribe(mutations: ["createMessage"])
+# }
