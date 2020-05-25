@@ -74,8 +74,8 @@ type Room
 # }
 
 # type Subscription {
-#   onCreateConvoLink(convoLinkUserId: ID!): ConvoLink
-#     @aws_subscribe(mutations: ["createConvoLink"])
-#   onCreateMessage(messageConversationId: ID!): Message
+  # onCreateConvoLink(convoLinkUserId: ID!): ConvoLink
+  #   @aws_subscribe(mutations: ["createConvoLink"])
+#   onCreateMessage(roomId: ID!): Message
 #     @aws_subscribe(mutations: ["createMessage"])
 # }
