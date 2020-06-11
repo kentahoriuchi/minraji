@@ -22,3 +22,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### 公開URL
+https://temp.d2evz6dalfayw3.amplifyapp.com/
