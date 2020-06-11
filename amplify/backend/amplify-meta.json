@@ -1,69 +1,66 @@
 {
-	"providers": {
-		"awscloudformation": {
-			"AuthRoleName": "amplify-minraji-test-162217-authRole",
-			"UnauthRoleArn": "arn:aws:iam::072958730182:role/amplify-minraji-test-162217-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::072958730182:role/amplify-minraji-test-162217-authRole",
-			"Region": "ap-northeast-1",
-			"DeploymentBucketName": "amplify-minraji-test-162217-deployment",
-			"UnauthRoleName": "amplify-minraji-test-162217-unauthRole",
-			"StackName": "amplify-minraji-test-162217",
-			"StackId": "arn:aws:cloudformation:ap-northeast-1:072958730182:stack/amplify-minraji-test-162217/a595bd40-95b3-11ea-a4e0-0aec1eafc950",
-			"AmplifyAppId": "d2evz6dalfayw3"
-		}
-	},
-	"auth": {
-		"minraji134fba57": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [],
-			"customAuth": false,
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-162217-deployment/amplify-cfn-templates/auth/minraji134fba57-cloudformation-template.yml",
-				"logicalId": "authminraji134fba57"
-			},
-			"lastPushTimeStamp": "2020-05-24T04:51:20.920Z",
-			"output": {
-				"AppClientSecret": "13oqkl36es5akv7jkm2qg6hpnf8os9nticnqnl2baj1ion17il9j",
-				"UserPoolId": "ap-northeast-1_o3GPvnFbu",
-				"AppClientIDWeb": "5i8p9108dfed3u3uqufntdkdcd",
-				"AppClientID": "2jqisf7r9kqphkb9i950keui57",
-				"IdentityPoolId": "ap-northeast-1:253c0ceb-140e-489d-9ddb-204c5004cab4",
-				"IdentityPoolName": "minraji134fba57_identitypool_134fba57__test",
-				"UserPoolName": "minraji134fba57_userpool_134fba57"
-			},
-			"lastPushDirHash": "6wA7NusijLzrIOUXIgPt8P2S0oM="
-		}
-	},
-	"api": {
-		"minraji": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"authConfig": {
-					"additionalAuthenticationProviders": [],
-					"defaultAuthentication": {
-						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
-						"userPoolConfig": {
-							"userPoolId": "authminraji134fba57"
-						}
-					}
-				},
-				"GraphQLAPIIdOutput": "4vgaddb365eyvlju33vmrg2zce",
-				"GraphQLAPIEndpointOutput": "https://z4caipoo7bflflr6vubphqheu4.appsync-api.ap-northeast-1.amazonaws.com/graphql"
-			},
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-minraji-test-162217-deployment/amplify-cfn-templates/api/cloudformation-template.json",
-				"logicalId": "apiminraji"
-			},
-			"lastPushTimeStamp": "2020-05-24T04:51:20.921Z",
-			"lastPushDirHash": "FK9ncedl6NQmtTxyEVJKDOIhv3w="
-		}
-	},
-	"hosting": {
-		"S3AndCloudFront": {
-			"service": "S3AndCloudFront",
-			"providerPlugin": "awscloudformation"
-		}
-	}
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-minraji-product-135606-authRole",
+            "UnauthRoleArn": "arn:aws:iam::072958730182:role/amplify-minraji-product-135606-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::072958730182:role/amplify-minraji-product-135606-authRole",
+            "Region": "ap-northeast-1",
+            "DeploymentBucketName": "amplify-minraji-product-135606-deployment",
+            "UnauthRoleName": "amplify-minraji-product-135606-unauthRole",
+            "StackName": "amplify-minraji-product-135606",
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:072958730182:stack/amplify-minraji-product-135606/dd56e270-ab9f-11ea-a259-0ac3b391d020",
+            "AmplifyAppId": "d191twodmxykh1"
+        },
+        "categories": {
+            "auth": {
+                "minraji4093eca8": {}
+            }
+        }
+    },
+    "auth": {
+        "minraji4093eca8": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "customAuth": false,
+            "output": {
+                "AppClientSecret": "slcolqehd9kud64ujemo9fektdabd2ho8qkd3atvbegfd3jhfut",
+                "UserPoolId": "ap-northeast-1_cMJeDp9HF",
+                "AppClientIDWeb": "3ki05snh7uehaqurs3fkta4201",
+                "AppClientID": "48ih5bida8qmeqk837eub6j0v1",
+                "IdentityPoolId": "ap-northeast-1:1565afac-205d-4c30-b553-abb3eba5e833",
+                "IdentityPoolName": "minraji4093eca8_identitypool_4093eca8__product",
+                "UserPoolName": "minraji4093eca8_userpool_4093eca8"
+            },
+            "lastPushTimeStamp": "2020-06-11T07:47:18.260Z",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-minraji-product-135606-deployment/amplify-cfn-templates/auth/minraji4093eca8-cloudformation-template.yml",
+                "logicalId": "authminraji4093eca8"
+            }
+        }
+    },
+    "api": {
+        "minraji": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "additionalAuthenticationProviders": [],
+                    "defaultAuthentication": {
+                        "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+                        "userPoolConfig": {
+                            "userPoolId": "authminraji4093eca8"
+                        }
+                    }
+                },
+                "GraphQLAPIIdOutput": "qb2du4n3d5gidenmsy3cakysg4",
+                "GraphQLAPIEndpointOutput": "https://3kel5kvnuvehfifncb4qcs2kg4.appsync-api.ap-northeast-1.amazonaws.com/graphql"
+            },
+            "lastPushTimeStamp": "2020-06-11T07:47:18.265Z",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-minraji-product-135606-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+                "logicalId": "apiminraji"
+            }
+        }
+    }
 }

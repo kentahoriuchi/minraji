@@ -1,7 +1,7 @@
 {
-    "test": {
+    "product": {
         "configLevel": "project",
         "useProfile": true,
-        "profileName": "minraji-test"
+        "profileName": "product"
     }
 }
